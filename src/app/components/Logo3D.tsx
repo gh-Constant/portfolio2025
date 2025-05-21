@@ -28,7 +28,8 @@ function Model() {
   // Rotate the model slowly
   useFrame(() => {
     if (modelRef.current) {
-      modelRef.current.rotation.y += 0.002
+      modelRef.current.rotation.y += 0.005
+      modelRef.current.rotation.x = 0.2 // Add a slight tilt on the x-axis
     }
   })
   
@@ -37,14 +38,14 @@ function Model() {
 
 const Logo3D: React.FC = () => {
   return (
-    <div className="absolute inset-0 z-0 opacity-25">
-      <Canvas camera={{ position: [0, 0, 4], fov: 60 }}>
-        <ambientLight intensity={0.6} />
-        <directionalLight position={[10, 10, 5]} intensity={1.2} />
+    <div className="absolute inset-0 z-0">
+      <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[10, 10, 5]} intensity={1} />
         <React.Suspense fallback={null}>
           <Model />
         </React.Suspense>
-        <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
+        <OrbitControls enableZoom={false} enablePan={false} />
       </Canvas>
     </div>
   )
