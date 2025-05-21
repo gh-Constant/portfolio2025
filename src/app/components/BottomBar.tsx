@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
+import { siteConfig } from '@/config/site';
 
 function getTimeString() {
   const now = new Date();
@@ -23,30 +24,20 @@ const BottomBar: React.FC = () => {
       <div className="flex items-center justify-between px-3 sm:px-8 py-2 sm:py-3 w-full">
         {/* Email on the left, responsive with ellipsis */}
         <a
-          href="mailto:constantsuchet@gmail.com"
+          href={`mailto:${siteConfig.contact.email}`}
           className="flex-1 min-w-0 text-xs sm:text-base font-mono underline text-white hover:text-blue-300 transition-colors overflow-hidden text-ellipsis whitespace-nowrap"
           style={{ letterSpacing: 1 }}
-          title="constantsuchet@gmail.com"
+          title={siteConfig.contact.email}
         >
-          constantsuchet@gmail.com
+          {siteConfig.contact.email}
         </a>
-        {/* Centered France */}
+        {/* Centered Location */}
         <div className="flex-1 flex justify-center items-center text-xs sm:text-base font-semibold text-white">
-          <span style={{ letterSpacing: 2 }}>FRANCE</span>
+          <span style={{ letterSpacing: 2 }}>{siteConfig.location}</span>
         </div>
-        {/* LinkedIn and Time on the right */}
-        <div className="flex-1 flex justify-end items-center space-x-4 text-xs sm:text-base text-white">
-          <a 
-            href="https://linkedin.com/in/constantsuchet" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="hidden sm:block font-mono underline hover:text-blue-300 transition-colors"
-          >
-            LinkedIn
-          </a>
-          <div className="font-mono tracking-widest overflow-hidden text-ellipsis whitespace-nowrap">
-            {time ?? ''}
-          </div>
+        {/* Time on the right */}
+        <div className="flex-1 flex justify-end text-xs sm:text-base font-mono tracking-widest text-white overflow-hidden text-ellipsis whitespace-nowrap">
+          {time ?? ''}
         </div>
       </div>
     </div>
