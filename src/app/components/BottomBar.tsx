@@ -25,7 +25,7 @@ const BottomBar: React.FC = () => {
         {/* Email on the left, responsive with ellipsis */}
         <a
           href={`mailto:${siteConfig.contact.email}`}
-          className="flex-1 min-w-0 text-xs sm:text-base font-mono underline text-white hover:text-blue-300 transition-colors overflow-hidden text-ellipsis whitespace-nowrap"
+          className="interactive flex-1 min-w-0 text-xs sm:text-base font-mono underline text-white hover:text-blue-300 transition-colors overflow-hidden text-ellipsis whitespace-nowrap"
           style={{ letterSpacing: 1 }}
           title={siteConfig.contact.email}
         >
@@ -35,9 +35,20 @@ const BottomBar: React.FC = () => {
         <div className="flex-1 flex justify-center items-center text-xs sm:text-base font-semibold text-white">
           <span style={{ letterSpacing: 2 }}>{siteConfig.location}</span>
         </div>
-        {/* Time on the right */}
-        <div className="flex-1 flex justify-end text-xs sm:text-base font-mono tracking-widest text-white overflow-hidden text-ellipsis whitespace-nowrap">
-          {time ?? ''}
+        {/* LinkedIn and Time on the right */}
+        <div className="flex-1 flex justify-end items-center gap-4 text-xs sm:text-base text-white overflow-hidden text-ellipsis whitespace-nowrap">
+          <a
+            href={siteConfig.contact.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="interactive font-mono underline text-white hover:text-blue-300 transition-colors hidden sm:inline-block"
+            style={{ letterSpacing: 1 }}
+          >
+            LinkedIn
+          </a>
+          <div className="font-mono tracking-widest">
+            {time ?? ''}
+          </div>
         </div>
       </div>
     </div>

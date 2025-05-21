@@ -53,7 +53,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-white text-black border-b border-gray-300 sticky top-0 z-50">
       <div className="container mx-auto px-6 py-3 flex justify-between items-center" style={{ height: NAVBAR_HEIGHT }}>
-        <div className="text-xl font-semibold uppercase tracking-wider">{siteConfig.name}</div>
+        <div className="text-xl font-semibold uppercase tracking-wider interactive">{siteConfig.name}</div>
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8">
           {siteConfig.navigation.main.map((item) => (
@@ -62,51 +62,27 @@ const Navbar: React.FC = () => {
               href={item.href} 
               target={item.external ? "_blank" : undefined}
               rel={item.external ? "noopener noreferrer" : undefined}
-              className="relative group hover:text-gray-700 uppercase tracking-wider pb-1 flex items-center"
+              className="relative group hover:text-gray-700 uppercase tracking-wider pb-1 flex items-center interactive"
             >
               {item.name}{item.badge && <sup>{item.badge}</sup>}
               {item.external && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4 ml-1"
                   fill="none"
                   viewBox="0 0 24 24"
-                  strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-4 h-4 ml-1"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                   />
                 </svg>
               )}
-              <span className="absolute bottom-0 left-0 w-full h-[1px] bg-gray-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-right group-hover:origin-left"></span>
             </a>
           ))}
-          <a 
-            href={siteConfig.contact.linkedin} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="relative group hover:text-gray-700 flex items-center uppercase tracking-wider pb-1"
-          >
-            LINKEDIN
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-4 h-4 ml-1"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-              />
-            </svg>
-            <span className="absolute bottom-0 left-0 w-full h-[1px] bg-gray-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-right group-hover:origin-left"></span>
-          </a>
         </div>
         {/* Hamburger Icon for Mobile */}
         <button
@@ -144,7 +120,7 @@ const Navbar: React.FC = () => {
               target={item.external ? "_blank" : undefined}
               rel={item.external ? "noopener noreferrer" : undefined}
               onClick={() => setIsOpen(false)} 
-              className="flex items-center hover:text-gray-700"
+              className="flex items-center hover:text-gray-700 interactive"
             >
               {item.name.charAt(0) + item.name.slice(1).toLowerCase()}{item.badge && <sup className="text-base">{item.badge}</sup>}
               {item.external && (
@@ -156,13 +132,13 @@ const Navbar: React.FC = () => {
           ))}
           <a 
             href={siteConfig.contact.linkedin} 
-            target="_blank" 
-            rel="noopener noreferrer" 
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setIsOpen(false)} 
-            className="flex items-center hover:text-gray-700"
+            className="flex items-center hover:text-gray-700 interactive text-base"
           >
-            LinkedIn
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 ml-1">
+            Linkedin
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 ml-1">
               <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
             </svg>
           </a>
