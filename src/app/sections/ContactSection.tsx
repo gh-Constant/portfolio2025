@@ -4,7 +4,7 @@
 import { Parallax } from 'react-scroll-parallax';
 
 const ContactSection = () => (
-  <section className="relative z-10 min-h-[60vh] w-full bg-black flex flex-col items-center justify-center">
+  <section className="relative z-10 min-h-[60vh] w-full bg-[#111] flex flex-col items-center justify-center">
     <Parallax speed={-20}>
       <div className="relative">
         <h2 className="text-[clamp(2rem,8vw,7rem)] font-serif mb-4 text-white mix-blend-difference text-center leading-none">

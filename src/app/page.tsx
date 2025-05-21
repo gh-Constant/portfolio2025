@@ -9,15 +9,18 @@ export default function Home() {
   return (
     <ParallaxProvider>
       <div className="relative bg-black min-h-screen w-full">
-        <GridLines />
         <div className="relative min-h-screen bg-white flex flex-col
-          rounded-b-[2.5rem] overflow-hidden border-[8px] border-white shadow-xl"
+          rounded-b-[4rem] overflow-hidden border-[8px] border-white shadow-xl"
         >
+          <GridLines />
           <main className="flex-1">
             <HeroSection />
           </main>
         </div>
-        <ContactSection />
+        <div className="relative">
+          <GridLines />
+          <ContactSection />
+        </div>
       </div>
     </ParallaxProvider>
   );

@@ -64,7 +64,7 @@ const Navbar: React.FC = () => {
             <span className="absolute bottom-0 left-0 w-full h-[1px] bg-gray-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-right group-hover:origin-left"></span>
           </a>
           <a
-            href="/resume.pdf" // Assuming the resume is a PDF in the public folder
+            href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="relative group hover:text-gray-700 flex items-center uppercase tracking-wider pb-1"
@@ -88,6 +88,29 @@ const Navbar: React.FC = () => {
           </a>
           <a href="#contact" className="relative group hover:text-gray-700 uppercase tracking-wider pb-1">
             CONTACT
+            <span className="absolute bottom-0 left-0 w-full h-[1px] bg-gray-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-right group-hover:origin-left"></span>
+          </a>
+          <a 
+            href="https://linkedin.com/in/constantsuchet" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="relative group hover:text-gray-700 flex items-center uppercase tracking-wider pb-1"
+          >
+            LINKEDIN
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-4 h-4 ml-1"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+              />
+            </svg>
             <span className="absolute bottom-0 left-0 w-full h-[1px] bg-gray-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-right group-hover:origin-left"></span>
           </a>
         </div>
@@ -128,6 +151,18 @@ const Navbar: React.FC = () => {
             </svg>
           </a>
           <a href="#contact" onClick={() => setIsOpen(false)} className="hover:text-gray-700">Contact</a>
+          <a 
+            href="https://linkedin.com/in/constantsuchet" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            onClick={() => setIsOpen(false)} 
+            className="flex items-center hover:text-gray-700"
+          >
+            LinkedIn
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 ml-1">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+            </svg>
+          </a>
         </div>
       </div>
     </nav>

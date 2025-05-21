@@ -7,7 +7,7 @@ export default function GridLines() {
       {[...Array(NUM_LINES + 1)].map((_, i) => (
         <div
           key={i}
-          className="absolute top-0 bottom-0 border-r border-black/10"
+          className="absolute top-0 bottom-0 border-r border-gray-400/30 dark:border-white/20"
           style={{
             left: `${(100 / NUM_LINES) * i}%`,
             width: 0,

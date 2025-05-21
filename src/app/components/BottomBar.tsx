@@ -34,9 +34,19 @@ const BottomBar: React.FC = () => {
         <div className="flex-1 flex justify-center items-center text-xs sm:text-base font-semibold text-white">
           <span style={{ letterSpacing: 2 }}>FRANCE</span>
         </div>
-        {/* Time on the right */}
-        <div className="flex-1 flex justify-end text-xs sm:text-base font-mono tracking-widest text-white overflow-hidden text-ellipsis whitespace-nowrap">
-          {time ?? ''}
+        {/* LinkedIn and Time on the right */}
+        <div className="flex-1 flex justify-end items-center space-x-4 text-xs sm:text-base text-white">
+          <a 
+            href="https://linkedin.com/in/constantsuchet" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="hidden sm:block font-mono underline hover:text-blue-300 transition-colors"
+          >
+            LinkedIn
+          </a>
+          <div className="font-mono tracking-widest overflow-hidden text-ellipsis whitespace-nowrap">
+            {time ?? ''}
+          </div>
         </div>
       </div>
     </div>
