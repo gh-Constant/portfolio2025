@@ -1,8 +1,7 @@
 'use client'
 
 import React, { useRef, useEffect, useMemo, Suspense } from 'react'
-import { Canvas, useFrame, useLoader } from '@react-three/fiber'
-import { GLTFLoader } from 'three-stdlib'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { Environment, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 
