@@ -2,6 +2,7 @@
 import React from 'react';
 import { Parallax } from 'react-scroll-parallax';
 import { projects } from '../data/projects';
+import Image from 'next/image';
 
 const ProjectsSection: React.FC = () => {
   return (
@@ -21,19 +22,29 @@ const ProjectsSection: React.FC = () => {
             const widthClass = project.size === 'large' ? 'w-[80vw]' : project.size === 'medium' ? 'w-[70vw]' : 'w-[60vw]';
             
             return (
-              <div 
+              <a 
                 key={project.id}
+                href={project.link || '#'}
+                target={project.link ? '_blank' : undefined}
+                rel={project.link ? 'noopener noreferrer' : undefined}
                 className={`
                   group relative overflow-hidden rounded-2xl bg-gray-100 transition-all duration-500 hover:scale-[1.02]
-                  ${widthClass} h-[50vh] ${offsetClass}
+                  ${widthClass} h-[50vh] ${offsetClass} block cursor-hover-target
                 `}
               >
                 {/* Image */}
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300">
-                  {/* Replace with actual image when you add them */}
-                  <div className="w-full h-full flex items-center justify-center text-gray-500">
-                    <span className="text-sm">Image: {project.title}</span>
-                  </div>
+                <div className="absolute inset-0">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    quality={95}
+                    placeholder="blur"
+                    blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjgwMCIgdmlld0JveD0iMCAwIDEyMDAgODAwIj48cmVjdCBmaWxsPSIjMmEyYTJhIiB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI4MDAiLz48L3N2Zz4="
+                    className="object-cover"
+                    sizes={`(max-width: 768px) 100vw, ${project.size === 'large' ? '80vw' : project.size === 'medium' ? '70vw' : '60vw'}`}
+                    priority={index < 2}
+                  />
                 </div>
                 
                 {/* Overlay */}
@@ -58,29 +69,29 @@ const ProjectsSection: React.FC = () => {
                     ))}
                   </div>
                   <div className="flex gap-3">
-                    {project.link && (
-                      <a 
-                        href={project.link}
-                        className="px-4 py-2 bg-white text-black rounded-full text-sm offbit-font hover:bg-gray-200 transition cursor-hover-target"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        View Project
-                      </a>
-                    )}
+                    <button 
+                      className="px-4 py-2 bg-white text-black rounded-full text-sm offbit-font hover:bg-gray-200 transition cursor-hover-target"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (project.link) window.open(project.link, '_blank');
+                      }}
+                    >
+                      View Project
+                    </button>
                     {project.github && (
-                      <a 
-                        href={project.github}
+                      <button 
                         className="px-4 py-2 border border-white text-white rounded-full text-sm offbit-font hover:bg-white hover:text-black transition cursor-hover-target"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          window.open(project.github, '_blank');
+                        }}
                       >
                         GitHub
-                      </a>
+                      </button>
                     )}
                   </div>
                 </div>
-              </div>
+              </a>
             );
           })}
         </div>
