@@ -1,6 +1,5 @@
 'use client'
-
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useIsMobile } from '@/hooks/use-mobile'
 
 export default function StickyCursor() {
@@ -12,9 +11,15 @@ export default function StickyCursor() {
   const cursorLargePos = useRef({ x: 0, y: 0 })
   const animationId = useRef<number>()
 
+  // NEW: Ref to track the hover state and scale
+  const hoverState = useRef({
+    isHovering: false,
+    scale: 1, // Current scale of the small cursor
+    largeScale: 1, // Current scale of the large cursor
+  })
+
   useEffect(() => {
     if (isMobile) return
-
     const cursor = cursorRef.current
     const cursorLarge = cursorLargeRef.current
     if (!cursor || !cursorLarge) return
@@ -24,25 +29,45 @@ export default function StickyCursor() {
       mousePos.current = { x: e.clientX, y: e.clientY }
     }
 
+    // NEW: Handlers for entering and leaving hover-target elements
+    const handleMouseEnter = () => {
+      hoverState.current.isHovering = true
+    }
+    const handleMouseLeave = () => {
+      hoverState.current.isHovering = false
+    }
+
     // Smooth animation loop using requestAnimationFrame
     const animate = () => {
       // Small cursor follows quickly
       const dx = mousePos.current.x - cursorPos.current.x
       const dy = mousePos.current.y - cursorPos.current.y
-      
       cursorPos.current.x += dx * 0.15
       cursorPos.current.y += dy * 0.15
 
       // Large cursor follows more slowly and smoothly
-       const dxLarge = mousePos.current.x - cursorLargePos.current.x
-       const dyLarge = mousePos.current.y - cursorLargePos.current.y
-       
-       cursorLargePos.current.x += dxLarge * 0.04
-       cursorLargePos.current.y += dyLarge * 0.04
+      const dxLarge = mousePos.current.x - cursorLargePos.current.x
+      const dyLarge = mousePos.current.y - cursorLargePos.current.y
+      cursorLargePos.current.x += dxLarge * 0.04
+      cursorLargePos.current.y += dyLarge * 0.04
+
+      // NEW: Animate scale based on hover state
+      const targetScale = hoverState.current.isHovering ? 2.5 : 1 // 2.5 * 16px = 40px (the size of the large cursor)
+      const targetLargeScale = hoverState.current.isHovering ? 0 : 1
+
+      // Smoothly interpolate the scales
+      hoverState.current.scale += (targetScale - hoverState.current.scale) * 0.2
+      hoverState.current.largeScale += (targetLargeScale - hoverState.current.largeScale) * 0.2
 
       // Apply transforms directly to DOM for maximum performance
-      cursor.style.transform = `translate3d(${cursorPos.current.x - 8}px, ${cursorPos.current.y - 8}px, 0)`
-      cursorLarge.style.transform = `translate3d(${cursorLargePos.current.x - 20}px, ${cursorLargePos.current.y - 20}px, 0)`
+      // We combine translate and scale into one transform property
+      cursor.style.transform = `translate3d(${cursorPos.current.x - 8}px, ${
+        cursorPos.current.y - 8
+      }px, 0) scale(${hoverState.current.scale})`
+
+      cursorLarge.style.transform = `translate3d(${cursorLargePos.current.x - 20}px, ${
+        cursorLargePos.current.y - 20
+      }px, 0) scale(${hoverState.current.largeScale})`
 
       animationId.current = requestAnimationFrame(animate)
     }
@@ -53,11 +78,24 @@ export default function StickyCursor() {
     // Add event listeners
     document.addEventListener('mousemove', handleMouseMove, { passive: true })
 
+    // NEW: Add listeners to all elements that should trigger the hover effect
+    const hoverTargets = document.querySelectorAll('.cursor-hover-target')
+    hoverTargets.forEach((target) => {
+      target.addEventListener('mouseenter', handleMouseEnter)
+      target.addEventListener('mouseleave', handleMouseLeave)
+    })
+
     return () => {
       if (animationId.current) {
         cancelAnimationFrame(animationId.current)
       }
       document.removeEventListener('mousemove', handleMouseMove)
+
+      // NEW: Clean up hover listeners
+      hoverTargets.forEach((target) => {
+        target.removeEventListener('mouseenter', handleMouseEnter)
+        target.removeEventListener('mouseleave', handleMouseLeave)
+      })
     }
   }, [isMobile])
 
@@ -67,23 +105,32 @@ export default function StickyCursor() {
   }
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[99999]">
+    // Apply mix-blend-difference to the container like BottomBar does
+    <div className="fixed inset-0 pointer-events-none z-[99999] mix-blend-difference">
       {/* Small filled cursor */}
-      <div
-        ref={cursorRef}
-        className="fixed w-4 h-4 bg-black rounded-full pointer-events-none z-[99999] mix-blend-difference"
-        style={{
-          willChange: 'transform',
-        }}
-      />
-      {/* Large outline cursor */}
-      <div
-        ref={cursorLargeRef}
-        className="fixed w-10 h-10 border border-black rounded-full pointer-events-none z-[99999] mix-blend-difference"
-        style={{
-          willChange: 'transform',
-        }}
-      />
+       <div
+         ref={cursorRef}
+         className="fixed top-0 left-0 w-4 h-4 bg-white rounded-full pointer-events-none z-[99999] shadow-lg border border-black/20"
+         style={{
+           willChange: 'transform',
+           imageRendering: 'crisp-edges',
+           backfaceVisibility: 'hidden',
+           perspective: '1000px',
+         }}
+       />
+       {/* Large outline cursor */}
+       <div
+         ref={cursorLargeRef}
+         className="fixed top-0 left-0 w-10 h-10 border-2 border-white rounded-full pointer-events-none z-[99999] shadow-lg"
+         style={{
+           willChange: 'transform',
+           imageRendering: 'crisp-edges',
+           backfaceVisibility: 'hidden',
+           perspective: '1000px',
+           // Add transition for smoother disappearance if JS is slow
+           transition: 'transform 0.2s ease-out',
+         }}
+       />
     </div>
   )
 }
