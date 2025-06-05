@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import BottomBar from "./components/BottomBar";
+import StickyCursor from "./components/StickyCursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,6 +43,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${offBitFont.variable} antialiased`}
       >
+        <StickyCursor />
         <Navbar />
         <main className="relative min-h-screen bg-[#F8F5F0]">
           <div className="absolute inset-0 grid grid-cols-3 pointer-events-none z-0">
