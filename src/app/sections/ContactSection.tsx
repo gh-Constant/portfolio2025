@@ -10,14 +10,14 @@ const ContactSection = () => (
     <Parallax speed={-20}>
       <div className="relative">
         <h2 className="text-[clamp(2rem,8vw,7rem)] offbit-font mb-4 text-white text-center leading-none">
-          Let&apos;s create <br />
-          <span className="block">great things <span className="italic">together.</span></span>
+          Lets create <br />
+          <span className="block">great things <span className="italic">together</span></span>
         </h2>
         <a
-          href="mailto:hello@yourdomain.com"
-          className="mt-8 px-8 py-4 border border-white rounded-full text-white offbit-font text-lg hover:bg-white hover:text-black transition block w-fit mx-auto"
+          href="mailto:constantsuchet@gmail.com"
+          className="mt-8 px-8 py-4 cursor-hover-target border border-white rounded-full text-white offbit-font text-lg hover:bg-white hover:text-black transition block w-fit mx-auto"
         >
-          hello@yourdomain.com
+          constantsuchet@gmail.com
         </a>
       </div>
     </Parallax>

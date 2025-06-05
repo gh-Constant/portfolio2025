@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
               href={item.href} 
               target={item.external ? "_blank" : undefined}
               rel={item.external ? "noopener noreferrer" : undefined}
-              className="relative group hover:text-gray-700 uppercase tracking-wider pb-1 flex items-center interactive offbit-font"
+              className="relative group uppercase tracking-wider pb-1 flex items-center interactive offbit-font cursor-hover-target"
             >
               {item.name}{item.badge && <sup>{item.badge}</sup>}
               {item.external && (
@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
         </div>
         {/* Hamburger Icon for Mobile */}
         <button
-          className="md:hidden flex flex-col justify-center items-center w-10 h-10 focus:outline-none"
+          className="md:hidden flex flex-col justify-center items-center w-10 h-10 focus:outline-none cursor-hover-target"
           onClick={() => setIsOpen((prev) => !prev)}
           aria-label={isOpen ? 'Close menu' : 'Open menu'}
         >
@@ -113,7 +113,7 @@ const Navbar: React.FC = () => {
                   target={item.external ? "_blank" : undefined}
                   rel={item.external ? "noopener noreferrer" : undefined}
                   onClick={() => setIsOpen(false)} 
-                  className="flex items-center hover:text-gray-700 interactive offbit-font"
+                  className="flex items-center interactive offbit-font"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 + index * 0.1, duration: 0.3 }}
@@ -131,7 +131,7 @@ const Navbar: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)} 
-                className="flex items-center hover:text-gray-700 interactive text-base offbit-font"
+                className="flex items-center interactive text-base offbit-font"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 + siteConfig.navigation.main.length * 0.1, duration: 0.3 }}

@@ -25,7 +25,7 @@ const BottomBar: React.FC = () => {
         {/* Email on the left, responsive with ellipsis */}
         <a
           href={`mailto:${siteConfig.contact.email}`}
-          className="interactive flex-1 min-w-0 text-xs sm:text-base font-mono underline text-white hover:text-blue-300 transition-colors overflow-hidden text-ellipsis whitespace-nowrap"
+          className="interactive flex-1 min-w-0 text-xs sm:text-base font-mono underline text-white hover:text-blue-300 transition-colors overflow-hidden text-ellipsis whitespace-nowrap cursor-hover-target"
           style={{ letterSpacing: 1 }}
           title={siteConfig.contact.email}
         >
@@ -41,7 +41,7 @@ const BottomBar: React.FC = () => {
             href={siteConfig.contact.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="interactive font-mono underline text-white hover:text-blue-300 transition-colors hidden sm:inline-block"
+            className="interactive font-mono underline text-white hover:text-blue-300 transition-colors hidden sm:inline-block cursor-hover-target"
             style={{ letterSpacing: 1 }}
           >
             LinkedIn
@@ -55,4 +55,4 @@ const BottomBar: React.FC = () => {
   );
 };
 
-export default BottomBar; 
+export default BottomBar;

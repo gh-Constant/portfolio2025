@@ -61,7 +61,7 @@ const ProjectsSection: React.FC = () => {
                     {project.link && (
                       <a 
                         href={project.link}
-                        className="px-4 py-2 bg-white text-black rounded-full text-sm offbit-font hover:bg-gray-200 transition"
+                        className="px-4 py-2 bg-white text-black rounded-full text-sm offbit-font hover:bg-gray-200 transition cursor-hover-target"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -71,7 +71,7 @@ const ProjectsSection: React.FC = () => {
                     {project.github && (
                       <a 
                         href={project.github}
-                        className="px-4 py-2 border border-white text-white rounded-full text-sm offbit-font hover:bg-white hover:text-black transition"
+                        className="px-4 py-2 border border-white text-white rounded-full text-sm offbit-font hover:bg-white hover:text-black transition cursor-hover-target"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
