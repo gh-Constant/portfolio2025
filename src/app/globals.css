@@ -9,6 +9,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-offbit: var(--font-offbit);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -125,6 +126,12 @@
 .fleur-de-leah-regular {
   font-family: "Fleur De Leah", cursive;
   font-weight: 400;
+  font-style: normal;
+}
+
+.offbit-font {
+  font-family: var(--font-offbit), sans-serif;
+  font-weight: bold;
   font-style: normal;
 }
 

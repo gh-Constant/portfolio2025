@@ -7,13 +7,13 @@ const ContactSection = () => (
   <section className="relative z-10 min-h-[60vh] w-full bg-[#111] flex flex-col items-center justify-center">
     <Parallax speed={-20}>
       <div className="relative">
-        <h2 className="text-[clamp(2rem,8vw,7rem)] font-serif mb-4 text-white mix-blend-difference text-center leading-none">
+        <h2 className="text-[clamp(2rem,8vw,7rem)] offbit-font mb-4 text-white text-center leading-none">
           Let&apos;s create <br />
           <span className="block">great things <span className="italic">together.</span></span>
         </h2>
         <a
           href="mailto:hello@yourdomain.com"
-          className="mt-8 px-8 py-4 border border-white rounded-full text-white mix-blend-difference text-lg hover:bg-white hover:text-black transition block w-fit mx-auto"
+          className="mt-8 px-8 py-4 border border-white rounded-full text-white offbit-font text-lg hover:bg-white hover:text-black transition block w-fit mx-auto"
         >
           hello@yourdomain.com
         </a>

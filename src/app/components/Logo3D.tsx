@@ -1,12 +1,49 @@
 'use client'
 
-import React, { useRef, useEffect, useMemo, Suspense } from 'react'
+import React, { useRef, useEffect, useMemo, Suspense, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Environment, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 
 // Preload the model for better performance
 useGLTF.preload('/assets/logo-optimized.glb')
+
+// Custom hook to get responsive FOV and DPR based on screen size
+function useResponsiveSettings() {
+  const [settings, setSettings] = useState({ fov: 50, dpr: 1 })
+
+  useEffect(() => {
+    const updateSettings = () => {
+      const width = window.innerWidth
+      const isMobile = width < 768
+      
+      // Adjust FOV and DPR based on screen width
+      if (width < 480) {
+        // Mobile phones - wider FOV, lower DPR for performance
+        setSettings({ fov: 70, dpr: 1 })
+      } else if (width < 768) {
+        // Tablets - medium FOV, lower DPR
+        setSettings({ fov: 60, dpr: 1 })
+      } else if (width < 1200) {
+        // Small desktops - standard FOV, moderate DPR
+        setSettings({ fov: 50, dpr: 1.5 })
+      } else {
+        // Large screens - narrower FOV, higher DPR but capped
+        setSettings({ fov: 45, dpr: 1.5 })
+      }
+    }
+
+    // Set initial settings
+    updateSettings()
+
+    // Listen for window resize
+    window.addEventListener('resize', updateSettings)
+    
+    return () => window.removeEventListener('resize', updateSettings)
+  }, [])
+
+  return settings
+}
 
 function Model() {
   // Use useGLTF instead of useLoader for better caching and performance
@@ -16,24 +53,16 @@ function Model() {
   // Clone the scene to avoid modifying the original
   const clonedScene = useMemo(() => scene.clone(), [scene])
 
-  const iridescentMaterial = useMemo(() => {
-    return new THREE.MeshPhysicalMaterial({
-      roughness: 0.1,
-      metalness: 0.2,
-      transmission: 0.7,
-      transparent: true,
-      thickness: 0.5,
-      ior: 1.5,
-      iridescence: 1.0,
-      iridescenceIOR: 1.3,
-      iridescenceThicknessRange: [100, 600],
-      color: new THREE.Color(0xffffff),
-      attenuationColor: new THREE.Color(0xffffff),
-      attenuationDistance: 0.2,
-      envMapIntensity: 3.0,
-      clearcoat: 0.5,
-      clearcoatRoughness: 0.1,
-      side: THREE.DoubleSide,
+  // Lightweight purple material - optimized for performance
+  const optimizedMaterial = useMemo(() => {
+    return new THREE.MeshStandardMaterial({
+      roughness: 0.3,
+      metalness: 0.7,
+      color: new THREE.Color(0x6a1b9a), // Bright purple base
+      envMapIntensity: 1.5,
+      // Simple emissive for purple glow without expensive effects
+      emissive: new THREE.Color(0x3f1651), // Subtle purple glow
+      emissiveIntensity: 0.1,
     })
   }, [])
 
@@ -42,8 +71,8 @@ function Model() {
       // Optimize geometry and materials
       clonedScene.traverse((child) => {
         if (child instanceof THREE.Mesh) {
-          // Apply material
-          child.material = iridescentMaterial
+          // Apply optimized material
+          child.material = optimizedMaterial
           
           // Optimize geometry
           if (child.geometry) {
@@ -77,7 +106,7 @@ function Model() {
       clonedScene.rotation.y = 0.3
       clonedScene.rotation.z = 0.1
     }
-  }, [clonedScene, iridescentMaterial])
+  }, [clonedScene, optimizedMaterial])
 
   // Optimize animation with delta time
   useFrame((state, delta) => {
@@ -90,23 +119,37 @@ function Model() {
 }
 
 const Logo3D: React.FC = () => {
+  const { fov, dpr } = useResponsiveSettings()
+  
   return (
     <div className="w-full h-full">
       <Canvas
-        camera={{ position: [0, 0, 5], fov: 50 }}
+        camera={{ position: [0, 0, 5], fov: fov }}
         gl={{
           alpha: true,
-          antialias: true,
+          antialias: window.innerWidth < 768, // Disable antialias on desktop for performance
           outputColorSpace: THREE.SRGBColorSpace,
-          // Performance optimizations
           powerPreference: 'high-performance',
           stencil: false,
           depth: true,
         }}
-        // Add performance monitoring
         performance={{ min: 0.5 }}
-        // Enable automatic pixel ratio adjustment
-        dpr={[1, 2]}
+         dpr={dpr}
+         onCreated={({ gl }) => {
+           // Limit frame rate for better performance
+           gl.setAnimationLoop = (callback) => {
+             const fps = 30 // Limit to 30 FPS for smoother performance
+             let then = 0
+             const animate = (now: number) => {
+               if (now - then >= 1000 / fps) {
+                 then = now
+                 callback?.(now)
+               }
+               requestAnimationFrame(animate)
+             }
+             requestAnimationFrame(animate)
+           }
+         }}
       >
         {/* Optimized lighting */}
         <ambientLight intensity={0.3} />
@@ -126,8 +169,7 @@ const Logo3D: React.FC = () => {
           <Environment 
             preset="sunset" 
             background={false}
-            // Reduce environment map resolution for better performance
-            resolution={256}
+            resolution={128} // Further reduced for better performance
           />
           <Model />
         </Suspense>
