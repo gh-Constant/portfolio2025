@@ -1,54 +1,14 @@
 'use client'  
 
-import React, { useState, useRef, useEffect } from 'react';
-import gsap from 'gsap';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { siteConfig } from '@/config/site';
+
+//TODO #2 : Add a animation when hovering the items of the navbar
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const topBar = useRef<HTMLSpanElement>(null);
-  const midBar = useRef<HTMLSpanElement>(null);
-  const botBar = useRef<HTMLSpanElement>(null);
-  const menuPanelRef = useRef<HTMLDivElement>(null);
   const NAVBAR_HEIGHT = 64; // px, adjust if your navbar height changes
-
-  // Hamburger animation
-  useEffect(() => {
-    if (isOpen) {
-      gsap.to(topBar.current, { rotate: 45, y: 8, duration: 0.3, transformOrigin: 'center' });
-      gsap.to(midBar.current, { opacity: 0, duration: 0.2 });
-      gsap.to(botBar.current, { rotate: -45, y: -8, duration: 0.3, transformOrigin: 'center' });
-    } else {
-      gsap.to(topBar.current, { rotate: 0, y: 0, duration: 0.3 });
-      gsap.to(midBar.current, { opacity: 1, duration: 0.2, delay: 0.1 });
-      gsap.to(botBar.current, { rotate: 0, y: 0, duration: 0.3 });
-    }
-  }, [isOpen]);
-
-  // Mobile menu derolling animation
-  useEffect(() => {
-    const panel = menuPanelRef.current;
-    if (!panel) return;
-    const fullHeight = `calc(100vh - ${NAVBAR_HEIGHT}px)`;
-    if (isOpen) {
-      gsap.to(panel, {
-        height: fullHeight,
-        opacity: 1,
-        duration: 0.4,
-        ease: 'power2.out',
-        display: 'block',
-        pointerEvents: 'auto',
-      });
-    } else {
-      gsap.to(panel, {
-        height: 0,
-        opacity: 0,
-        duration: 0.3,
-        ease: 'power2.in',
-        pointerEvents: 'none',
-      });
-    }
-  }, [isOpen]);
 
   return (
     <nav className="bg-white text-black border-b border-gray-300 sticky top-0 z-50">
@@ -90,60 +50,101 @@ const Navbar: React.FC = () => {
           onClick={() => setIsOpen((prev) => !prev)}
           aria-label={isOpen ? 'Close menu' : 'Open menu'}
         >
-          <span ref={topBar} className="block w-7 h-1 bg-black mb-1 rounded origin-center transition-all"></span>
-          <span ref={midBar} className="block w-7 h-1 bg-black mb-1 rounded origin-center transition-all"></span>
-          <span ref={botBar} className="block w-7 h-1 bg-black rounded origin-center transition-all"></span>
+          <motion.span 
+            className="block w-7 h-1 bg-black mb-1 rounded origin-center"
+            animate={{
+              rotate: isOpen ? 45 : 0,
+              y: isOpen ? 8 : 0
+            }}
+            transition={{ duration: 0.3 }}
+          />
+          <motion.span 
+            className="block w-7 h-1 bg-black mb-1 rounded origin-center"
+            animate={{
+              opacity: isOpen ? 0 : 1
+            }}
+            transition={{ duration: 0.2 }}
+          />
+          <motion.span 
+            className="block w-7 h-1 bg-black rounded origin-center"
+            animate={{
+              rotate: isOpen ? -45 : 0,
+              y: isOpen ? -8 : 0
+            }}
+            transition={{ duration: 0.3 }}
+          />
         </button>
       </div>
       {/* Mobile Menu Panel (derolls from under navbar) */}
-      <div
-        ref={menuPanelRef}
-        style={{
-          position: 'fixed',
-          top: NAVBAR_HEIGHT,
-          left: 0,
-          right: 0,
-          zIndex: 40,
-          background: 'white',
-          height: 0,
-          opacity: 0,
-          overflow: 'hidden',
-          pointerEvents: isOpen ? 'auto' : 'none',
-        }}
-        className="md:hidden shadow-lg"
-      >
-        <div className="flex flex-col items-start px-8 py-8 space-y-8 text-3xl font-serif h-full w-full">
-          {siteConfig.navigation.main.map((item) => (
-            <a 
-              key={item.name}
-              href={item.href} 
-              target={item.external ? "_blank" : undefined}
-              rel={item.external ? "noopener noreferrer" : undefined}
-              onClick={() => setIsOpen(false)} 
-              className="flex items-center hover:text-gray-700 interactive offbit-font"
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ 
+              height: `calc(100vh - ${NAVBAR_HEIGHT}px)`, 
+              opacity: 1 
+            }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ 
+              duration: 0.4, 
+              ease: [0.25, 0.46, 0.45, 0.94] // power2.out equivalent
+            }}
+            style={{
+              position: 'fixed',
+              top: NAVBAR_HEIGHT,
+              left: 0,
+              right: 0,
+              zIndex: 40,
+              background: 'white',
+              overflow: 'hidden',
+            }}
+            className="md:hidden shadow-lg"
+          >
+            <motion.div 
+              className="flex flex-col items-start px-8 py-8 space-y-8 text-3xl font-serif h-full w-full"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.3 }}
             >
-              {item.name.charAt(0) + item.name.slice(1).toLowerCase()}{item.badge && <sup className="text-base">{item.badge}</sup>}
-              {item.external && (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 ml-1">
+              {siteConfig.navigation.main.map((item, index) => (
+                <motion.a 
+                  key={item.name}
+                  href={item.href} 
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noopener noreferrer" : undefined}
+                  onClick={() => setIsOpen(false)} 
+                  className="flex items-center hover:text-gray-700 interactive offbit-font"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 + index * 0.1, duration: 0.3 }}
+                >
+                  {item.name.charAt(0) + item.name.slice(1).toLowerCase()}{item.badge && <sup className="text-base">{item.badge}</sup>}
+                  {item.external && (
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 ml-1">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                    </svg>
+                  )}
+                </motion.a>
+              ))}
+              <motion.a 
+                href={siteConfig.contact.linkedin} 
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsOpen(false)} 
+                className="flex items-center hover:text-gray-700 interactive text-base offbit-font"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 + siteConfig.navigation.main.length * 0.1, duration: 0.3 }}
+              >
+                Linkedin
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 ml-1">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                 </svg>
-              )}
-            </a>
-          ))}
-          <a 
-            href={siteConfig.contact.linkedin} 
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setIsOpen(false)} 
-            className="flex items-center hover:text-gray-700 interactive text-base offbit-font"
-          >
-            Linkedin
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 ml-1">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-            </svg>
-          </a>
-        </div>
-      </div>
+              </motion.a>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

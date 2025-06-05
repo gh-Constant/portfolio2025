@@ -3,6 +3,8 @@
 'use client'
 import { Parallax } from 'react-scroll-parallax';
 
+//TODO: #4 #3 Make the contact section parallax better, a little taller and fix the background not blending with the section (we can see it where the rounded corners of the last section reveals the black background of the section/page/layout)
+
 const ContactSection = () => (
   <section className="relative z-10 min-h-[60vh] w-full bg-[#111] flex flex-col items-center justify-center">
     <Parallax speed={-20}>
