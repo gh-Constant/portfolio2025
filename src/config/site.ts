@@ -12,7 +12,7 @@ export const siteConfig = {
     main: [
       { name: "PROJECTS", href: "#projects", badge: "9" },
       { name: "ABOUT", href: "#about" },
-      { name: "RÉSUMÉ", href: "/resume.pdf", external: true },
+      { name: "RESUME", href: "/resume.pdf", external: true },
       { name: "CONTACT", href: "#contact" },
     ],
   },

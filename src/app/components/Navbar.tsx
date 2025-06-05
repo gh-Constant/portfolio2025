@@ -53,7 +53,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-white text-black border-b border-gray-300 sticky top-0 z-50">
       <div className="container mx-auto px-6 py-3 flex justify-between items-center" style={{ height: NAVBAR_HEIGHT }}>
-        <div className="text-xl font-semibold uppercase tracking-wider interactive">{siteConfig.name}</div>
+        <div className="text-xl offbit-font font-semibold uppercase tracking-wider interactive">{siteConfig.name}</div>
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8">
           {siteConfig.navigation.main.map((item) => (
@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
               href={item.href} 
               target={item.external ? "_blank" : undefined}
               rel={item.external ? "noopener noreferrer" : undefined}
-              className="relative group hover:text-gray-700 uppercase tracking-wider pb-1 flex items-center interactive"
+              className="relative group hover:text-gray-700 uppercase tracking-wider pb-1 flex items-center interactive offbit-font"
             >
               {item.name}{item.badge && <sup>{item.badge}</sup>}
               {item.external && (
@@ -120,7 +120,7 @@ const Navbar: React.FC = () => {
               target={item.external ? "_blank" : undefined}
               rel={item.external ? "noopener noreferrer" : undefined}
               onClick={() => setIsOpen(false)} 
-              className="flex items-center hover:text-gray-700 interactive"
+              className="flex items-center hover:text-gray-700 interactive offbit-font"
             >
               {item.name.charAt(0) + item.name.slice(1).toLowerCase()}{item.badge && <sup className="text-base">{item.badge}</sup>}
               {item.external && (
@@ -135,7 +135,7 @@ const Navbar: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsOpen(false)} 
-            className="flex items-center hover:text-gray-700 interactive text-base"
+            className="flex items-center hover:text-gray-700 interactive text-base offbit-font"
           >
             Linkedin
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 ml-1">
@@ -148,4 +148,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar; 
+export default Navbar;
