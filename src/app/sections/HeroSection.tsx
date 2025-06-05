@@ -1,12 +1,11 @@
 import React from 'react';
-import Logo3D from "../components/Logo3D";
 
 const HeroSection: React.FC = () => {
   return (
     <section className="flex min-h-screen items-center justify-center bg-transparent relative overflow-hidden">
       {/* 3D Model Background Layer */}
       <div className="absolute inset-0 z-0">
-        <Logo3D />
+      
       </div>
       
       {/* Text Foreground Layer */}

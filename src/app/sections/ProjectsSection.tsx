@@ -5,10 +5,10 @@ import { projects } from '../data/projects';
 
 const ProjectsSection: React.FC = () => {
   return (
-    <section className="relative z-10 min-h-screen w-full py-20">
+    <section className="relative z-10 min-h-screen w-full py-40">
       <div className="container mx-auto px-6">
         <Parallax speed={-10}>
-          <h2 className="text-[clamp(3rem,10vw,8rem)] font-serif mb-16 text-black text-center leading-none">
+          <h2 className="text-[clamp(4rem,12vw,10rem)] font-serif mb-16 text-black text-center leading-none">
             Selected <br />
             <span className="italic">Projects</span>
           </h2>
