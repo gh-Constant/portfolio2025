@@ -115,10 +115,25 @@ function Model() {
     }
   })
 
+  useEffect(() => {
+    if (clonedScene && modelRef.current && onLoad) {
+      // A simple way to check if the model is somewhat ready
+      // More robust checks might involve checking if geometry is available
+      // or if specific textures are loaded, depending on the model complexity.
+      if (modelRef.current.children.length > 0) {
+        onLoad();
+      }
+    }
+  }, [clonedScene, onLoad]);
+
   return <primitive ref={modelRef} object={clonedScene} />
 }
 
-const Logo3D: React.FC = () => {
+interface Logo3DProps {
+  onLoad?: () => void;
+}
+
+const Logo3D: React.FC<Logo3DProps> = ({ onLoad }) => {
   const { fov, dpr } = useResponsiveSettings()
   
   return (

@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Logo3D from '../components/Logo3D';
+import LoadingScreen from '../components/LoadingScreen'; // Import LoadingScreen
 
 const HeroSection: React.FC = () => {
+  const [isModelLoaded, setIsModelLoaded] = useState(false);
+  const [isScreenVisible, setIsScreenVisible] = useState(true);
+
+  const handleLoadingComplete = () => {
+    setIsScreenVisible(false);
+  };
+
   return (
+    <>
+      {isScreenVisible && (
+        <LoadingScreen 
+          logoSrc="/assets/logo-optimized.glb" // Replace with your actual logo path if different
+          onLoadingComplete={handleLoadingComplete}
+          isModelLoaded={isModelLoaded}
+        />
+      )}
     <section className="flex min-h-screen  items-center justify-center bg-transparent relative overflow-hidden">
       {/* 3D Model Background Layer */}
-      <div className="absolute inset-0 z-0">
-        <Logo3D />
+      <div className={`absolute inset-0 z-0 ${isScreenVisible ? 'opacity-0' : 'opacity-100 transition-opacity duration-500'}`}>
+        <Logo3D onLoad={() => setIsModelLoaded(true)} />
       </div>
       
       {/* Text Foreground Layer */}
@@ -18,6 +34,7 @@ const HeroSection: React.FC = () => {
         </h1>
       </div>
     </section>
+    </>
   );
 };
 

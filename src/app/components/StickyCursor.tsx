@@ -9,7 +9,7 @@ export default function StickyCursor() {
   const mousePos = useRef({ x: 0, y: 0 })
   const cursorPos = useRef({ x: 0, y: 0 })
   const cursorLargePos = useRef({ x: 0, y: 0 })
-  const animationId = useRef<number>()
+  const animationId = useRef<number | null>(null)
 
   // NEW: Ref to track the hover state and scale
   const hoverState = useRef({

@@ -13,10 +13,10 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: '1',
-    title: 'ASEAN Student\'s Forum 2024',
-    description: 'Visual identity, event design, and publication materials for the ASEAN Student\'s Forum 2024. A comprehensive branding project showcasing cultural diversity and academic excellence.',
+    title: 'ChronoSync',
+    description: 'A modern time management app tool built for developers. Designed to help you focus on what matters most.',
     image: '/images/project1.png',
-    tags: ['Visual Identity', 'Event Design', 'Publication'],
+    tags: ['Nuxt.Js', 'Vue.Js', 'Tailwind CSS', 'C++ Application', 'Express.Js', 'PostgreSQL'],
     link: 'https://example.com',
     featured: true,
     size: 'large'

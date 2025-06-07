@@ -70,7 +70,7 @@ const ProjectsSection: React.FC = () => {
                   </div>
                   <div className="flex gap-3">
                     <button 
-                      className="px-4 py-2 bg-white text-black rounded-full text-sm offbit-font hover:bg-gray-200 transition cursor-hover-target"
+                      className="px-4 py-2 bg-white text-black rounded-full text-sm offbit-font transition"
                       onClick={(e) => {
                         e.preventDefault();
                         if (project.link) window.open(project.link, '_blank');
@@ -80,7 +80,7 @@ const ProjectsSection: React.FC = () => {
                     </button>
                     {project.github && (
                       <button 
-                        className="px-4 py-2 border border-white text-white rounded-full text-sm offbit-font hover:bg-white hover:text-black transition cursor-hover-target"
+                        className="px-4 py-2 border border-white text-white rounded-full text-sm offbit-font transition"
                         onClick={(e) => {
                           e.preventDefault();
                           window.open(project.github, '_blank');
