@@ -13,25 +13,66 @@ const LoadingScreen = () => {
     let currentProgress = 0;
     const targetProgress = 100;
     let animationFrameId: number;
+    let lastPauseTime = 0;
+    let nextPauseDuration = 0;
+    const initialDelay = 500; // Wait 500ms before starting
 
     const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
-    const animateLoading = () => {
-      currentProgress += 0.5; // Base increment
-      const easedProgress = targetProgress * easeOutCubic(currentProgress / targetProgress);
+    const shouldPause = () => {
+      // Pause more frequently at lower percentages, less at higher
+      const pauseChance = currentProgress < 30 ? 0.02 : (currentProgress < 70 ? 0.01 : 0.005);
+      return Math.random() < pauseChance;
+    };
+
+    const animateLoading = (timestamp: number) => {
+      if (!lastPauseTime) lastPauseTime = timestamp; // Initialize lastPauseTime
+
+      let currentSpeedFactor = 1;
+      if (timestamp < lastPauseTime + nextPauseDuration) {
+        // During a "pause", significantly slow down the animation
+        currentSpeedFactor = 0.1; // Drastically reduce speed instead of a hard stop
+      } else {
+        // Check if a new pause should start
+        if (shouldPause()) {
+          lastPauseTime = timestamp;
+          nextPauseDuration = 300 + Math.random() * 700; // Pause for 300-1000ms
+          currentSpeedFactor = 0.1; // Start the slowdown for the new pause
+        }
+      }
+
+      // Increment progress
+      const baseProgressStep = 0.2 + Math.random() * 0.4; // Base step, slightly reduced randomness
+      const progressStep = baseProgressStep * currentSpeedFactor;
+      currentProgress += progressStep;
+      const easedProgress = targetProgress * easeOutCubic(Math.min(currentProgress / targetProgress, 1));
 
       if (easedProgress < targetProgress) {
         setLoadingPercentage(Math.min(Math.floor(easedProgress), targetProgress));
         animationFrameId = requestAnimationFrame(animateLoading);
       } else {
         setLoadingPercentage(targetProgress);
-        setTimeout(() => setIsVisible(false), 500); // Delay before starting slide-up
+        // Ensure the slide-up animation doesn't start prematurely if we are in a slowdown phase
+        if (currentSpeedFactor === 1) { 
+            setTimeout(() => setIsVisible(false), 500); // Delay before starting slide-up
+        } else {
+            // If ending during a slowdown, wait for the slowdown period to effectively end
+            const remainingPause = (lastPauseTime + nextPauseDuration) - timestamp;
+            setTimeout(() => setIsVisible(false), Math.max(500, remainingPause + 100));
+        }
       }
     };
 
-    animationFrameId = requestAnimationFrame(animateLoading);
+    const startAnimationWithDelay = () => {
+        animationFrameId = requestAnimationFrame(animateLoading);
+    };
 
-    return () => cancelAnimationFrame(animationFrameId);
+    const timeoutId = setTimeout(startAnimationWithDelay, initialDelay);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      clearTimeout(timeoutId);
+    }
   }, []);
 
   return (
@@ -65,7 +106,7 @@ const LoadingScreen = () => {
               height: '100%',
               backgroundColor: 'white',
               zIndex: -1,
-              transition: 'width 0.2s cubic-bezier(0.6, 0.04, 0.98, 0.335)', // Non-linear progress bar
+              transition: 'width 0.25s cubic-bezier(0.4, 0, 0.2, 1)', // Smoother transition for the progress bar
             }}
           />
           <div></div>
@@ -90,8 +131,8 @@ const LoadingScreen = () => {
             <Image
               src="/images/loading-image.png"
               alt="Loading Logo"
-              width={300}
-              height={300}
+              width={400} // Increased logo size
+              height={400} // Increased logo size
               priority
               style={{ mixBlendMode: 'difference' }}
             />
