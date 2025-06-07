@@ -45,7 +45,7 @@ function useResponsiveSettings() {
   return settings
 }
 
-function Model() {
+function Model({ onLoad }: { onLoad?: () => void }) {
   // Use useGLTF instead of useLoader for better caching and performance
   const { scene } = useGLTF('/assets/logo-optimized.glb')
   const modelRef = useRef<THREE.Group>(null!)
@@ -116,7 +116,7 @@ function Model() {
   })
 
   useEffect(() => {
-    if (clonedScene && modelRef.current && onLoad) {
+    if (clonedScene && modelRef.current && typeof onLoad === 'function') {
       // A simple way to check if the model is somewhat ready
       // More robust checks might involve checking if geometry is available
       // or if specific textures are loaded, depending on the model complexity.
@@ -186,7 +186,7 @@ const Logo3D: React.FC<Logo3DProps> = ({ onLoad }) => {
             background={false}
             resolution={128} // Further reduced for better performance
           />
-          <Model />
+          <Model onLoad={onLoad} />
         </Suspense>
       </Canvas>
     </div>

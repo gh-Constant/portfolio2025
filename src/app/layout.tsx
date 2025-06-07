@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import BottomBar from "./components/BottomBar";
 import StickyCursor from "./components/StickyCursor";
+import LoadingScreen from "./components/LoadingScreen"; // Added import for LoadingScreen
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,6 +44,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${offBitFont.variable} antialiased`}
       >
+        <LoadingScreen /> {/* Added LoadingScreen component */}
         <StickyCursor />
         <Navbar />
         <main className="relative min-h-screen bg-[#F8F5F0]">
