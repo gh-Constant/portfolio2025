@@ -53,18 +53,20 @@ function Model({ onLoad }: { onLoad?: () => void }) {
   // Clone the scene to avoid modifying the original
   const clonedScene = useMemo(() => scene.clone(), [scene])
 
-  // Lightweight purple material - optimized for performance
+  // Enhanced purple material - optimized for performance
   const optimizedMaterial = useMemo(() => {
     return new THREE.MeshStandardMaterial({
-      roughness: 0.3,
-      metalness: 0.7,
-      color: new THREE.Color(0x6a1b9a), // Bright purple base
-      envMapIntensity: 1.5,
-      // Simple emissive for purple glow without expensive effects
-      emissive: new THREE.Color(0x3f1651), // Subtle purple glow
-      emissiveIntensity: 0.1,
-    })
-  }, [])
+      roughness: 0.2, // Slightly less rough for a bit more shine
+      metalness: 0.8, // Slightly more metallic
+      color: new THREE.Color(0x7e57c2), // A richer, slightly lighter purple
+      envMapIntensity: 1.8, // Increased environment map intensity for more reflection
+      emissive: new THREE.Color(0x4a148c), // Deeper purple glow
+      emissiveIntensity: 0.15, // Slightly stronger glow
+      // Consider adding a normal map here if you have one for more detail
+      // normalMap: textureLoader.load('/path/to/your-normal-map.png'), 
+      // normalScale: new THREE.Vector2(0.5, 0.5),
+    });
+  }, []);
 
   useEffect(() => {
     if (clonedScene) {
@@ -95,25 +97,101 @@ function Model({ onLoad }: { onLoad?: () => void }) {
       })
       
       // Scale and position
-      clonedScene.scale.set(2, 2, 1)
+      clonedScene.scale.set(1.8, 1.8, 0.9) // Slightly reduced scale
       
       const box = new THREE.Box3().setFromObject(clonedScene)
       const center = box.getCenter(new THREE.Vector3())
       clonedScene.position.sub(center)
       
-      // Set initial rotation
-      clonedScene.rotation.x = 0.2
-      clonedScene.rotation.y = 0.3
-      clonedScene.rotation.z = 0.1
+      // Set initial rotation and a slight bend
+      // Applying a shear might be too complex without a geometry modifier or direct vertex manipulation.
+      // Instead, we'll adjust rotation to give a sense of being slightly off-axis or 'bended'.
+      clonedScene.rotation.x = 0.25; // Slightly more tilt on X
+      clonedScene.rotation.y = 0.3;
+      clonedScene.rotation.z = 0.15; // Add a slight Z rotation for a 'bended' feel
+
+      // For a more pronounced bend, you would typically use a Bend modifier (e.g., from Drei or custom)
+      // or directly manipulate vertices, which is more involved.
+      // Example of a slight shear if you were to manipulate the matrix directly (more advanced):
+      // const shearMatrix = new THREE.Matrix4().makeShear(0.1, 0, 0, 0, 0, 0);
+      // clonedScene.applyMatrix4(shearMatrix);
+      // Ensure to recompute bounding box if using matrix manipulations that affect it significantly.
+      // box.setFromObject(clonedScene); // Recompute box if needed
+      // center = box.getCenter(new THREE.Vector3()); // Recenter if needed
+      // clonedScene.position.sub(center); // Reapply centering if needed
     }
   }, [clonedScene, optimizedMaterial])
 
-  // Optimize animation with delta time
+  const [isDragging, setIsDragging] = useState(false);
+  const previousMousePosition = useRef({ x: 0, y: 0 });
+  const lastMoveTime = useRef(0);
+  const moveThreshold = 16; // roughly 60fps, throttle move events
+  const rotationVelocity = useRef({ x: 0, y: 0 }); // To store velocity for inertia
+  const dampingFactor = 0.97; // Increased for smoother slowdown
+
+  // Optimize animation with delta time, manual override, and inertia
   useFrame((state, delta) => {
     if (modelRef.current) {
-      modelRef.current.rotation.y += delta * 0.5 // Use delta for consistent animation
+      if (!isDragging) {
+        // Apply inertia if there's velocity
+        if (Math.abs(rotationVelocity.current.x) > 0.0001 || Math.abs(rotationVelocity.current.y) > 0.0001) {
+          modelRef.current.rotation.x += rotationVelocity.current.x;
+          modelRef.current.rotation.y += rotationVelocity.current.y;
+          rotationVelocity.current.x *= dampingFactor;
+          rotationVelocity.current.y *= dampingFactor;
+        } else {
+          // If velocity is negligible, reset it and apply default rotation
+          rotationVelocity.current.x = 0;
+          rotationVelocity.current.y = 0;
+          modelRef.current.rotation.y += delta * 0.1; // Default slow rotation
+        }
+      } 
+      // Note: Velocity is now set in handlePointerMove and reset in handlePointerDown.
+      // This ensures the last drag velocity is used for inertia when dragging stops.
     }
-  })
+  });
+
+  const handlePointerDown = (event: React.PointerEvent<THREE.Object3D>) => {
+    setIsDragging(true);
+    previousMousePosition.current = { x: event.clientX, y: event.clientY };
+    // Reset velocity when a new drag starts to stop any ongoing inertia
+    rotationVelocity.current = { x: 0, y: 0 }; 
+    (event.target as HTMLElement).setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event: React.PointerEvent<THREE.Object3D>) => {
+    const now = performance.now();
+    if (isDragging && modelRef.current && now - lastMoveTime.current > moveThreshold) {
+      const timeDelta = now - lastMoveTime.current;
+      lastMoveTime.current = now;
+
+      const deltaX = event.clientX - previousMousePosition.current.x;
+      const deltaY = event.clientY - previousMousePosition.current.y;
+
+      const rotationAmountX = deltaY * 0.005;
+      const rotationAmountY = deltaX * 0.005;
+
+      modelRef.current.rotation.x += rotationAmountX;
+      modelRef.current.rotation.y += rotationAmountY;
+
+      // Calculate velocity for inertia: (change in rotation) / (change in time)
+      // Normalize timeDelta to avoid extreme velocities if frames skip
+      const normalizedTimeDelta = Math.max(1, timeDelta); // Avoid division by zero or very small numbers
+      // Reduced multiplier for less fast initial inertia
+      rotationVelocity.current.x = rotationAmountX / normalizedTimeDelta * 10; 
+      rotationVelocity.current.y = rotationAmountY / normalizedTimeDelta * 10;
+
+      previousMousePosition.current = { x: event.clientX, y: event.clientY };
+    }
+  };
+
+  const handlePointerUpOrOut = (event: React.PointerEvent<THREE.Object3D>) => {
+    if (isDragging) {
+      setIsDragging(false);
+      (event.target as HTMLElement).releasePointerCapture(event.pointerId);
+      // Velocity is already set during pointer move, so inertia will take over
+    }
+  };
 
   useEffect(() => {
     if (clonedScene && modelRef.current && typeof onLoad === 'function') {
@@ -126,7 +204,18 @@ function Model({ onLoad }: { onLoad?: () => void }) {
     }
   }, [clonedScene, onLoad]);
 
-  return <primitive ref={modelRef} object={clonedScene} />
+  return (
+    <primitive 
+      ref={modelRef} 
+      object={clonedScene} 
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUpOrOut} // Use combined handler
+      onPointerOut={handlePointerUpOrOut} // Use combined handler
+      onLostPointerCapture={handlePointerUpOrOut} // Also handle lost pointer capture
+      style={{ cursor: isDragging ? 'grabbing' : 'grab' }} // Change cursor on drag
+    />
+  );
 }
 
 interface Logo3DProps {
