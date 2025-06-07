@@ -10,28 +10,28 @@ useGLTF.preload('/assets/logo-optimized.glb')
 
 // Custom hook to get responsive FOV and DPR based on screen size
 function useResponsiveSettings() {
-  const [settings, setSettings] = useState({ fov: 50, dpr: 1 })
+  const [settings, setSettings] = useState({ fov: 50, dpr: 1, isMobile: false });
 
   useEffect(() => {
     const updateSettings = () => {
-      const width = window.innerWidth
-      const isMobile = width < 768
+      const width = window.innerWidth;
+      const isMobile = width < 768;
       
       // Adjust FOV and DPR based on screen width
       if (width < 480) {
         // Mobile phones - wider FOV, lower DPR for performance
-        setSettings({ fov: 70, dpr: 1 })
+        setSettings({ fov: 70, dpr: 1, isMobile: true });
       } else if (width < 768) {
         // Tablets - medium FOV, lower DPR
-        setSettings({ fov: 60, dpr: 1 })
+        setSettings({ fov: 60, dpr: 1, isMobile: true });
       } else if (width < 1200) {
         // Small desktops - standard FOV, moderate DPR
-        setSettings({ fov: 50, dpr: 1.5 })
+        setSettings({ fov: 50, dpr: 1.5, isMobile: false });
       } else {
         // Large screens - narrower FOV, higher DPR but capped
-        setSettings({ fov: 45, dpr: 1.5 })
+        setSettings({ fov: 45, dpr: 1.5, isMobile: false });
       }
-    }
+    };
 
     // Set initial settings
     updateSettings()
@@ -223,7 +223,7 @@ interface Logo3DProps {
 }
 
 const Logo3D: React.FC<Logo3DProps> = ({ onLoad }) => {
-  const { fov, dpr } = useResponsiveSettings()
+  const { fov, dpr, isMobile } = useResponsiveSettings();
   
   return (
     <div className="w-full h-full">
@@ -231,7 +231,7 @@ const Logo3D: React.FC<Logo3DProps> = ({ onLoad }) => {
         camera={{ position: [0, 0, 5], fov: fov }}
         gl={{
           alpha: true,
-          antialias: window.innerWidth < 768, // Disable antialias on desktop for performance
+          antialias: isMobile, // Use isMobile state from hook
           outputColorSpace: THREE.SRGBColorSpace,
           powerPreference: 'high-performance',
           stencil: false,
