@@ -18,7 +18,7 @@ const HeroSection: React.FC = () => {
       {/* 3D Model Background Layer */}
       {/* The Logo3D component will only be fully visible once loaded due to its internal structure or styling if any */}
       {/* We ensure it's part of the DOM to allow its onLoad to trigger */}
-      <div className={`absolute inset-0 z-0 transition-opacity duration-500 ${isModelLoaded ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`absolute -top-20 inset-x-0 bottom-0 z-0 transition-opacity duration-500 ${isModelLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <Logo3D onLoad={() => setIsModelLoaded(true)} />
       </div>
       
@@ -26,8 +26,7 @@ const HeroSection: React.FC = () => {
       {/* This text will be visible regardless of the 3D model's loading state */}
       <div className="absolute inset-x-0 top-1/4 transform -translate-y-1/4 z-10">
         <h1 className="text-center w-full px-4">
-          <span className="offbit-font block text-[clamp(3.5rem,22.5vw,20rem)] leading-none text-black">
-            {/* Text content can be dynamic or static */}
+          <span className="nohemi-caption block text-[clamp(3.5rem,22.5vw,20rem)] leading-none text-black">
           </span>
         </h1>
       </div>

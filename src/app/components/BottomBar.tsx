@@ -25,23 +25,23 @@ const BottomBar: React.FC = () => {
         {/* Email on the left, responsive with ellipsis */}
         <a
           href={`mailto:${siteConfig.contact.email}`}
-          className="interactive flex-1 min-w-0 text-xs sm:text-base font-mono underline text-white hover:text-blue-300 transition-colors overflow-hidden text-ellipsis whitespace-nowrap cursor-hover-target"
+          className="interactive flex-1 min-w-0 text-xs sm:text-base nohemi-body underline text-white hover:text-blue-300 transition-colors overflow-hidden text-ellipsis whitespace-nowrap cursor-hover-target"
           style={{ letterSpacing: 1 }}
           title={siteConfig.contact.email}
         >
           {siteConfig.contact.email}
         </a>
         {/* Centered Location */}
-        <div className="flex-1 flex justify-center items-center text-xs sm:text-base font-semibold text-white">
+        <div className="flex-1 flex justify-center items-center text-xs sm:text-base nohemi-heading-sm text-white">
           <span style={{ letterSpacing: 2 }}>{siteConfig.location}</span>
         </div>
         {/* LinkedIn and Time on the right */}
-        <div className="flex-1 flex justify-end items-center gap-4 text-xs sm:text-base text-white overflow-hidden text-ellipsis whitespace-nowrap">
+        <div className="flex-1 flex justify-end items-center gap-4 text-xs sm:text-base nohemi-body text-white overflow-hidden text-ellipsis whitespace-nowrap">
           <a
             href={siteConfig.contact.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="interactive font-mono underline text-white hover:text-blue-300 transition-colors hidden sm:inline-block cursor-hover-target"
+            className="interactive nohemi-body underline text-white hover:text-blue-300 transition-colors hidden sm:inline-block cursor-hover-target"
             style={{ letterSpacing: 1 }}
           >
             LinkedIn

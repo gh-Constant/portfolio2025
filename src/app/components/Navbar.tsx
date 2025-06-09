@@ -13,7 +13,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-white text-black border-b border-gray-300 sticky top-0 z-50">
       <div className="container mx-auto px-6 py-3 flex justify-between items-center" style={{ height: NAVBAR_HEIGHT }}>
-        <div className="text-xl offbit-font font-semibold uppercase tracking-wider interactive">{siteConfig.name}</div>
+        <div className="text-xl nohemi-heading-lg font-semibold uppercase tracking-wider interactive">{siteConfig.name}</div>
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8">
           {siteConfig.navigation.main.map((item) => (
@@ -131,7 +131,7 @@ const Navbar: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)} 
-                className="flex items-center interactive text-base offbit-font"
+                className="flex items-center interactive text-base nohemi-heading-sm"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 + siteConfig.navigation.main.length * 0.1, duration: 0.3 }}

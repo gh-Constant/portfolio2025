@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const LoadingScreen = () => {
   const [loadingPercentage, setLoadingPercentage] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
+  const [showText, setShowText] = useState(true);
 
   useEffect(() => {
     let currentProgress = 0;
@@ -110,7 +111,10 @@ const LoadingScreen = () => {
             }}
           />
           <div></div>
-          <p
+          <motion.p
+            initial={{ transform: 'translateY(0%)' }}
+            animate={{ transform: showText ? 'translateY(0%)' : 'translateY(100%)' }}
+            transition={{ duration: 1.5, ease: [0.77, 0, 0.175, 1] }}
             style={{
               fontFamily: 'var(--font-offbit)',
               fontSize: 'clamp(4rem, 15vw, 12rem)',
@@ -121,10 +125,11 @@ const LoadingScreen = () => {
               textAlign: 'left',
               lineHeight: '1',
               paddingLeft: '5vw',
+              overflow: 'hidden',
             }}
           >
             {loadingPercentage}
-          </p>
+          </motion.p>
           <div></div>
           <div></div>
           <div style={{ gridColumn: '2 / 3', gridRow: '2 / 3', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

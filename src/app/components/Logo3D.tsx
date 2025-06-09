@@ -127,24 +127,58 @@ function Model({ onLoad }: { onLoad?: () => void }) {
   const lastMoveTime = useRef(0);
   const moveThreshold = 16; // roughly 60fps, throttle move events
   const rotationVelocity = useRef({ x: 0, y: 0 }); // To store velocity for inertia
-  const dampingFactor = 0.97; // Increased for smoother slowdown
+  const scrollVelocity = useRef(0); // To store scroll velocity for inertia
+  const lastScrollY = useRef(0);
+  const lastScrollTime = useRef(0);
+  const dampingFactor = 0.99; // Much higher for longer inertia
+  const scrollDampingFactor = 0.98; // Much higher damping for longer scroll inertia
+
+  // Add scroll event listener
+  useEffect(() => {
+    const handleScroll = () => {
+      const now = performance.now();
+      const currentScrollY = window.scrollY;
+      
+      if (now - lastScrollTime.current > 16) { // Throttle to ~60fps
+        const scrollDelta = currentScrollY - lastScrollY.current;
+        const timeDelta = Math.max(1, now - lastScrollTime.current);
+        
+        // Calculate scroll velocity with smoothing
+         const newVelocity = (scrollDelta / timeDelta) * 0.05; // Much higher scale factor for faster rotation
+         scrollVelocity.current = scrollVelocity.current * 0.5 + newVelocity * 0.5; // Less smoothing for more responsive rotation
+        
+        lastScrollY.current = currentScrollY;
+        lastScrollTime.current = now;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Optimize animation with delta time, manual override, and inertia
   useFrame((state, delta) => {
     if (modelRef.current) {
       if (!isDragging) {
-        // Apply inertia if there's velocity
+        // Apply scroll-based rotation with inertia
+         if (Math.abs(scrollVelocity.current) > 0.0001) { // Much lower threshold for longer inertia
+           modelRef.current.rotation.y += scrollVelocity.current;
+           modelRef.current.rotation.x += scrollVelocity.current * 0.5; // Increased X rotation for more dynamic effect
+           scrollVelocity.current *= scrollDampingFactor;
+         }
+        
+        // Apply mouse drag inertia if there's velocity
         if (Math.abs(rotationVelocity.current.x) > 0.0001 || Math.abs(rotationVelocity.current.y) > 0.0001) {
           modelRef.current.rotation.x += rotationVelocity.current.x;
           modelRef.current.rotation.y += rotationVelocity.current.y;
           rotationVelocity.current.x *= dampingFactor;
           rotationVelocity.current.y *= dampingFactor;
-        } else {
-          // If velocity is negligible, reset it and apply default rotation
-          rotationVelocity.current.x = 0;
-          rotationVelocity.current.y = 0;
-          modelRef.current.rotation.y += delta * 0.1; // Default slow rotation
-        }
+        } else if (Math.abs(scrollVelocity.current) <= 0.0001) {
+           // If no scroll or drag velocity, apply default rotation
+           rotationVelocity.current.x = 0;
+           rotationVelocity.current.y = 0;
+           modelRef.current.rotation.y += delta * 0.1; // Default slow rotation
+         }
       } 
       // Note: Velocity is now set in handlePointerMove and reset in handlePointerDown.
       // This ensures the last drag velocity is used for inertia when dragging stops.
@@ -155,7 +189,8 @@ function Model({ onLoad }: { onLoad?: () => void }) {
     setIsDragging(true);
     previousMousePosition.current = { x: event.clientX, y: event.clientY };
     // Reset velocity when a new drag starts to stop any ongoing inertia
-    rotationVelocity.current = { x: 0, y: 0 }; 
+    rotationVelocity.current = { x: 0, y: 0 };
+    scrollVelocity.current = 0; // Also reset scroll velocity to prevent conflicts
     (event.target as HTMLElement).setPointerCapture(event.pointerId);
   };
 

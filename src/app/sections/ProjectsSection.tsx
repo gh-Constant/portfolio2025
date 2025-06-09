@@ -9,9 +9,9 @@ const ProjectsSection: React.FC = () => {
     <section className="relative z-10 min-h-screen w-full py-40">
       <div className="container mx-auto px-6">
         <Parallax speed={-10}>
-          <h2 className="text-[clamp(4rem,12vw,10rem)] offbit-font mb-16 text-black text-center leading-none">
-            Selected <br />
-            <span className="italic">Projects</span>
+          <h2 className="text-[clamp(4rem,12vw,10rem)] nohemi-heading-xl mb-16 text-black text-center leading-none">
+            SELECTED <br />
+            <span className="italic">PROJECTS</span>
           </h2>
         </Parallax>
         
@@ -52,17 +52,17 @@ const ProjectsSection: React.FC = () => {
                 
                 {/* Content */}
                 <div className="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all duration-500">
-                  <h3 className="text-white text-xl md:text-2xl offbit-font mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-white/90 text-sm md:text-base offbit-font mb-4 line-clamp-3">
-                    {project.description}
-                  </p>
+                  <h3 className="text-white text-xl md:text-2xl nohemi-heading-lg mb-2">
+                  {project.title}
+                </h3>
+                <p className="text-white/90 text-sm md:text-base nohemi-body mb-4 line-clamp-3">
+                  {project.description}
+                </p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.map((tag) => (
                       <span 
                         key={tag}
-                        className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs offbit-font"
+                        className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs nohemi-caption"
                       >
                         {tag}
                       </span>
@@ -70,7 +70,7 @@ const ProjectsSection: React.FC = () => {
                   </div>
                   <div className="flex gap-3">
                     <button 
-                      className="px-4 py-2 bg-white text-black rounded-full text-sm offbit-font transition"
+                      className="px-4 py-2 bg-white text-black rounded-full text-sm nohemi-heading-sm transition"
                       onClick={(e) => {
                         e.preventDefault();
                         if (project.link) window.open(project.link, '_blank');
@@ -80,7 +80,7 @@ const ProjectsSection: React.FC = () => {
                     </button>
                     {project.github && (
                       <button 
-                        className="px-4 py-2 border border-white text-white rounded-full text-sm offbit-font transition"
+                        className="px-4 py-2 border border-white text-white rounded-full text-sm nohemi-heading-sm transition"
                         onClick={(e) => {
                           e.preventDefault();
                           window.open(project.github, '_blank');
