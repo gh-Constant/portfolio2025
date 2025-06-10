@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const LoadingScreen = () => {
   const [loadingPercentage, setLoadingPercentage] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
-  const [showText, setShowText] = useState(true);
+  const [showText] = useState(true);
 
   useEffect(() => {
     let currentProgress = 0;

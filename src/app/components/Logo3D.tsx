@@ -15,7 +15,6 @@ function useResponsiveSettings() {
   useEffect(() => {
     const updateSettings = () => {
       const width = window.innerWidth;
-      const isMobile = width < 768;
       
       // Adjust FOV and DPR based on screen width
       if (width < 480) {
