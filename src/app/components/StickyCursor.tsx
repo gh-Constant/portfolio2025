@@ -10,6 +10,10 @@ export default function StickyCursor() {
   const cursorPos = useRef({ x: 0, y: 0 })
   const cursorLargePos = useRef({ x: 0, y: 0 })
   const animationId = useRef<number | null>(null)
+  
+  // Velocity tracking for inertia effect
+  const velocity = useRef({ x: 0, y: 0 })
+  const lastMousePos = useRef({ x: 0, y: 0 })
 
   // NEW: Ref to track the hover state and scale
   const hoverState = useRef({
@@ -24,8 +28,13 @@ export default function StickyCursor() {
     const cursorLarge = cursorLargeRef.current
     if (!cursor || !cursorLarge) return
 
-    // Handle mouse movement with direct position tracking
+    // Handle mouse movement with velocity tracking for inertia
     const handleMouseMove = (e: MouseEvent) => {
+      // Calculate velocity based on mouse movement
+      velocity.current.x = (e.clientX - lastMousePos.current.x) * 0.5
+      velocity.current.y = (e.clientY - lastMousePos.current.y) * 0.5
+      
+      lastMousePos.current = { x: e.clientX, y: e.clientY }
       mousePos.current = { x: e.clientX, y: e.clientY }
     }
 
@@ -39,11 +48,17 @@ export default function StickyCursor() {
 
     // Smooth animation loop using requestAnimationFrame
     const animate = () => {
-      // Small cursor follows with minimal latency
+      // Small cursor with inertia effect
       const dx = mousePos.current.x - cursorPos.current.x
       const dy = mousePos.current.y - cursorPos.current.y
-      cursorPos.current.x += dx * 0.8
-      cursorPos.current.y += dy * 0.8
+      
+      // Apply velocity for inertia effect
+      velocity.current.x *= 0.85 // Damping factor
+      velocity.current.y *= 0.85
+      
+      // Combine direct movement with velocity-based inertia
+      cursorPos.current.x += dx * 0.6 + velocity.current.x
+      cursorPos.current.y += dy * 0.6 + velocity.current.y
 
       // Large cursor follows more slowly and smoothly
       const dxLarge = mousePos.current.x - cursorLargePos.current.x
