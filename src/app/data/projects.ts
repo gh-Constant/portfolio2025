@@ -96,70 +96,70 @@ export const projects: Project[] = [
   },
   {
     id: '3',
-<<<<<<< HEAD
     title: 'Pauvocoder',
     description: 'Simplified implementation of a vocoder allowing audio signal manipulation, specifically focused on pitch shifting while preserving the speech tempo.',
-    image: '/images/Pauvocoder.png',
+    image: '/images/Pauvocoder.PNG',
     tags: ['Java'],
-    size: 'medium'
+    size: 'medium',
+    longDescription: 'Pauvocoder is a sophisticated audio processing application that implements vocoder technology for real-time audio manipulation. The project focuses on pitch shifting algorithms while maintaining speech intelligibility and temporal characteristics.',
+    year: '2024',
+    technologies: ['Java', 'Audio Processing', 'Signal Processing'],
+    sections: [
+      {
+        type: 'title',
+        content: 'Audio Processing Innovation'
+      },
+      {
+        type: 'text',
+        content: 'This project implements advanced vocoder algorithms for real-time audio manipulation, focusing on pitch shifting while preserving speech tempo and clarity. The application demonstrates deep understanding of digital signal processing principles.'
+      },
+      {
+        type: 'image',
+        image: '/images/Pauvocoder.PNG',
+        caption: 'Pauvocoder interface showing real-time audio processing controls and visualization'
+      },
+      {
+        type: 'title',
+        content: 'Technical Implementation'
+      },
+      {
+        type: 'text',
+        content: 'Built with Java, the application utilizes advanced signal processing techniques including FFT analysis, phase vocoding, and time-domain pitch shifting algorithms to achieve high-quality audio manipulation.'
+      }
+    ]
   },
   {
     id: '4',
     title: 'PuissanceX',
     description: 'A modified version of Connect 4 with X win condition created in Java with the framework Boardifier.',
-    image: '/images/PuissanceX.png',
+    image: '/images/PuissanceX.PNG',
     tags: ['Java', 'JavaFX', 'JUnit', 'Maven'],
-    size: 'large'
-=======
-    title: 'Creative Project 3',
-    description: 'Description for your third project. Easy to customize and modify.',
-    image: '/images/project3.jpg',
-    tags: ['Design', 'Creative'],
-    size: 'small',
-    longDescription: 'A creative exploration into modern design principles and user experience.',
-    year: '2023',
-    technologies: ['Figma', 'Adobe Creative Suite'],
+    size: 'large',
+    longDescription: 'PuissanceX is an innovative take on the classic Connect 4 game, introducing dynamic win conditions and enhanced gameplay mechanics. Built with modern Java technologies and following best practices for game development.',
+    year: '2024',
+    technologies: ['Java', 'JavaFX', 'JUnit', 'Maven', 'Boardifier Framework'],
     sections: [
       {
         type: 'title',
-        content: 'Creative Exploration'
+        content: 'Game Design Innovation'
       },
       {
         type: 'text',
-        content: 'This project explores the intersection of creativity and functionality in modern digital design, pushing the boundaries of conventional design patterns.'
+        content: 'PuissanceX reimagines the classic Connect 4 game by introducing variable win conditions and enhanced gameplay mechanics. The project demonstrates advanced object-oriented programming and game development principles.'
       },
       {
         type: 'image',
-        image: '/images/project3.jpg',
-        caption: 'Creative design exploration showcasing innovative visual approaches'
-      }
-    ]
-  },
-  {
-    id: '4',
-    title: 'Creative Project 4',
-    description: 'Description for your fourth project. Easy to customize and modify.',
-    image: '/images/project4.jpg',
-    tags: ['Design', 'Creative'],
-    size: 'medium',
-    longDescription: 'An innovative approach to solving complex design challenges.',
-    year: '2023',
-    technologies: ['Figma', 'Adobe Creative Suite'],
-    sections: [
+        image: '/images/PuissanceX.PNG',
+        caption: 'PuissanceX game interface showing the enhanced Connect 4 gameplay with dynamic win conditions'
+      },
       {
         type: 'title',
-        content: 'Innovation in Design'
+        content: 'Technical Architecture'
       },
       {
         type: 'text',
-        content: 'This project demonstrates innovative solutions to complex design challenges, showcasing a methodical approach to problem-solving in creative contexts.'
-      },
-      {
-        type: 'image',
-        image: '/images/project4.jpg',
-        caption: 'Innovative design solutions addressing complex user experience challenges'
+        content: 'Developed using the Boardifier framework with JavaFX for the user interface, the project follows MVC architecture patterns and includes comprehensive unit testing with JUnit. Maven is used for dependency management and build automation.'
       }
     ]
->>>>>>> 0880dae06bf3a0b701c1ed90e9c760781006d65b
   }
 ];
