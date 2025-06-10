@@ -60,19 +60,19 @@ export default function StickyCursor() {
       cursorPos.current.x += dx * 0.6 + velocity.current.x
       cursorPos.current.y += dy * 0.6 + velocity.current.y
 
-      // Large cursor follows more slowly and smoothly
+      // Large cursor follows more quickly and smoothly
       const dxLarge = mousePos.current.x - cursorLargePos.current.x
       const dyLarge = mousePos.current.y - cursorLargePos.current.y
-      cursorLargePos.current.x += dxLarge * 0.08
-      cursorLargePos.current.y += dyLarge * 0.08
+      cursorLargePos.current.x += dxLarge * 0.18
+      cursorLargePos.current.y += dyLarge * 0.18
 
-      // Animate cursor size based on hover state
+      // Animate cursor size based on hover state with faster response
       const targetSize = hoverState.current.isHovering ? 48 : 16 // Target size in pixels
        const targetLargeScale = hoverState.current.isHovering ? 1.5 : 1 // Expand large cursor on hover
 
-       // Smoothly interpolate the sizes
-       hoverState.current.scale += (targetSize - hoverState.current.scale) * 0.15
-       hoverState.current.largeScale += (targetLargeScale - hoverState.current.largeScale) * 0.15
+       // Smoothly interpolate the sizes with faster animation
+       hoverState.current.scale += (targetSize - hoverState.current.scale) * 0.25
+       hoverState.current.largeScale += (targetLargeScale - hoverState.current.largeScale) * 0.25
 
        // Apply size and position directly
        const size = Math.round(hoverState.current.scale)

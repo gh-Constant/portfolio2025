@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 import GridLines from '../components/GridLines';
 
@@ -20,21 +21,15 @@ export default function About() {
                   {/* Profile Image - Left Side */}
                   <Parallax translateY={[-20, 20]} className="relative">
                     <div className="relative w-full max-w-md mx-auto lg:mx-0">
-                      <div className="aspect-square rounded-3xl overflow-hidden bg-gray-200 shadow-2xl">
-                        {/* Placeholder for profile image */}
-                        <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center">
-                          <span className="text-gray-600 text-lg nohemi-body-regular">
-                            Profile Image
-                          </span>
-                        </div>
-                        {/* Uncomment and replace with your actual image */}
-                        {/* <Image
-                          src="/images/profile.jpg"
+                      <div className="aspect-square rounded-3xl overflow-hidden bg-gray-200 shadow-2xl relative">
+                        <Image
+                          src="/images/profile.png"
                           alt="Constant Suchet"
                           fill
                           className="object-cover"
                           priority
-                        /> */}
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                        />
                       </div>
                     </div>
                   </Parallax>
