@@ -2,34 +2,30 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const LoadingScreen = () => {
-  const pathname = usePathname();
   const [loadingPercentage, setLoadingPercentage] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const [showText] = useState(true);
   const [shouldShowLoading, setShouldShowLoading] = useState(true);
 
-  // Check if this is a client-side navigation (not initial page load)
+  // Check if this is the first time visiting in this session/tab
   useEffect(() => {
-    // Also check if the page was loaded via Next.js router (client-side navigation)
-    const hasNavigationAPI = typeof window !== 'undefined' && 'navigation' in window;
-    const isNextJSNavigation = hasNavigationAPI || sessionStorage.getItem('nextjs-navigation');
-    
-    // Don't show loading screen for client-side navigation or if coming from another page
-    if (isNextJSNavigation || document.referrer.includes(window.location.origin)) {
-      setShouldShowLoading(false);
-      setIsVisible(false);
-    }
-    
-    // Mark that we've navigated within the app
     if (typeof window !== 'undefined') {
-      sessionStorage.setItem('nextjs-navigation', 'true');
+      const hasVisitedInSession = sessionStorage.getItem('hasVisitedInSession');
+      
+      if (hasVisitedInSession) {
+        // User has already seen loading screen in this session, don't show again
+        setShouldShowLoading(false);
+        setIsVisible(false);
+      } else {
+        // First time in this session, mark as visited and show loading screen
+        sessionStorage.setItem('hasVisitedInSession', 'true');
+      }
     }
-  }, [pathname]);
+  }, []);
 
   useEffect(() => {
     // Don't run loading animation if we shouldn't show loading
