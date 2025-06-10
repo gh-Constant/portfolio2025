@@ -123,32 +123,26 @@ function Model({ onLoad }: { onLoad?: () => void }) {
 
   const [isDragging, setIsDragging] = useState(false);
   const previousMousePosition = useRef({ x: 0, y: 0 });
-  const lastMoveTime = useRef(0);
-  const moveThreshold = 16; // roughly 60fps, throttle move events
-  const rotationVelocity = useRef({ x: 0, y: 0 }); // To store velocity for inertia
-  const scrollVelocity = useRef(0); // To store scroll velocity for inertia
+  const rotationVelocity = useRef({ x: 0, y: 0 });
+  const scrollVelocity = useRef(0);
   const lastScrollY = useRef(0);
   const lastScrollTime = useRef(0);
-  const dampingFactor = 0.99; // Much higher for longer inertia
-  const scrollDampingFactor = 0.98; // Much higher damping for longer scroll inertia
+  const dampingFactor = 0.95; // Adjusted for smoother deceleration
+  const scrollDampingFactor = 0.95; // Matched with rotation damping
 
   // Add scroll event listener
   useEffect(() => {
     const handleScroll = () => {
       const now = performance.now();
       const currentScrollY = window.scrollY;
+      const scrollDelta = currentScrollY - lastScrollY.current;
       
-      if (now - lastScrollTime.current > 16) { // Throttle to ~60fps
-        const scrollDelta = currentScrollY - lastScrollY.current;
-        const timeDelta = Math.max(1, now - lastScrollTime.current);
-        
-        // Calculate scroll velocity with smoothing
-         const newVelocity = (scrollDelta / timeDelta) * 0.05; // Much higher scale factor for faster rotation
-         scrollVelocity.current = scrollVelocity.current * 0.5 + newVelocity * 0.5; // Less smoothing for more responsive rotation
-        
-        lastScrollY.current = currentScrollY;
-        lastScrollTime.current = now;
-      }
+      // Calculate scroll velocity with smoothing
+      const newVelocity = scrollDelta * 0.001; // Reduced scale factor for smoother rotation
+      scrollVelocity.current = scrollVelocity.current * 0.8 + newVelocity * 0.2; // More smoothing
+      
+      lastScrollY.current = currentScrollY;
+      lastScrollTime.current = now;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -158,29 +152,29 @@ function Model({ onLoad }: { onLoad?: () => void }) {
   // Optimize animation with delta time, manual override, and inertia
   useFrame((state, delta) => {
     if (modelRef.current) {
+      const rotationSpeed = 0.5; // Base rotation speed
+      
       if (!isDragging) {
         // Apply scroll-based rotation with inertia
-         if (Math.abs(scrollVelocity.current) > 0.0001) { // Much lower threshold for longer inertia
-           modelRef.current.rotation.y += scrollVelocity.current;
-           modelRef.current.rotation.x += scrollVelocity.current * 0.5; // Increased X rotation for more dynamic effect
-           scrollVelocity.current *= scrollDampingFactor;
-         }
+        if (Math.abs(scrollVelocity.current) > 0.0001) {
+          modelRef.current.rotation.y += scrollVelocity.current * rotationSpeed;
+          modelRef.current.rotation.x += scrollVelocity.current * rotationSpeed * 0.5;
+          scrollVelocity.current *= scrollDampingFactor;
+        }
         
-        // Apply mouse drag inertia if there's velocity
+        // Apply mouse drag inertia
         if (Math.abs(rotationVelocity.current.x) > 0.0001 || Math.abs(rotationVelocity.current.y) > 0.0001) {
-          modelRef.current.rotation.x += rotationVelocity.current.x;
-          modelRef.current.rotation.y += rotationVelocity.current.y;
+          modelRef.current.rotation.x += rotationVelocity.current.x * rotationSpeed;
+          modelRef.current.rotation.y += rotationVelocity.current.y * rotationSpeed;
           rotationVelocity.current.x *= dampingFactor;
           rotationVelocity.current.y *= dampingFactor;
         } else if (Math.abs(scrollVelocity.current) <= 0.0001) {
-           // If no scroll or drag velocity, apply default rotation
-           rotationVelocity.current.x = 0;
-           rotationVelocity.current.y = 0;
-           modelRef.current.rotation.y += delta * 0.1; // Default slow rotation
-         }
-      } 
-      // Note: Velocity is now set in handlePointerMove and reset in handlePointerDown.
-      // This ensures the last drag velocity is used for inertia when dragging stops.
+          // Default auto-rotation
+          rotationVelocity.current.x = 0;
+          rotationVelocity.current.y = 0;
+          modelRef.current.rotation.y += delta * rotationSpeed;
+        }
+      }
     }
   });
 
@@ -194,26 +188,19 @@ function Model({ onLoad }: { onLoad?: () => void }) {
   };
 
   const handlePointerMove = (event: React.PointerEvent<THREE.Object3D>) => {
-    const now = performance.now();
-    if (isDragging && modelRef.current && now - lastMoveTime.current > moveThreshold) {
-      const timeDelta = now - lastMoveTime.current;
-      lastMoveTime.current = now;
-
+    if (isDragging && modelRef.current) {
       const deltaX = event.clientX - previousMousePosition.current.x;
       const deltaY = event.clientY - previousMousePosition.current.y;
 
-      const rotationAmountX = deltaY * 0.005;
-      const rotationAmountY = deltaX * 0.005;
+      const rotationAmountX = deltaY * 0.002;
+      const rotationAmountY = deltaX * 0.002;
 
       modelRef.current.rotation.x += rotationAmountX;
       modelRef.current.rotation.y += rotationAmountY;
 
-      // Calculate velocity for inertia: (change in rotation) / (change in time)
-      // Normalize timeDelta to avoid extreme velocities if frames skip
-      const normalizedTimeDelta = Math.max(1, timeDelta); // Avoid division by zero or very small numbers
-      // Reduced multiplier for less fast initial inertia
-      rotationVelocity.current.x = rotationAmountX / normalizedTimeDelta * 10; 
-      rotationVelocity.current.y = rotationAmountY / normalizedTimeDelta * 10;
+      // Update velocity for inertia
+      rotationVelocity.current.x = rotationAmountX;
+      rotationVelocity.current.y = rotationAmountY;
 
       previousMousePosition.current = { x: event.clientX, y: event.clientY };
     }
@@ -263,31 +250,17 @@ const Logo3D: React.FC<Logo3DProps> = ({ onLoad }) => {
     <div className="w-full h-full">
       <Canvas
         camera={{ position: [0, 0, 5], fov: fov }}
+        frameloop="always"
         gl={{
           alpha: true,
-          antialias: isMobile, // Use isMobile state from hook
+          antialias: isMobile,
           outputColorSpace: THREE.SRGBColorSpace,
           powerPreference: 'high-performance',
           stencil: false,
           depth: true,
         }}
         performance={{ min: 0.5 }}
-         dpr={dpr}
-         onCreated={({ gl }) => {
-           // Limit frame rate for better performance
-           gl.setAnimationLoop = (callback) => {
-             const fps = 30 // Limit to 30 FPS for smoother performance
-             let then = 0
-             const animate = (now: number) => {
-               if (now - then >= 1000 / fps) {
-                 then = now
-                 callback?.(now)
-               }
-               requestAnimationFrame(animate)
-             }
-             requestAnimationFrame(animate)
-           }
-         }}
+        dpr={dpr}
       >
         {/* Optimized lighting */}
         <ambientLight intensity={0.3} />

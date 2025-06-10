@@ -39,11 +39,11 @@ export default function StickyCursor() {
 
     // Smooth animation loop using requestAnimationFrame
     const animate = () => {
-      // Small cursor follows quickly
+      // Small cursor follows with minimal latency
       const dx = mousePos.current.x - cursorPos.current.x
       const dy = mousePos.current.y - cursorPos.current.y
-      cursorPos.current.x += dx * 0.15
-      cursorPos.current.y += dy * 0.15
+      cursorPos.current.x += dx * 0.8
+      cursorPos.current.y += dy * 0.8
 
       // Large cursor follows more slowly and smoothly
       const dxLarge = mousePos.current.x - cursorLargePos.current.x
