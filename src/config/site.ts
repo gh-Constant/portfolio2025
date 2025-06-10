@@ -11,7 +11,7 @@ export const siteConfig = {
   navigation: {
     main: [
       { name: "PROJECTS", href: "#projects", badge: "9" },
-      { name: "ABOUT", href: "#about" },
+      { name: "ABOUT", href: "/about" },
       { name: "RESUME", href: "/resume.pdf", external: true },
       { name: "CONTACT", href: "#contact" },
     ],
