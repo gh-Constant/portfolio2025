@@ -2,15 +2,39 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const LoadingScreen = () => {
+  const pathname = usePathname();
   const [loadingPercentage, setLoadingPercentage] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const [showText] = useState(true);
+  const [shouldShowLoading, setShouldShowLoading] = useState(true);
+
+  // Check if this is a client-side navigation (not initial page load)
+  useEffect(() => {
+    // Also check if the page was loaded via Next.js router (client-side navigation)
+    const hasNavigationAPI = typeof window !== 'undefined' && 'navigation' in window;
+    const isNextJSNavigation = hasNavigationAPI || sessionStorage.getItem('nextjs-navigation');
+    
+    // Don't show loading screen for client-side navigation or if coming from another page
+    if (isNextJSNavigation || document.referrer.includes(window.location.origin)) {
+      setShouldShowLoading(false);
+      setIsVisible(false);
+    }
+    
+    // Mark that we've navigated within the app
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('nextjs-navigation', 'true');
+    }
+  }, [pathname]);
 
   useEffect(() => {
+    // Don't run loading animation if we shouldn't show loading
+    if (!shouldShowLoading) return;
+    
     let currentProgress = 0;
     const targetProgress = 100;
     let animationFrameId: number;
@@ -74,11 +98,11 @@ const LoadingScreen = () => {
       cancelAnimationFrame(animationFrameId);
       clearTimeout(timeoutId);
     }
-  }, []);
+  }, [shouldShowLoading]);
 
   return (
     <AnimatePresence>
-      {isVisible && (
+      {isVisible && shouldShowLoading && (
         <motion.div
           initial={{ y: 0 }}
           exit={{ y: '-100vh' }}

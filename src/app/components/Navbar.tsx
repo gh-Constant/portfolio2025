@@ -1,6 +1,7 @@
 'use client'  
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { siteConfig } from '@/config/site';
 
@@ -13,7 +14,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-white text-black border-b border-gray-300 sticky top-0 z-50">
       <div className="container mx-auto px-6 py-3 flex justify-between items-center" style={{ height: NAVBAR_HEIGHT }}>
-        <div className="text-xl nohemi-heading-lg font-semibold uppercase tracking-wider interactive">{siteConfig.name}</div>
+        <Link href="/" className="text-xl nohemi-heading-lg font-semibold uppercase tracking-wider interactive cursor-hover-target">{siteConfig.name}</Link>
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8">
           {siteConfig.navigation.main.map((item) => (
