@@ -10,6 +10,10 @@ export default function StickyCursor() {
   const cursorPos = useRef({ x: 0, y: 0 })
   const cursorLargePos = useRef({ x: 0, y: 0 })
   const animationId = useRef<number | null>(null)
+  
+  // Velocity tracking for inertia effect
+  const velocity = useRef({ x: 0, y: 0 })
+  const lastMousePos = useRef({ x: 0, y: 0 })
 
   // NEW: Ref to track the hover state and scale
   const hoverState = useRef({
@@ -24,8 +28,13 @@ export default function StickyCursor() {
     const cursorLarge = cursorLargeRef.current
     if (!cursor || !cursorLarge) return
 
-    // Handle mouse movement with direct position tracking
+    // Handle mouse movement with velocity tracking for inertia
     const handleMouseMove = (e: MouseEvent) => {
+      // Calculate velocity based on mouse movement
+      velocity.current.x = (e.clientX - lastMousePos.current.x) * 0.5
+      velocity.current.y = (e.clientY - lastMousePos.current.y) * 0.5
+      
+      lastMousePos.current = { x: e.clientX, y: e.clientY }
       mousePos.current = { x: e.clientX, y: e.clientY }
     }
 
@@ -39,25 +48,31 @@ export default function StickyCursor() {
 
     // Smooth animation loop using requestAnimationFrame
     const animate = () => {
-      // Small cursor follows quickly
+      // Small cursor with inertia effect
       const dx = mousePos.current.x - cursorPos.current.x
       const dy = mousePos.current.y - cursorPos.current.y
-      cursorPos.current.x += dx * 0.15
-      cursorPos.current.y += dy * 0.15
+      
+      // Apply velocity for inertia effect
+      velocity.current.x *= 0.85 // Damping factor
+      velocity.current.y *= 0.85
+      
+      // Combine direct movement with velocity-based inertia
+      cursorPos.current.x += dx * 0.6 + velocity.current.x
+      cursorPos.current.y += dy * 0.6 + velocity.current.y
 
-      // Large cursor follows more slowly and smoothly
+      // Large cursor follows more quickly and smoothly
       const dxLarge = mousePos.current.x - cursorLargePos.current.x
       const dyLarge = mousePos.current.y - cursorLargePos.current.y
-      cursorLargePos.current.x += dxLarge * 0.08
-      cursorLargePos.current.y += dyLarge * 0.08
+      cursorLargePos.current.x += dxLarge * 0.18
+      cursorLargePos.current.y += dyLarge * 0.18
 
-      // Animate cursor size based on hover state
+      // Animate cursor size based on hover state with faster response
       const targetSize = hoverState.current.isHovering ? 48 : 16 // Target size in pixels
        const targetLargeScale = hoverState.current.isHovering ? 1.5 : 1 // Expand large cursor on hover
 
-       // Smoothly interpolate the sizes
-       hoverState.current.scale += (targetSize - hoverState.current.scale) * 0.15
-       hoverState.current.largeScale += (targetLargeScale - hoverState.current.largeScale) * 0.15
+       // Smoothly interpolate the sizes with faster animation
+       hoverState.current.scale += (targetSize - hoverState.current.scale) * 0.25
+       hoverState.current.largeScale += (targetLargeScale - hoverState.current.largeScale) * 0.25
 
        // Apply size and position directly
        const size = Math.round(hoverState.current.scale)

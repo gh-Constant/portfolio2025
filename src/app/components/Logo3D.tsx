@@ -15,7 +15,6 @@ function useResponsiveSettings() {
   useEffect(() => {
     const updateSettings = () => {
       const width = window.innerWidth;
-      const isMobile = width < 768;
       
       // Adjust FOV and DPR based on screen width
       if (width < 480) {
@@ -124,99 +123,149 @@ function Model({ onLoad }: { onLoad?: () => void }) {
 
   const [isDragging, setIsDragging] = useState(false);
   const previousMousePosition = useRef({ x: 0, y: 0 });
-  const lastMoveTime = useRef(0);
-  const moveThreshold = 16; // roughly 60fps, throttle move events
-  const rotationVelocity = useRef({ x: 0, y: 0 }); // To store velocity for inertia
-  const scrollVelocity = useRef(0); // To store scroll velocity for inertia
+  const rotationVelocity = useRef({ x: 0, y: 0 });
+  const scrollVelocity = useRef({ x: 0, y: 0 }); // Changed to 2D for more complex scroll effects
   const lastScrollY = useRef(0);
   const lastScrollTime = useRef(0);
-  const dampingFactor = 0.99; // Much higher for longer inertia
-  const scrollDampingFactor = 0.98; // Much higher damping for longer scroll inertia
+  const dampingFactor = 0.98; // Increased for stronger inertia
+  const scrollDampingFactor = 0.97; // Stronger scroll inertia
+  const velocityMultiplier = useRef(1); // Dynamic multiplier for enhanced effects
 
-  // Add scroll event listener
+  // Enhanced scroll event listener with stronger inertia
   useEffect(() => {
     const handleScroll = () => {
       const now = performance.now();
       const currentScrollY = window.scrollY;
+      const scrollDelta = currentScrollY - lastScrollY.current;
+      const timeDelta = now - lastScrollTime.current;
       
-      if (now - lastScrollTime.current > 16) { // Throttle to ~60fps
-        const scrollDelta = currentScrollY - lastScrollY.current;
-        const timeDelta = Math.max(1, now - lastScrollTime.current);
-        
-        // Calculate scroll velocity with smoothing
-         const newVelocity = (scrollDelta / timeDelta) * 0.05; // Much higher scale factor for faster rotation
-         scrollVelocity.current = scrollVelocity.current * 0.5 + newVelocity * 0.5; // Less smoothing for more responsive rotation
-        
-        lastScrollY.current = currentScrollY;
-        lastScrollTime.current = now;
-      }
+      // Calculate enhanced scroll velocity with momentum
+      const instantVelocity = timeDelta > 0 ? scrollDelta / timeDelta : 0;
+      const velocityScale = 0.003; // Increased for stronger effect
+      
+      // Apply momentum with stronger inertia
+      const newVelocityY = instantVelocity * velocityScale;
+      const newVelocityX = instantVelocity * velocityScale * 0.3; // Cross-axis effect
+      
+      // Preserve momentum with less smoothing for stronger inertia
+      scrollVelocity.current.y = scrollVelocity.current.y * 0.9 + newVelocityY * 0.1;
+      scrollVelocity.current.x = scrollVelocity.current.x * 0.9 + newVelocityX * 0.1;
+      
+      // Dynamic velocity multiplier based on scroll speed
+      const scrollSpeed = Math.abs(scrollDelta);
+      velocityMultiplier.current = Math.min(3, 1 + scrollSpeed * 0.01);
+      
+      lastScrollY.current = currentScrollY;
+      lastScrollTime.current = now;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Optimize animation with delta time, manual override, and inertia
+  // Enhanced animation with stronger inertia and momentum physics
   useFrame((state, delta) => {
     if (modelRef.current) {
+      const baseRotationSpeed = 0.8; // Increased base speed
+      const dynamicSpeed = baseRotationSpeed * velocityMultiplier.current;
+      
       if (!isDragging) {
-        // Apply scroll-based rotation with inertia
-         if (Math.abs(scrollVelocity.current) > 0.0001) { // Much lower threshold for longer inertia
-           modelRef.current.rotation.y += scrollVelocity.current;
-           modelRef.current.rotation.x += scrollVelocity.current * 0.5; // Increased X rotation for more dynamic effect
-           scrollVelocity.current *= scrollDampingFactor;
-         }
+        // Apply enhanced scroll-based rotation with stronger inertia
+        const scrollThreshold = 0.00005; // Lower threshold for more sensitive detection
+        if (Math.abs(scrollVelocity.current.y) > scrollThreshold || Math.abs(scrollVelocity.current.x) > scrollThreshold) {
+          // Primary Y-axis rotation from vertical scroll
+          modelRef.current.rotation.y += scrollVelocity.current.y * dynamicSpeed;
+          // Secondary X-axis rotation for more dynamic movement
+          modelRef.current.rotation.x += scrollVelocity.current.y * dynamicSpeed * 0.4;
+          // Cross-axis rotation for complex movement
+          modelRef.current.rotation.z += scrollVelocity.current.x * dynamicSpeed * 0.2;
+          
+          // Apply stronger damping for longer-lasting inertia
+          scrollVelocity.current.y *= scrollDampingFactor;
+          scrollVelocity.current.x *= scrollDampingFactor;
+        }
         
-        // Apply mouse drag inertia if there's velocity
-        if (Math.abs(rotationVelocity.current.x) > 0.0001 || Math.abs(rotationVelocity.current.y) > 0.0001) {
-          modelRef.current.rotation.x += rotationVelocity.current.x;
-          modelRef.current.rotation.y += rotationVelocity.current.y;
+        // Apply enhanced mouse drag inertia with momentum preservation
+        const dragThreshold = 0.00005;
+        if (Math.abs(rotationVelocity.current.x) > dragThreshold || Math.abs(rotationVelocity.current.y) > dragThreshold) {
+          // Apply rotation with enhanced momentum
+          modelRef.current.rotation.x += rotationVelocity.current.x * dynamicSpeed * 1.5;
+          modelRef.current.rotation.y += rotationVelocity.current.y * dynamicSpeed * 1.5;
+          
+          // Add subtle secondary rotations for more natural movement
+          modelRef.current.rotation.z += (rotationVelocity.current.x + rotationVelocity.current.y) * 0.1;
+          
+          // Stronger damping for longer inertia
           rotationVelocity.current.x *= dampingFactor;
           rotationVelocity.current.y *= dampingFactor;
-        } else if (Math.abs(scrollVelocity.current) <= 0.0001) {
-           // If no scroll or drag velocity, apply default rotation
-           rotationVelocity.current.x = 0;
-           rotationVelocity.current.y = 0;
-           modelRef.current.rotation.y += delta * 0.1; // Default slow rotation
-         }
-      } 
-      // Note: Velocity is now set in handlePointerMove and reset in handlePointerDown.
-      // This ensures the last drag velocity is used for inertia when dragging stops.
+        } else if (Math.abs(scrollVelocity.current.y) <= scrollThreshold && Math.abs(scrollVelocity.current.x) <= scrollThreshold) {
+          // Gentle auto-rotation when no inertia is active
+          rotationVelocity.current.x = 0;
+          rotationVelocity.current.y = 0;
+          modelRef.current.rotation.y += delta * baseRotationSpeed * 0.3; // Slower auto-rotation
+        }
+        
+        // Gradually reduce velocity multiplier
+        velocityMultiplier.current = Math.max(1, velocityMultiplier.current * 0.99);
+      }
     }
   });
 
   const handlePointerDown = (event: React.PointerEvent<THREE.Object3D>) => {
     setIsDragging(true);
     previousMousePosition.current = { x: event.clientX, y: event.clientY };
-    // Reset velocity when a new drag starts to stop any ongoing inertia
-    rotationVelocity.current = { x: 0, y: 0 };
-    scrollVelocity.current = 0; // Also reset scroll velocity to prevent conflicts
+    // Preserve some existing velocity for smoother transitions
+    rotationVelocity.current.x *= 0.3; // Reduce but don't completely reset
+    rotationVelocity.current.y *= 0.3;
+    scrollVelocity.current.x *= 0.3; // Reduce scroll velocity but maintain some momentum
+    scrollVelocity.current.y *= 0.3;
+    velocityMultiplier.current = Math.max(1.5, velocityMultiplier.current); // Boost for interaction
     (event.target as HTMLElement).setPointerCapture(event.pointerId);
   };
 
   const handlePointerMove = (event: React.PointerEvent<THREE.Object3D>) => {
-    const now = performance.now();
-    if (isDragging && modelRef.current && now - lastMoveTime.current > moveThreshold) {
-      const timeDelta = now - lastMoveTime.current;
-      lastMoveTime.current = now;
-
+    if (isDragging && modelRef.current) {
+      // Calculate mouse movement delta
       const deltaX = event.clientX - previousMousePosition.current.x;
       const deltaY = event.clientY - previousMousePosition.current.y;
-
-      const rotationAmountX = deltaY * 0.005;
-      const rotationAmountY = deltaX * 0.005;
-
+      
+      // Calculate time since last move for velocity
+      const now = performance.now();
+      const timeDelta = now - lastScrollTime.current;
+      const timeMultiplier = Math.min(1, timeDelta / 16); // Normalize to 60fps
+      
+      // Enhanced sensitivity with dynamic scaling
+      const sensitivity = 0.003 * velocityMultiplier.current;
+      const rotationAmountX = deltaY * sensitivity;
+      const rotationAmountY = deltaX * sensitivity;
+      
+      // Apply immediate rotation
       modelRef.current.rotation.x += rotationAmountX;
       modelRef.current.rotation.y += rotationAmountY;
-
-      // Calculate velocity for inertia: (change in rotation) / (change in time)
-      // Normalize timeDelta to avoid extreme velocities if frames skip
-      const normalizedTimeDelta = Math.max(1, timeDelta); // Avoid division by zero or very small numbers
-      // Reduced multiplier for less fast initial inertia
-      rotationVelocity.current.x = rotationAmountX / normalizedTimeDelta * 10; 
-      rotationVelocity.current.y = rotationAmountY / normalizedTimeDelta * 10;
-
+      
+      // Calculate velocity with momentum accumulation
+      // Blend previous velocity with new velocity for smoother transitions
+      const momentumFactor = 0.8; // Higher value = more momentum preservation
+      rotationVelocity.current.x = rotationVelocity.current.x * momentumFactor + 
+                                  (rotationAmountX / timeMultiplier) * (1 - momentumFactor);
+      rotationVelocity.current.y = rotationVelocity.current.y * momentumFactor + 
+                                  (rotationAmountY / timeMultiplier) * (1 - momentumFactor);
+      
+      // Add subtle cross-axis effect for more natural movement
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        // Horizontal movement dominates - add subtle vertical component
+        rotationVelocity.current.x += rotationAmountY * 0.2;
+      } else {
+        // Vertical movement dominates - add subtle horizontal component
+        rotationVelocity.current.y += rotationAmountX * 0.2;
+      }
+      
+      // Boost velocity multiplier based on movement speed
+      const moveSpeed = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+      velocityMultiplier.current = Math.min(3, velocityMultiplier.current + moveSpeed * 0.005);
+      
       previousMousePosition.current = { x: event.clientX, y: event.clientY };
+      lastScrollTime.current = now; // Reuse the scroll time ref for mouse movement timing
     }
   };
 
@@ -264,31 +313,17 @@ const Logo3D: React.FC<Logo3DProps> = ({ onLoad }) => {
     <div className="w-full h-full">
       <Canvas
         camera={{ position: [0, 0, 5], fov: fov }}
+        frameloop="always"
         gl={{
           alpha: true,
-          antialias: isMobile, // Use isMobile state from hook
+          antialias: isMobile,
           outputColorSpace: THREE.SRGBColorSpace,
           powerPreference: 'high-performance',
           stencil: false,
           depth: true,
         }}
         performance={{ min: 0.5 }}
-         dpr={dpr}
-         onCreated={({ gl }) => {
-           // Limit frame rate for better performance
-           gl.setAnimationLoop = (callback) => {
-             const fps = 30 // Limit to 30 FPS for smoother performance
-             let then = 0
-             const animate = (now: number) => {
-               if (now - then >= 1000 / fps) {
-                 then = now
-                 callback?.(now)
-               }
-               requestAnimationFrame(animate)
-             }
-             requestAnimationFrame(animate)
-           }
-         }}
+        dpr={dpr}
       >
         {/* Optimized lighting */}
         <ambientLight intensity={0.3} />

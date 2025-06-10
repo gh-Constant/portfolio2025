@@ -1,5 +1,6 @@
 'use client'
 import React from 'react';
+import Link from 'next/link';
 import { Parallax } from 'react-scroll-parallax';
 import { projects } from '../data/projects';
 import Image from 'next/image';
@@ -22,11 +23,9 @@ const ProjectsSection: React.FC = () => {
             const widthClass = project.size === 'large' ? 'w-[80vw]' : project.size === 'medium' ? 'w-[70vw]' : 'w-[60vw]';
             
             return (
-              <a 
+              <Link 
                 key={project.id}
-                href={project.link || '#'}
-                target={project.link ? '_blank' : undefined}
-                rel={project.link ? 'noopener noreferrer' : undefined}
+                href={`/projects/${project.id}`}
                 className={`
                   group relative overflow-hidden rounded-2xl bg-gray-100 transition-all duration-500 hover:scale-[1.02]
                   ${widthClass} h-[50vh] ${offsetClass} block cursor-hover-target
@@ -72,17 +71,17 @@ const ProjectsSection: React.FC = () => {
                     <button 
                       className="px-4 py-2 bg-white text-black rounded-full text-sm nohemi-heading-sm transition"
                       onClick={(e) => {
-                        e.preventDefault();
+                        e.stopPropagation();
                         if (project.link) window.open(project.link, '_blank');
                       }}
                     >
-                      View Project
+                      Live Demo
                     </button>
                     {project.github && (
                       <button 
                         className="px-4 py-2 border border-white text-white rounded-full text-sm nohemi-heading-sm transition"
                         onClick={(e) => {
-                          e.preventDefault();
+                          e.stopPropagation();
                           window.open(project.github, '_blank');
                         }}
                       >
@@ -91,7 +90,7 @@ const ProjectsSection: React.FC = () => {
                     )}
                   </div>
                 </div>
-              </a>
+              </Link>
             );
           })}
         </div>

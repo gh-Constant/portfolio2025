@@ -14,7 +14,7 @@ const ContactSection = () => {
       <Parallax speed={-20}>
         <div className="relative">
           <h2 className="text-[clamp(2rem,8vw,7rem)] nohemi-heading-xl mb-4 text-white text-center leading-none">
-            LET'S WORK<br />TOGETHER
+            LET&apos;S WORK<br />TOGETHER
           </h2>
           <div className="relative mt-8 w-fit mx-auto overflow-hidden" ref={elementRef}>
             <div
@@ -26,7 +26,7 @@ const ContactSection = () => {
               href="mailto:constantsuchet@gmail.com"
               className="relative px-12 py-4 border border-white rounded-full text-white cursor- nohemi-heading-md text-lg block hover:text-black transition-colors duration-300 z-10 min-w-[280px] text-center"
             >
-              Let's Create Something Amazing
+              Let&apos;s Create Something Amazing
             </a>
           </div>
         </div>

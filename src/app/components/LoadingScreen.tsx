@@ -8,9 +8,29 @@ import { motion, AnimatePresence } from 'framer-motion';
 const LoadingScreen = () => {
   const [loadingPercentage, setLoadingPercentage] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
-  const [showText, setShowText] = useState(true);
+  const [showText] = useState(true);
+  const [shouldShowLoading, setShouldShowLoading] = useState(true);
+
+  // Check if this is the first time visiting in this session/tab
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hasVisitedInSession = sessionStorage.getItem('hasVisitedInSession');
+      
+      if (hasVisitedInSession) {
+        // User has already seen loading screen in this session, don't show again
+        setShouldShowLoading(false);
+        setIsVisible(false);
+      } else {
+        // First time in this session, mark as visited and show loading screen
+        sessionStorage.setItem('hasVisitedInSession', 'true');
+      }
+    }
+  }, []);
 
   useEffect(() => {
+    // Don't run loading animation if we shouldn't show loading
+    if (!shouldShowLoading) return;
+    
     let currentProgress = 0;
     const targetProgress = 100;
     let animationFrameId: number;
@@ -74,11 +94,11 @@ const LoadingScreen = () => {
       cancelAnimationFrame(animationFrameId);
       clearTimeout(timeoutId);
     }
-  }, []);
+  }, [shouldShowLoading]);
 
   return (
     <AnimatePresence>
-      {isVisible && (
+      {isVisible && shouldShowLoading && (
         <motion.div
           initial={{ y: 0 }}
           exit={{ y: '-100vh' }}

@@ -21,8 +21,6 @@ export const useMagnetic = ({ maxDistance = 0.5, minDistance = 0.1 }: MagneticBu
 
     const getDirectionStyles = (x: number, y: number, enter: boolean) => {
       const angle = Math.atan2(y, x) * (180 / Math.PI);
-      const distance = Math.hypot(x, y);
-      const normalizedDistance = Math.min(distance / 100, 1);
       
       // Calculate initial position based on angle
       const startLeft = Math.cos(angle * (Math.PI / 180)) * 100;
