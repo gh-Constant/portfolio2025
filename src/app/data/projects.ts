@@ -29,7 +29,7 @@ export const loadProjectTranslation = async (projectId: string, language: 'en' |
   try {
     const translation = await import(`../../translations/projects/${language}/${projectId}.json`);
     return translation.default;
-  } catch (error) {
+  } catch {
     console.warn(`Translation not found for project ${projectId} in language ${language}`);
     return null;
   }
