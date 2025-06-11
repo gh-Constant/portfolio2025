@@ -45,20 +45,66 @@
     {
       "type": "image",
       "image": "/images/chronosync/backend.png",
-      "caption": "Express.js API for centralized data and service management"
+      "caption": "Figure 3: Express.js API for centralized data and service management"
     },
     {
       "type": "text",
-      "content": "The backend is developed with Express.js, providing a robust and performant REST API. This architecture enables smooth communication between web and desktop applications, with centralized data and authentication management."
+      "content": "Figure 3 is a screenshot of the appUsage.ts file, a TypeScript file that defines backend routes for the ChronoSync application. This file is part of the API developed with Express.js, a framework for creating web servers with JavaScript. An API (Application Programming Interface) is a set of entry points (called routes) that the client (application on phone, computer, or browser) can use to request data from the server. In this specific case, we observe five routes, each allowing retrieval of usage statistics (time spent on each application) according to different periods: daily, weekly, monthly, yearly, and custom. These routes therefore allow the user interface to display charts or summaries according to the period selected by the user."
+    },
+    {
+      "type": "text",
+      "content": "The implementation of these five routes demonstrates an understanding of how a REST API works with Express.js. Each route is designed to respond to a specific client request: for example, getting all applications used during a day or over a date range defined by the user. I was able to structure these entry points clearly, grouping them by business logic (here: application usage), which makes the code more readable and easier to maintain. This structuring is essential in a long-term or collaborative project, as it allows other developers to quickly understand the role of each part of the code. My level in using Express.js to create routes is still limited, as this project is the only one where I was able to discover and learn this framework. However, I am capable of understanding and modifying a project that uses this technology without too much difficulty."
+    },
+    {
+      "type": "text",
+      "content": "This logical grouping in a single file (appUsage.ts) also illustrates good backend organization around a single business concept. This facilitates the implementation of global controls, such as user authentication verification or parameter validation, which can apply to all routes without code duplication. This modular approach improves code maintainability in the long term. As we have seen in other projects I have presented in this portfolio, such as Power X with the MVC model, I think I master the modular approach when developing in most languages."
+    },
+    {
+      "type": "text",
+      "content": "The use of dynamic parameters, particularly for the custom route, shows an ability to design flexible routes capable of responding to complex requests. In this route, the client can for example send two specific dates, and the server will return only the data corresponding to this interval. This gives the user great freedom in consulting their statistics, while keeping unified logic on the server side. My level in managing custom parameters in an API, as with APIs in general, is still limited, due to a lack of varied practical experiences."
+    },
+    {
+      "type": "text",
+      "content": "Finally, the fact that this backend serves a multi-platform application (web, desktop, mobile) shows that I was able to design a coherent API for heterogeneous clients. All platforms consume the same routes, which guarantees that data is uniform and synchronized, regardless of the medium used by the user. This ability to design a central data point for multiple interfaces is a real advantage in cross-platform projects."
+    },
+    {
+      "type": "image",
+      "image": "/images/chronosync/database.png",
+      "caption": "Figure 4: Database architecture and data management system"
+    },
+    {
+      "type": "text",
+      "content": "Figure 4 shows one of the database versions used in the ChronoSync project, represented through a relational schema visualization tool (ChartDB). A relational database is a structured storage system where information is organized in tables (similar to Excel sheets) connected through logical relationships, allowing data to be structured and interconnected coherently."
+    },
+    {
+      "type": "text",
+      "content": "This representation illustrates the overall project architecture: users, the applications they use, their screen time, recorded tasks, as well as task types. It also includes support for two authentication modes — either email/password or OAuth (login via third-party services like Google or GitHub). This structure efficiently meets ChronoSync's functional needs while remaining scalable and maintainable."
+    },
+    {
+      "type": "text",
+      "content": "This modeling reflects a good mastery of relational databases, an essential skill in any project handling user data. I was able to identify key entities, define their attributes (username, usage duration, task category, etc.), and especially design the necessary relationships for their interconnection. A well-designed database ensures information consistency, avoids duplicates, and simplifies complex queries. It also makes future developments easier to integrate. My level in relational modeling is satisfactory: I can design, structure, and evolve a database while ensuring its maintainability. I had the opportunity to develop these skills particularly during my first year of BUT, as well as in projects like a homework manager, structured around a database for users and tasks to complete."
+    },
+    {
+      "type": "text",
+      "content": "The integration of two authentication modes demonstrates an understanding of modern identity requirements. Allowing users to choose their login method without complicating the backend architecture requires adapting the user data model to handle multiple types of identifiers. I used Passport.js, an authentication management middleware for Node.js, to implement this logic in the project. My level remains intermediate on this subject, as I have only experimented with one tool in a constrained context so far. However, I am aware that other solutions exist adapted to other contexts, such as NextAuth.js for Next.js projects or Auth.js more generally."
+    },
+    {
+      "type": "text",
+      "content": "The database is also designed to store temporal data regarding application usage. Each event records which applications were used, when, and for how long. This structuring raises issues of granularity, performance, and long-term retention. Designing a \"traceability\"-oriented database is particularly important for projects focused on behavior or productivity analysis. On this point, I acknowledge some remaining gaps. To date, no definitive solution has been implemented regarding archiving or optimization of historical data. I am considering, for example, a compression or aggregation strategy for old data (beyond 6 months), allowing to reduce the level of detail while preserving global statistics. This reflection is ongoing and represents a clear improvement axis in my skills for managing large volumes of data."
     },
     {
       "type": "title",
-      "content": "Web Authentication"
+      "content": "Web & Desktop Authentication"
     },
     {
       "type": "image",
       "image": "/images/chronosync/login.png",
-      "caption": "Web login interface with modern authentication system"
+      "caption": "Figure 5: Web login interface with modern authentication system"
+    },
+    {
+      "type": "image",
+      "image": "/images/chronosync/loginUser.PNG",
+      "caption": "Figure 6: Part of the code executed after authentication"
     },
     {
       "type": "text",
@@ -71,40 +117,23 @@
     {
       "type": "image",
       "image": "/images/chronosync/logindesktop.png",
-      "caption": "Desktop application login screen with native styling"
+      "caption": "Figure 7: Desktop application login screen"
+    },
+    {
+      "type": "video",
+      "video": "/videos/chronosync/URIshowcase.mp4",
+      "caption": "Figure 8: URI request demonstration showing authentication token generation and management",
+      "muted": true
     },
     {
       "type": "text",
       "content": "The desktop application features a native login screen that integrates perfectly with the operating system while maintaining the same security standards as the web version."
     },
     {
-      "type": "title",
-      "content": "Token & URI Management"
-    },
-    {
-      "type": "video",
-      "video": "/videos/chronosync/URIshowcase.mp4",
-      "caption": "URI request demonstration showing authentication token generation and management",
-      "muted": true
-    },
-    {
       "type": "text",
       "content": "The authentication system demonstrates how URI requests handle token generation and management for secure desktop application access."
     },
-    {
-      "type": "title",
-      "content": "Core Features"
-    },
-    {
-      "type": "image",
-      "image": "/images/chronosync/database.png",
-      "caption": "Database architecture and data management system"
-    },
-    {
-      "type": "image",
-      "image": "/images/chronosync/email.png",
-      "caption": "Email notification system for project updates and reminders"
-    },
+    {"type":"image","image":"/images/chronosync/email.png","caption":"Email notification system for project updates and reminders"},
     {
       "type": "text",
       "content": "The application provides a comprehensive dashboard for time tracking, project management, and productivity analysis. Users can easily switch between web and desktop interfaces while maintaining synchronized data."

@@ -45,20 +45,46 @@
     {
       "type": "image",
       "image": "/images/chronosync/backend.png",
-      "caption": "API Express.js pour la gestion centralisée des données et services"
+      "caption": "Figure 3 : API Express.js pour la gestion centralisée des données et services"
     },
     {
       "type": "text",
-      "content": "Le backend est développé avec Express.js, offrant une API REST robuste et performante. Cette architecture permet une communication fluide entre les applications web et desktop, avec une gestion centralisée des données et de l'authentification."
+      "content": "La figure 3 est une capture d'écran du fichier appUsage.ts, un fichier écrit en TypeScript qui définit des routes backend pour l'application ChronoSync. Ce fichier fait partie de l'API développée avec Express.js, un framework (cadre de développement) permettant de créer des serveurs web avec JavaScript. Une API (Application Programming Interface) est un ensemble de points d'entrée (appelés routes) que le client (l'application sur téléphone, ordinateur ou navigateur) peut utiliser pour demander des données au serveur. Dans ce cas précis, on observe cinq routes, chacune permettant de récupérer des statistiques d'usage (temps passé sur chaque application) selon différentes périodes : quotidienne (daily), hebdomadaire (weekly), mensuelle (monthly), annuelle (yearly) et personnalisée (custom). Ces routes permettent donc à l'interface utilisateur d'afficher des graphiques ou des synthèses selon la période sélectionnée par l'utilisateur."
     },
     {
-      "type": "title",
-      "content": "Authentification Web"
+      "type": "text",
+      "content": "La mise en place de ces cinq routes démontre une compréhension du fonctionnement d'une API REST avec Express.js. Chaque route est conçue pour répondre à une requête précise du client : par exemple, obtenir toutes les applications utilisées au cours d'une journée ou bien sur une plage de dates définie par l'utilisateur. J'ai su structurer ces points d'entrée de manière claire, en les regroupant par logique métier (ici : l'usage d'applications), ce qui rend le code plus lisible et plus facile à maintenir. Cette structuration est essentielle dans un projet à long terme ou collaboratif, car elle permet à d'autres développeurs de comprendre rapidement le rôle de chaque partie du code. Mon niveau dans l'utilisation d'Express.js pour créer des routes reste encore limité, car ce projet est le seul où j'ai pu découvrir et apprendre ce framework. Cependant, je suis capable de comprendre et de modifier un projet qui utilise cette technologie sans trop de difficulté."
     },
+    {
+      "type": "text",
+      "content": "Ce regroupement logique dans un seul fichier (appUsage.ts) illustre également une bonne organisation du backend autour d'un concept métier unique. Cela facilite la mise en place de contrôles globaux, comme la vérification de l'authentification de l'utilisateur ou la validation des paramètres, qui peuvent s'appliquer à toutes les routes sans duplication de code. Cette approche modulaire améliore la maintenabilité du code sur le long terme. Comme on a pu le voir dans d'autres projets que j'ai présentés dans ce portfolio, comme Puissance X avec le modèle MVC, je pense maîtriser l'approche modulaire lors du développement dans la plupart des langages."
+    },
+    {
+      "type": "text",
+      "content": "L'utilisation de paramètres dynamiques, notamment pour la route personnalisée (custom), montre une capacité à concevoir des routes flexibles, capables de répondre à des requêtes complexes. Dans cette route, le client peut par exemple envoyer deux dates précises, et le serveur renverra uniquement les données correspondant à cet intervalle. Cela donne à l'utilisateur une grande liberté dans la consultation de ses statistiques, tout en gardant une logique unifiée côté serveur. Mon niveau en gestion de paramètres personnalisés dans une API, comme pour les APIs en général, reste encore limité, en raison d'un manque d'expériences pratiques variées."
+    },
+    {
+      "type": "text",
+      "content": "Enfin, le fait que ce backend serve une application multiplateforme (web, desktop, mobile) montre que j'ai su concevoir une API cohérente pour des clients hétérogènes. Toutes les plateformes consomment les mêmes routes, ce qui garantit que les données sont uniformes et synchronisées, quel que soit le support utilisé par l'utilisateur. Cette capacité à concevoir un point central de données pour plusieurs interfaces est un vrai avantage dans les projets cross-platform."
+    },
+
+    {"type":"image","image":"/images/chronosync/database.png","caption":"Figure 4 : Architecture de base de données et système de gestion des données"},
+    {"type":"text","content":"La Figure 4 montre une des versions de la base de données utilisée dans le projet ChronoSync, représentée via un outil de visualisation de schémas relationnels (ChartDB). Une base de données relationnelle est un système de stockage structuré dans lequel les informations sont organisées en tables (similaires à des feuilles Excel) reliées entre elles par des relations logiques, ce qui permet de structurer et d'interconnecter les données de manière cohérente."},
+    {"type":"text","content":"Cette représentation illustre l'architecture globale du projet : les utilisateurs, les applications qu'ils utilisent, leur temps d'écran, les tâches enregistrées, ainsi que les types de tâches. On y retrouve également la prise en charge de deux modes d'authentification — soit par email/mot de passe, soit via OAuth (connexion via des services tiers comme Google ou GitHub). Cette structure permet de répondre efficacement aux besoins fonctionnels de ChronoSync tout en restant évolutive et maintenable."},
+    {"type":"text","content":"Cette modélisation reflète une bonne maîtrise des bases de données relationnelles, compétence essentielle dans tout projet manipulant des données utilisateur. J'ai su identifier les entités clés, définir leurs attributs (nom d'utilisateur, durée d'usage, catégorie de tâche, etc.), et surtout concevoir les relations nécessaires à leur interconnexion. Une base de données bien pensée garantit la cohérence des informations, évite les doublons et simplifie les requêtes complexes. Elle rend également les évolutions plus faciles à intégrer. Mon niveau en modélisation relationnelle est satisfaisant : je suis capable de concevoir, structurer et faire évoluer une base tout en assurant sa maintenabilité. J'ai eu l'occasion de développer ces compétences notamment durant ma première année de BUT, ainsi que dans des projets comme un gestionnaire de devoirs, structuré autour d'une base pour les utilisateurs et les tâches à réaliser."},
+    {"type":"text","content":"L'intégration de deux modes d'authentification démontre une compréhension des exigences modernes en matière d'identité. Permettre à l'utilisateur de choisir son mode de connexion sans complexifier l'architecture du backend nécessite d'adapter le modèle de données utilisateur pour gérer plusieurs types d'identifiants. J'ai utilisé Passport.js, un middleware de gestion d'authentification pour Node.js, afin d'implémenter cette logique dans le projet. Mon niveau reste intermédiaire sur ce sujet, car je n'ai pour l'instant expérimenté qu'un seul outil dans un cadre contraint. Je suis néanmoins conscient qu'il existe d'autres solutions adaptées à d'autres contextes, comme NextAuth.js pour les projets Next.js ou Auth.js de manière plus générale."},
+    {"type":"text","content":"La base est également pensée pour stocker des données temporelles concernant l'usage des applications. Chaque événement enregistre quelles applications ont été utilisées, à quel moment, et pendant combien de temps. Cette structuration soulève des enjeux de granularité, de performance et de conservation à long terme. Concevoir une base orientée \"traçabilité\" est particulièrement important pour des projets centrés sur l'analyse de comportement ou de productivité. Sur ce point, je reconnais encore certaines lacunes. À ce jour, aucune solution définitive n'a été mise en place concernant l'archivage ou l'optimisation des données historiques. Je réfléchis par exemple à une stratégie de compression ou d'agrégation des données anciennes (au-delà de 6 mois), permettant de réduire le niveau de détail tout en conservant des statistiques globales. Cette réflexion reste en cours et représente un axe clair d'amélioration dans mes compétences en gestion de données volumineuses."},
+
+    {"type":"title","content":"Authentification Web & Desktop"},
     {
       "type": "image",
       "image": "/images/chronosync/login.png",
-      "caption": "Interface de connexion web avec système d'authentification moderne"
+      "caption": "Figure 5 : Interface de connexion web avec système d'authentification moderne"
+    },
+    {
+      "type": "image",
+      "image": "/images/chronosync/loginUser.PNG",
+      "caption": "Figure 6 : Partie du code executé aprés l'authentification"
     },
     {
       "type": "text",
@@ -71,34 +97,21 @@
     {
       "type": "image",
       "image": "/images/chronosync/logindesktop.png",
-      "caption": "Écran de connexion de l'application desktop avec style natif"
+      "caption": "Figure 7 : Écran de connexion de l'application desktop"
+    },
+    {
+      "type": "video",
+      "video": "/videos/chronosync/URIshowcase.mp4",
+      "caption": "Figure 8 : Démonstration des requêtes URI montrant la génération et gestion des tokens d'authentification",
+      "muted": true
     },
     {
       "type": "text",
       "content": "L'application desktop dispose d'un écran de connexion natif qui s'intègre parfaitement au système d'exploitation tout en maintenant les mêmes standards de sécurité que la version web."
     },
     {
-      "type": "title",
-      "content": "Gestion des Tokens & URI"
-    },
-    {
-      "type": "video",
-      "video": "/videos/chronosync/URIshowcase.mp4",
-      "caption": "Démonstration des requêtes URI montrant la génération et gestion des tokens d'authentification",
-      "muted": true
-    },
-    {
       "type": "text",
       "content": "Le système d'authentification démontre comment les requêtes URI gèrent la génération et la gestion des tokens pour un accès sécurisé à l'application desktop."
-    },
-    {
-      "type": "title",
-      "content": "Fonctionnalités Principales"
-    },
-    {
-      "type": "image",
-      "image": "/images/chronosync/database.png",
-      "caption": "Architecture de base de données et système de gestion des données"
     },
     {
       "type": "image",
