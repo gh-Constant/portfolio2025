@@ -20,11 +20,27 @@
     {
       "type": "image",
       "image": "/images/chronosync/nx.png",
-      "caption": "NX monorepo architecture for optimized project management"
+      "caption": "Figure 2 : NX monorepo architecture for optimized project management"
     },
     {
       "type": "text",
-      "content": "ChronoSync is built on a modern architecture using an NX monorepo for optimized code and dependency management. This approach allows for better code organization, faster builds, and simplified maintenance between different application components."
+      "content": "Figure 2 shows a screenshot of the 'packages' folder from ChronoSync's GitHub repository. It contains four directories: desktop, mobile, web, and shared. Each corresponds to a different version of the application (desktop, mobile, and web browser), while the shared folder contains common code used across all platforms. This demonstrates the use of a mono-repository structure - a single project grouping all platforms together, making it easy to share code."
+    },
+    {
+      "type": "text",
+      "content": "As indicated in the caption, this mono-repository was set up using Nx, a tool designed to organize this type of project, and pnpm, a modern package manager used to install, compile, and manage different parts of the application. This structure enables parallel development across multiple platforms while maintaining overall project coherence."
+    },
+    {
+      "type": "text",
+      "content": "This organization demonstrates a solid understanding of multi-platform architecture. Grouping different versions of the application within a single repository allows for code reuse, centralizes business logic, and limits duplication. It also facilitates project scalability and simplifies synchronization between teams or modules. While I've only experienced this architecture in this project, I feel capable of effectively integrating into or contributing to other similarly structured projects."
+    },
+    {
+      "type": "text",
+      "content": "The choice of pnpm over npm or yarn aligns with performance and maintainability goals. In a JavaScript/TypeScript project, the package manager is an essential tool for installing and organizing project libraries. I chose pnpm for its concrete advantages: fast installation, disk space efficiency through symlinks, and better dependency management. This allowed me to effectively manage multiple packages in parallel within a mono-repo environment while maintaining consistent versions. I now consider myself quite proficient in using package managers like pnpm, npm, or bun, having used them in most of my personal and professional projects, particularly when creating websites like task managers."
+    },
+    {
+      "type": "text",
+      "content": "The implementation of the shared package demonstrates a clear intention to optimize project structure. This module contains common functions, types, or models used across all platforms, ensuring uniform logic and reducing errors or inconsistencies. However, I believe I still have room for improvement in using this type of package, particularly when sharing code between different technologies or languages - an aspect I didn't explore deeply in this project. On the other hand, regarding general code modularity, I believe I have a good level of expertise. For example, in my 'Power X' project, a video game developed in Java, I applied the MVC pattern, which helped me better organize the code and make it more readable and maintainable."
     },
     {
       "type": "image",

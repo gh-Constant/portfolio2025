@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
               href={item.href} 
               target={item.external ? "_blank" : undefined}
               rel={item.external ? "noopener noreferrer" : undefined}
-              className="relative group uppercase tracking-wider pb-1 flex items-center interactive offbit-font cursor-hover-target"
+              className="relative group uppercase tracking-wider pb-1 flex items-center interactive nohemi-heading-sm cursor-hover-target"
             >
               {item.name}{item.badge && <sup>{item.badge}</sup>}
               {item.external && (
@@ -126,7 +126,7 @@ const Navbar: React.FC = () => {
                   target={item.external ? "_blank" : undefined}
                   rel={item.external ? "noopener noreferrer" : undefined}
                   onClick={() => setIsOpen(false)} 
-                  className="flex items-center interactive offbit-font"
+                  className="flex items-center interactive nohemi-heading-md"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 + index * 0.1, duration: 0.3 }}

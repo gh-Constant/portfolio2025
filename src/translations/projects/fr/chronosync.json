@@ -20,11 +20,27 @@
     {
       "type": "image",
       "image": "/images/chronosync/nx.png",
-      "caption": "Architecture monorepo NX pour une gestion optimisée du projet"
+      "caption": "Figure 2 : Architecture monorepo NX pour une gestion optimisée du projet"
     },
     {
       "type": "text",
-      "content": "ChronoSync est construit sur une architecture moderne utilisant un monorepo NX pour une gestion optimisée du code et des dépendances. Cette approche permet une meilleure organisation du code, des builds plus rapides et une maintenance simplifiée entre les différents composants de l'application."
+      "content": "La figure 2 est une capture d'écran du dossier « packages » du dépôt GitHub de ChronoSync. On y voit quatre dossiers : desktop, mobile, web et shared. Chacun correspond à une version différente de l'application (ordinateur, mobile et navigateur web), tandis que le dossier shared contient du code commun utilisé par toutes ces plateformes. Cela montre l'utilisation d'une structure en mono-repository, c'est-à-dire un seul projet regroupant toutes les plateformes, permettant de partager facilement des morceaux de code."
+    },
+    {
+      "type": "text",
+      "content": "Comme indiqué dans la légende, ce mono-repository a été mis en place à l'aide de Nx, un outil conçu pour organiser ce type de projet, et de pnpm, un gestionnaire de paquets moderne utilisé pour installer, compiler et gérer les différentes parties de l'application. Cette structure permet de développer plusieurs plateformes en parallèle tout en maintenant une cohérence globale du projet."
+    },
+    {
+      "type": "text",
+      "content": "Cette organisation montre une compréhension solide de l'architecture multi-plateforme. Regrouper les différentes versions de l'application au sein d'un seul dépôt permet de réutiliser le code, de centraliser la logique métier et de limiter la duplication. Cela facilite aussi la scalabilité du projet et rend plus simple la synchronisation entre les équipes ou les modules. Même si je n'ai expérimenté cette architecture que sur ce projet, je me sens capable de m'intégrer ou de contribuer efficacement à d'autres projets structurés de cette manière."
+    },
+    {
+      "type": "text",
+      "content": "L'utilisation de pnpm à la place de npm ou yarn s'inscrit dans une logique de performance et de maintenabilité. Dans un projet JavaScript/TypeScript, le gestionnaire de paquets est un outil essentiel qui permet d'installer et d'organiser les bibliothèques du projet. J'ai choisi pnpm pour ses avantages concrets : rapidité d'installation, économie d'espace disque grâce aux liens symboliques, et meilleure gestion des dépendances. Cela m'a permis de gérer efficacement plusieurs packages en parallèle dans un environnement mono-repo, tout en gardant des versions cohérentes entre eux. Je me considère aujourd'hui assez qualifié dans l'utilisation des gestionnaires de paquets comme pnpm, npm ou bun. Je les ai utilisés dans la grande majorité de mes projets personnels et professionnels, notamment lors de la création de sites web comme des gestionnaires de tâches."
+    },
+    {
+      "type": "text",
+      "content": "La mise en place du package shared montre une volonté claire d'optimiser la structure du projet. Ce module contient les fonctions, types ou modèles communs utilisés par toutes les plateformes. Cela permet d'assurer une logique uniforme et de réduire les erreurs ou incohérences. Cependant, je pense avoir encore des progrès à faire dans l'utilisation de ce type de package, notamment lorsqu'il s'agit de partager du code entre des technologies ou langages différents. C'est un point que j'ai peu approfondi dans ce projet. En revanche, sur le plan de la modularité générale du code, je pense avoir un bon niveau. Par exemple, dans mon projet \"Puissance X\", un jeu vidéo développé en Java, j'ai appliqué le modèle MVC, ce qui m'a permis de mieux organiser le code et de le rendre plus lisible et maintenable."
     },
     {
       "type": "image",
