@@ -1,0 +1,46 @@
+{
+  "title": "Roblox Inventory",
+  "description": "Inventory System for games featuring Drag&Drop, item size system, hotbar etc (inspired of Tarkov inventory).",
+  "longDescription": "A comprehensive inventory system designed for Roblox games, featuring advanced drag-and-drop mechanics, dynamic item sizing, hotbar functionality, and grid-based organization inspired by modern tactical games like Escape from Tarkov.",
+  "year": "2023",
+  "technologies": ["Roblox", "Lua", "UI/UX Design"],
+  "sections": [
+    {
+      "type": "title",
+      "content": "Game Development Challenge"
+    },
+    {
+      "type": "text",
+      "content": "Creating an intuitive and responsive inventory system for Roblox games that provides players with a tactical and immersive item management experience. The system needed to handle complex item interactions while maintaining smooth performance."
+    },
+    {
+      "type": "image",
+      "image": "/images/InventoryRoblox.png",
+      "caption": "Roblox Inventory system showing grid-based layout with drag-and-drop functionality"
+    },
+    {
+      "type": "title",
+      "content": "Core Features"
+    },
+    {
+      "type": "text",
+      "content": "The inventory system includes advanced drag-and-drop mechanics, variable item sizes that occupy multiple grid slots, hotbar integration for quick access, and visual feedback for item placement and interactions."
+    },
+    {
+      "type": "title",
+      "content": "Technical Implementation"
+    },
+    {
+      "type": "text",
+      "content": "Built entirely in Lua for the Roblox platform, the system utilizes efficient algorithms for grid management, collision detection for item placement, and smooth UI animations. The design prioritizes both functionality and visual appeal."
+    },
+    {
+      "type": "title",
+      "content": "User Experience Design"
+    },
+    {
+      "type": "text",
+      "content": "Inspired by tactical shooters like Escape from Tarkov, the interface provides players with an authentic and engaging inventory management experience that enhances gameplay immersion and strategic decision-making."
+    }
+  ]
+}

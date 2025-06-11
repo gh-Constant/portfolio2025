@@ -1,0 +1,136 @@
+{
+  "title": "ChronoSync",
+  "description": "A modern time management app tool built for developers. Designed to help you focus on what matters most.",
+  "longDescription": "ChronoSync is a comprehensive time management solution designed specifically for developers and creative professionals. The application combines modern web technologies with a native desktop application to provide seamless time tracking across all platforms.",
+  "year": "2024",
+  "technologies": ["Nuxt.js", "Vue.js", "Tailwind CSS", "C++", "Express.js", "PostgreSQL"],
+  "sections": [
+    {
+      "type": "title",
+      "content": "Project Overview"
+    },
+    {
+      "type": "text",
+      "content": "ChronoSync represents a modern approach to time management, specifically designed for developers and creative professionals. The application seamlessly integrates web and desktop technologies to provide a unified experience across all platforms."
+    },
+    {
+      "type": "title",
+      "content": "Architecture"
+    },
+    {
+      "type": "image",
+      "image": "/images/chronosync/nx.png",
+      "caption": "NX monorepo architecture for optimized project management"
+    },
+    {
+      "type": "text",
+      "content": "ChronoSync is built on a modern architecture using an NX monorepo for optimized code and dependency management. This approach allows for better code organization, faster builds, and simplified maintenance between different application components."
+    },
+    {
+      "type": "image",
+      "image": "/images/chronosync/backend.png",
+      "caption": "Express.js API for centralized data and service management"
+    },
+    {
+      "type": "text",
+      "content": "The backend is developed with Express.js, providing a robust and performant REST API. This architecture enables smooth communication between web and desktop applications, with centralized data and authentication management."
+    },
+    {
+      "type": "title",
+      "content": "Web Authentication"
+    },
+    {
+      "type": "image",
+      "image": "/images/chronosync/login.png",
+      "caption": "Web login interface with modern authentication system"
+    },
+    {
+      "type": "text",
+      "content": "The web login interface offers a modern and intuitive authentication experience with responsive design and secure credential management."
+    },
+    {
+      "type": "title",
+      "content": "Desktop Application"
+    },
+    {
+      "type": "image",
+      "image": "/images/chronosync/logindesktop.png",
+      "caption": "Desktop application login screen with native styling"
+    },
+    {
+      "type": "text",
+      "content": "The desktop application features a native login screen that integrates perfectly with the operating system while maintaining the same security standards as the web version."
+    },
+    {
+      "type": "title",
+      "content": "Token & URI Management"
+    },
+    {
+      "type": "video",
+      "video": "/videos/chronosync/URIshowcase.mp4",
+      "caption": "URI request demonstration showing authentication token generation and management",
+      "muted": true
+    },
+    {
+      "type": "text",
+      "content": "The authentication system demonstrates how URI requests handle token generation and management for secure desktop application access."
+    },
+    {
+      "type": "title",
+      "content": "Core Features"
+    },
+    {
+      "type": "image",
+      "image": "/images/chronosync/database.png",
+      "caption": "Database architecture and data management system"
+    },
+    {
+      "type": "image",
+      "image": "/images/chronosync/email.png",
+      "caption": "Email notification system for project updates and reminders"
+    },
+    {
+      "type": "text",
+      "content": "The application provides a comprehensive dashboard for time tracking, project management, and productivity analysis. Users can easily switch between web and desktop interfaces while maintaining synchronized data."
+    },
+    {
+      "type": "title",
+      "content": "Advanced Algorithms"
+    },
+    {
+      "type": "image",
+      "image": "/images/chronosync/blurryAlgorithm.png",
+      "caption": "Blur detection algorithm for focus tracking and productivity measurement"
+    },
+    {
+      "type": "image",
+      "image": "/images/chronosync/closeAlgorithm.png",
+      "caption": "Session closure algorithm for automatic time tracking and data preservation"
+    },
+    {
+      "type": "text",
+      "content": "ChronoSync implements sophisticated algorithms for time optimization and productivity analysis, including blur detection for focus tracking and intelligent session management."
+    },
+    {
+      "type": "title",
+      "content": "Integrations"
+    },
+    {
+      "type": "image",
+      "image": "/images/chronosync/clickup.png",
+      "caption": "ClickUp integration for seamless project management workflow"
+    },
+    {
+      "type": "text",
+      "content": "The platform integrates seamlessly with popular project management tools and provides comprehensive API access for custom workflows and third-party applications."
+    },
+    {
+      "type": "title",
+      "content": "Technical Stack"
+    },
+    {
+      "type": "text",
+      "content": "Frontend developed with Nuxt.js and Vue.js, leveraging server-side rendering for optimal performance. Express.js backend with PostgreSQL for robust data management. Desktop application in C++ for native performance."
+    }
+  ]
+}

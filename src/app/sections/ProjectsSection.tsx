@@ -1,13 +1,14 @@
-'use client'
+'use client';
 import React from 'react';
 import Link from 'next/link';
 import { Parallax } from 'react-scroll-parallax';
-import { projects } from '../data/projects';
 import Image from 'next/image';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useTranslatedProjects } from '../../hooks/use-translated-projects';
 
 const ProjectsSection: React.FC = () => {
   const { t } = useLanguage();
+  const { projects: translatedProjects, loading } = useTranslatedProjects();
   return (
     <section className="relative z-10 min-h-screen w-full py-40">
       <div className="container mx-auto px-6">
@@ -27,7 +28,12 @@ const ProjectsSection: React.FC = () => {
         </Parallax>
         
         <div className="space-y-32 max-w-none">
-          {projects.map((project, index) => {
+          {loading ? (
+            <div className="text-center py-20">
+              <div className="text-gray-500">Loading projects...</div>
+            </div>
+          ) : (
+            translatedProjects.map((project, index) => {
             const isEven = index % 2 === 0;
             const offsetClass = isEven ? 'ml-0 mr-auto' : 'ml-auto mr-0';
             const widthClass = project.size === 'large' ? 'w-[80vw]' : project.size === 'medium' ? 'w-[70vw]' : 'w-[60vw]';
@@ -93,7 +99,8 @@ const ProjectsSection: React.FC = () => {
                 </div>
               </Link>
             );
-          })}
+          })
+          )}
         </div>
       </div>
     </section>

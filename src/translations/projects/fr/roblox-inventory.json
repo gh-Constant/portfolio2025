@@ -1,0 +1,46 @@
+{
+  "title": "Inventaire Roblox",
+  "description": "Système d'inventaire pour jeux avec fonctionnalités Drag&Drop, système de taille d'objets, barre d'accès rapide etc (inspiré de l'inventaire de Tarkov).",
+  "longDescription": "Un système d'inventaire complet conçu pour les jeux Roblox, avec des mécaniques avancées de glisser-déposer, dimensionnement dynamique des objets, fonctionnalité de barre d'accès rapide, et organisation basée sur une grille inspirée des jeux tactiques modernes comme Escape from Tarkov.",
+  "year": "2023",
+  "technologies": ["Roblox", "Lua", "Design UI/UX"],
+  "sections": [
+    {
+      "type": "title",
+      "content": "Défi de Développement de Jeu"
+    },
+    {
+      "type": "text",
+      "content": "Créer un système d'inventaire intuitif et réactif pour les jeux Roblox qui offre aux joueurs une expérience de gestion d'objets tactique et immersive. Le système devait gérer des interactions d'objets complexes tout en maintenant des performances fluides."
+    },
+    {
+      "type": "image",
+      "image": "/images/InventoryRoblox.png",
+      "caption": "Système d'inventaire Roblox montrant la disposition en grille avec fonctionnalité glisser-déposer"
+    },
+    {
+      "type": "title",
+      "content": "Fonctionnalités Principales"
+    },
+    {
+      "type": "text",
+      "content": "Le système d'inventaire inclut des mécaniques avancées de glisser-déposer, des tailles d'objets variables qui occupent plusieurs emplacements de grille, intégration de barre d'accès rapide pour un accès rapide, et retour visuel pour le placement et les interactions d'objets."
+    },
+    {
+      "type": "title",
+      "content": "Implémentation Technique"
+    },
+    {
+      "type": "text",
+      "content": "Construit entièrement en Lua pour la plateforme Roblox, le système utilise des algorithmes efficaces pour la gestion de grille, détection de collision pour le placement d'objets, et animations UI fluides. Le design priorise à la fois la fonctionnalité et l'attrait visuel."
+    },
+    {
+      "type": "title",
+      "content": "Design d'Expérience Utilisateur"
+    },
+    {
+      "type": "text",
+      "content": "Inspiré par les jeux de tir tactiques comme Escape from Tarkov, l'interface offre aux joueurs une expérience de gestion d'inventaire authentique et engageante qui améliore l'immersion du gameplay et la prise de décision stratégique."
+    }
+  ]
+}

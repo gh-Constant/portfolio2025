@@ -1,0 +1,46 @@
+{
+  "title": "Pauvocoder",
+  "description": "Simplified implementation of a vocoder allowing audio signal manipulation, specifically focused on pitch shifting while preserving the speech tempo.",
+  "longDescription": "Pauvocoder is a sophisticated audio processing application that implements vocoder technology for real-time audio manipulation. The project focuses on pitch shifting algorithms while maintaining speech intelligibility and temporal characteristics.",
+  "year": "2024",
+  "technologies": ["Java", "Audio Processing", "Signal Processing"],
+  "sections": [
+    {
+      "type": "title",
+      "content": "Audio Processing Innovation"
+    },
+    {
+      "type": "text",
+      "content": "This project implements advanced vocoder algorithms for real-time audio manipulation, focusing on pitch shifting while preserving speech tempo and clarity. The application demonstrates deep understanding of digital signal processing principles."
+    },
+    {
+      "type": "image",
+      "image": "/images/Pauvocoder.PNG",
+      "caption": "Pauvocoder interface showing real-time audio processing controls and visualization"
+    },
+    {
+      "type": "title",
+      "content": "Technical Implementation"
+    },
+    {
+      "type": "text",
+      "content": "Built with Java, the application utilizes advanced signal processing techniques including FFT analysis, phase vocoding, and time-domain pitch shifting algorithms to achieve high-quality audio manipulation."
+    },
+    {
+      "type": "title",
+      "content": "Signal Processing Algorithms"
+    },
+    {
+      "type": "text",
+      "content": "The core of Pauvocoder lies in its sophisticated signal processing algorithms that analyze audio in both frequency and time domains. The implementation ensures minimal artifacts while maintaining the natural characteristics of human speech."
+    },
+    {
+      "type": "title",
+      "content": "Real-time Performance"
+    },
+    {
+      "type": "text",
+      "content": "Optimized for real-time processing, the application provides low-latency audio manipulation suitable for live applications. The efficient Java implementation ensures smooth performance across different hardware configurations."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "title": "PuissanceX",
+  "description": "Une version modifiée du Puissance 4 avec condition de victoire X créée en Java avec le framework Boardifier.",
+  "longDescription": "PuissanceX est une approche innovante du jeu classique Puissance 4, introduisant des conditions de victoire dynamiques et des mécaniques de jeu améliorées. Construit avec des technologies Java modernes et suivant les meilleures pratiques de développement de jeux.",
+  "year": "2024",
+  "technologies": ["Java", "JavaFX", "JUnit", "Maven", "Framework Boardifier"],
+  "sections": [
+    {
+      "type": "title",
+      "content": "Innovation en Design de Jeu"
+    },
+    {
+      "type": "text",
+      "content": "PuissanceX réinvente le jeu classique Puissance 4 en introduisant des conditions de victoire variables et des mécaniques de jeu améliorées. Le projet démontre une programmation orientée objet avancée et les principes de développement de jeux."
+    },
+    {
+      "type": "image",
+      "image": "/images/PuissanceX.PNG",
+      "caption": "Interface de jeu PuissanceX montrant le gameplay Puissance 4 amélioré avec conditions de victoire dynamiques"
+    },
+    {
+      "type": "title",
+      "content": "Architecture Technique"
+    },
+    {
+      "type": "text",
+      "content": "Développé en utilisant le framework Boardifier avec JavaFX pour l'interface utilisateur, le projet suit les modèles d'architecture MVC et inclut des tests unitaires complets avec JUnit. Maven est utilisé pour la gestion des dépendances et l'automatisation de build."
+    },
+    {
+      "type": "title",
+      "content": "Mécaniques de Jeu Améliorées"
+    },
+    {
+      "type": "text",
+      "content": "Le jeu introduit des conditions de victoire dynamiques où les joueurs peuvent personnaliser le nombre de pièces consécutives nécessaires pour gagner, créant plus de profondeur stratégique et de rejouabilité comparé au Puissance 4 traditionnel."
+    },
+    {
+      "type": "title",
+      "content": "Pratiques d'Ingénierie Logicielle"
+    },
+    {
+      "type": "text",
+      "content": "Le projet présente des pratiques modernes de développement logiciel incluant des tests unitaires complets, architecture de code propre, injection de dépendances, et processus de build automatisés utilisant Maven pour un code fiable et maintenable."
+    },
+    {
+      "type": "title",
+      "content": "Design d'Interface Utilisateur"
+    },
+    {
+      "type": "text",
+      "content": "Construit avec JavaFX, l'interface fournit une expérience de jeu intuitive et réactive avec des animations fluides, retour visuel pour les actions du joueur, et un design propre et moderne qui améliore l'expérience de jeu globale."
+    }
+  ]
+}

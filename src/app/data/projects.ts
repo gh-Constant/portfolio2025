@@ -24,9 +24,50 @@ export interface Project {
   sections?: ProjectSection[];
 }
 
+// Function to load project translations
+export const loadProjectTranslation = async (projectId: string, language: 'en' | 'fr') => {
+  try {
+    const translation = await import(`../../translations/projects/${language}/${projectId}.json`);
+    return translation.default;
+  } catch (error) {
+    console.warn(`Translation not found for project ${projectId} in language ${language}`);
+    return null;
+  }
+};
+
+// Function to get translated project data
+export const getTranslatedProject = async (projectId: string, language: 'en' | 'fr'): Promise<Project | null> => {
+  const translation = await loadProjectTranslation(projectId, language);
+  if (!translation) return null;
+
+  const baseProject = projects.find(p => p.id === projectId);
+  if (!baseProject) return null;
+
+  return {
+    ...baseProject,
+    title: translation.title,
+    description: translation.description,
+    longDescription: translation.longDescription,
+    year: translation.year,
+    technologies: translation.technologies,
+    sections: translation.sections
+  };
+};
+
+// Function to get all translated projects
+export const getTranslatedProjects = async (language: 'en' | 'fr'): Promise<Project[]> => {
+  const translatedProjects = await Promise.all(
+    projects.map(async (project) => {
+      const translatedProject = await getTranslatedProject(project.id, language);
+      return translatedProject || project; // Fallback to original if translation fails
+    })
+  );
+  return translatedProjects;
+};
+
 export const projects: Project[] = [
   {
-    id: '1',
+    id: 'chronosync',
     title: 'ChronoSync',
     description: 'A modern time management app tool built for developers. Designed to help you focus on what matters most.',
     image: '/images/Chronosync.png',
@@ -168,7 +209,7 @@ export const projects: Project[] = [
     ]
   },
   {
-    id: '2',
+    id: 'roblox-inventory',
     title: 'Roblox Inventory',
     description: 'Inventory System for games featuring Drag&Drop, item size system, hotbar etc (inspired of Tarkov inventory).',
     image: '/images/InventoryRoblox.png',
@@ -203,7 +244,7 @@ export const projects: Project[] = [
     ]
   },
   {
-    id: '3',
+    id: 'pauvocoder',
     title: 'Pauvocoder',
     description: 'Simplified implementation of a vocoder allowing audio signal manipulation, specifically focused on pitch shifting while preserving the speech tempo.',
     image: '/images/Pauvocoder.PNG',
@@ -237,7 +278,7 @@ export const projects: Project[] = [
     ]
   },
   {
-    id: '4',
+    id: 'puissancex',
     title: 'PuissanceX',
     description: 'A modified version of Connect 4 with X win condition created in Java with the framework Boardifier.',
     image: '/images/PuissanceX.PNG',

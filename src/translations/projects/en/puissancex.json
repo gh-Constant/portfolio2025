@@ -1,0 +1,54 @@
+{
+  "title": "PuissanceX",
+  "description": "A modified version of Connect 4 with X win condition created in Java with the framework Boardifier.",
+  "longDescription": "PuissanceX is an innovative take on the classic Connect 4 game, introducing dynamic win conditions and enhanced gameplay mechanics. Built with modern Java technologies and following best practices for game development.",
+  "year": "2024",
+  "technologies": ["Java", "JavaFX", "JUnit", "Maven", "Boardifier Framework"],
+  "sections": [
+    {
+      "type": "title",
+      "content": "Game Design Innovation"
+    },
+    {
+      "type": "text",
+      "content": "PuissanceX reimagines the classic Connect 4 game by introducing variable win conditions and enhanced gameplay mechanics. The project demonstrates advanced object-oriented programming and game development principles."
+    },
+    {
+      "type": "image",
+      "image": "/images/PuissanceX.PNG",
+      "caption": "PuissanceX game interface showing the enhanced Connect 4 gameplay with dynamic win conditions"
+    },
+    {
+      "type": "title",
+      "content": "Technical Architecture"
+    },
+    {
+      "type": "text",
+      "content": "Developed using the Boardifier framework with JavaFX for the user interface, the project follows MVC architecture patterns and includes comprehensive unit testing with JUnit. Maven is used for dependency management and build automation."
+    },
+    {
+      "type": "title",
+      "content": "Enhanced Gameplay Mechanics"
+    },
+    {
+      "type": "text",
+      "content": "The game introduces dynamic win conditions where players can customize the number of consecutive pieces needed to win, creating more strategic depth and replayability compared to traditional Connect 4."
+    },
+    {
+      "type": "title",
+      "content": "Software Engineering Practices"
+    },
+    {
+      "type": "text",
+      "content": "The project showcases modern software development practices including comprehensive unit testing, clean code architecture, dependency injection, and automated build processes using Maven for reliable and maintainable code."
+    },
+    {
+      "type": "title",
+      "content": "User Interface Design"
+    },
+    {
+      "type": "text",
+      "content": "Built with JavaFX, the interface provides an intuitive and responsive gaming experience with smooth animations, visual feedback for player actions, and a clean, modern design that enhances the overall gameplay experience."
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "Pauvocoder",
+  "description": "Implémentation simplifiée d'un vocodeur permettant la manipulation de signaux audio, spécifiquement axée sur le changement de hauteur tout en préservant le tempo de la parole.",
+  "longDescription": "Pauvocoder est une application sophistiquée de traitement audio qui implémente la technologie de vocodeur pour la manipulation audio en temps réel. Le projet se concentre sur les algorithmes de changement de hauteur tout en maintenant l'intelligibilité de la parole et les caractéristiques temporelles.",
+  "year": "2024",
+  "technologies": ["Java", "Traitement Audio", "Traitement du Signal"],
+  "sections": [
+    {
+      "type": "title",
+      "content": "Innovation en Traitement Audio"
+    },
+    {
+      "type": "text",
+      "content": "Ce projet implémente des algorithmes de vocodeur avancés pour la manipulation audio en temps réel, se concentrant sur le changement de hauteur tout en préservant le tempo et la clarté de la parole. L'application démontre une compréhension approfondie des principes de traitement numérique du signal."
+    },
+    {
+      "type": "image",
+      "image": "/images/Pauvocoder.PNG",
+      "caption": "Interface Pauvocoder montrant les contrôles de traitement audio en temps réel et la visualisation"
+    },
+    {
+      "type": "title",
+      "content": "Implémentation Technique"
+    },
+    {
+      "type": "text",
+      "content": "Construit avec Java, l'application utilise des techniques avancées de traitement du signal incluant l'analyse FFT, le vocodage de phase, et les algorithmes de changement de hauteur dans le domaine temporel pour obtenir une manipulation audio de haute qualité."
+    },
+    {
+      "type": "title",
+      "content": "Algorithmes de Traitement du Signal"
+    },
+    {
+      "type": "text",
+      "content": "Le cœur de Pauvocoder réside dans ses algorithmes sophistiqués de traitement du signal qui analysent l'audio dans les domaines fréquentiel et temporel. L'implémentation assure des artefacts minimaux tout en maintenant les caractéristiques naturelles de la parole humaine."
+    },
+    {
+      "type": "title",
+      "content": "Performance en Temps Réel"
+    },
+    {
+      "type": "text",
+      "content": "Optimisé pour le traitement en temps réel, l'application fournit une manipulation audio à faible latence adaptée aux applications en direct. L'implémentation Java efficace assure des performances fluides sur différentes configurations matérielles."
+    }
+  ]
+}

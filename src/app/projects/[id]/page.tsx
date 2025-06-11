@@ -1,10 +1,11 @@
-import React from 'react';
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-
-import { projects, ProjectSection } from '../../data/projects';
+import { useState, useEffect } from 'react';
+import { ProjectSection } from '../../data/projects';
 import GridLines from '../../components/GridLines';
 import { notFound } from 'next/navigation';
+import { useTranslatedProject } from '../../../hooks/use-translated-projects';
 
 interface ProjectPageProps {
   params: Promise<{
@@ -81,11 +82,28 @@ function ProjectSectionComponent({ section }: { section: ProjectSection }) {
   }
 }
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
-  const resolvedParams = await params;
-  const project = projects.find(p => p.id === resolvedParams.id);
+export default function ProjectPage({ params }: ProjectPageProps) {
+  const [projectId, setProjectId] = useState<string>('');
+
+  useEffect(() => {
+    const resolveParams = async () => {
+      const resolved = await params;
+      setProjectId(resolved.id);
+    };
+    resolveParams();
+  }, [params]);
+
+  const { project, loading, error } = useTranslatedProject(projectId);
   
-  if (!project) {
+  if (loading) {
+    return (
+      <div className="relative bg-black min-h-screen w-full flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
+  
+  if (error || !project) {
     notFound();
   }
 
