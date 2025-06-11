@@ -1,0 +1,39 @@
+{
+  "nav.projects": "PROJECTS",
+  "nav.about": "ABOUT",
+  "nav.resume": "RESUME",
+  "nav.contact": "CONTACT",
+  
+  "hero.title": "CONSTANT SUCHET",
+  
+  "contact.title": "LET'S WORK\nTOGETHER",
+  "contact.button": "Let's Create Something Amazing",
+  
+  "about.title": "CONSTANT\nSUCHET",
+  "about.subtitle": "Creative Developer & Designer",
+  "about.description": "I'm a passionate full-stack developer with a keen eye for design and user experience. I specialize in creating innovative digital solutions that bridge the gap between functionality and aesthetics.",
+  "about.philosophy.title": "My Philosophy",
+  "about.philosophy.description": "I believe in crafting experiences that not only solve problems but also delight users. Every project is an opportunity to push boundaries and explore new possibilities in the intersection of technology and creativity.",
+  "about.skills.title": "Skills & Expertise",
+  "about.skills.frontend": "Frontend",
+  "about.skills.backend": "Backend",
+  "about.skills.design": "Design",
+  "about.skills.tools": "Tools",
+  "about.skills.frontend.tech": "React, Next.js, TypeScript, Three.js",
+  "about.skills.backend.tech": "Node.js, Python, PostgreSQL, MongoDB",
+  "about.skills.design.tech": "UI/UX, Figma, Adobe Creative Suite",
+  "about.skills.tools.tech": "Git, Docker, AWS, Vercel",
+  "about.experience.title": "Experience",
+  "about.experience.description": "With several years of experience in web development and design, I have worked on diverse projects ranging from e-commerce platforms to interactive web applications. I enjoy collaborating with teams and bringing creative visions to life.",
+  "about.contact.title": "Get In Touch",
+  "about.contact.description": "I'm always interested in new opportunities and exciting projects. Whether you have a specific idea in mind or just want to explore possibilities, I'd love to hear from you.",
+  "about.contact.button": "Start a Conversation",
+  
+  "projects.title": "SELECTED PROJECTS",
+  "projects.viewProject": "View Project",
+  "projects.viewGithub": "View on GitHub",
+  
+  "language.switch": "Language",
+  "language.english": "English",
+  "language.french": "Français"
+}

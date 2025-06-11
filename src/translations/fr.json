@@ -1,0 +1,39 @@
+{
+  "nav.projects": "PROJETS",
+  "nav.about": "À PROPOS",
+  "nav.resume": "CV",
+  "nav.contact": "CONTACT",
+  
+  "hero.title": "CONSTANT SUCHET",
+  
+  "contact.title": "TRAVAILLONS\nENSEMBLE",
+  "contact.button": "Créons Quelque Chose d'Incroyable",
+  
+  "about.title": "CONSTANT\nSUCHET",
+  "about.subtitle": "Développeur Créatif & Designer",
+  "about.description": "Je suis un développeur full-stack passionné avec un œil aiguisé pour le design et l'expérience utilisateur. Je me spécialise dans la création de solutions numériques innovantes qui comblent le fossé entre fonctionnalité et esthétique.",
+  "about.philosophy.title": "Ma Philosophie",
+  "about.philosophy.description": "Je crois en la création d'expériences qui non seulement résolvent des problèmes mais ravissent aussi les utilisateurs. Chaque projet est une opportunité de repousser les limites et d'explorer de nouvelles possibilités à l'intersection de la technologie et de la créativité.",
+  "about.skills.title": "Compétences & Expertise",
+  "about.skills.frontend": "Frontend",
+  "about.skills.backend": "Backend",
+  "about.skills.design": "Design",
+  "about.skills.tools": "Outils",
+  "about.skills.frontend.tech": "React, Next.js, TypeScript, Three.js",
+  "about.skills.backend.tech": "Node.js, Python, PostgreSQL, MongoDB",
+  "about.skills.design.tech": "UI/UX, Figma, Adobe Creative Suite",
+  "about.skills.tools.tech": "Git, Docker, AWS, Vercel",
+  "about.experience.title": "Expérience",
+  "about.experience.description": "Avec plusieurs années d'expérience en développement web et design, j'ai travaillé sur des projets divers allant des plateformes e-commerce aux applications web interactives. J'aime collaborer avec des équipes et donner vie aux visions créatives.",
+  "about.contact.title": "Prenons Contact",
+  "about.contact.description": "Je suis toujours intéressé par de nouvelles opportunités et des projets passionnants. Que vous ayez une idée spécifique en tête ou que vous souhaitiez simplement explorer les possibilités, j'aimerais avoir de vos nouvelles.",
+  "about.contact.button": "Commencer une Conversation",
+  
+  "projects.title": "PROJETS SÉLECTIONNÉS",
+  "projects.viewProject": "Voir le Projet",
+  "projects.viewGithub": "Voir sur GitHub",
+  
+  "language.switch": "Langue",
+  "language.english": "English",
+  "language.french": "Français"
+}
