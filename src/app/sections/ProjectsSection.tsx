@@ -68,15 +68,6 @@ const ProjectsSection: React.FC = () => {
                     ))}
                   </div>
                   <div className="flex gap-3">
-                    <button 
-                      className="px-4 py-2 bg-white text-black rounded-full text-sm nohemi-heading-sm transition"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (project.link) window.open(project.link, '_blank');
-                      }}
-                    >
-                      Live Demo
-                    </button>
                     {project.github && (
                       <button 
                         className="px-4 py-2 border border-white text-white rounded-full text-sm nohemi-heading-sm transition"

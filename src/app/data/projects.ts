@@ -1,8 +1,10 @@
 export interface ProjectSection {
-  type: 'text' | 'image' | 'title';
+  type: 'text' | 'image' | 'title' | 'video';
   content?: string;
   image?: string;
+  video?: string;
   caption?: string;
+  muted?: boolean;
 }
 
 export interface Project {
@@ -45,17 +47,123 @@ export const projects: Project[] = [
         content: 'ChronoSync represents a modern approach to time management, specifically designed for developers and creative professionals. The application seamlessly integrates web and desktop technologies to provide a unified experience across all platforms.'
       },
       {
-        type: 'image',
-        image: '/images/project1.png',
-        caption: 'Main dashboard interface showing time tracking and project management features'
+        type: 'title',
+        content: 'Architecture'
       },
       {
-        type: 'title',
-        content: 'Technical Implementation'
+        type: 'image',
+        image: '/images/chronosync/nx.png',
+        caption: 'Architecture monorepo NX pour une gestion optimisée du projet'
       },
       {
         type: 'text',
-        content: 'The frontend is built with Nuxt.js and Vue.js, leveraging server-side rendering for optimal performance. The backend utilizes Express.js with PostgreSQL for robust data management, while the desktop application is developed in C++ for native performance.'
+        content: 'ChronoSync est construit sur une architecture moderne utilisant un monorepo NX pour une gestion optimisée du code et des dépendances. Cette approche permet une meilleure organisation du code, des builds plus rapides et une maintenance simplifiée entre les différents composants de l\'application.'
+      },
+      {
+        type: 'image',
+        image: '/images/chronosync/backend.png',
+        caption: 'API Express.js pour la gestion centralisée des données et services'
+      },
+      {
+        type: 'text',
+        content: 'Le backend est développé avec Express.js, offrant une API REST robuste et performante. Cette architecture permet une communication fluide entre les applications web et desktop, avec une gestion centralisée des données et de l\'authentification.'
+      },
+      {
+        type: 'title',
+        content: 'Authentification Web'
+      },
+      {
+        type: 'image',
+        image: '/images/chronosync/login.png',
+        caption: 'Interface de connexion web avec système d\'authentification moderne'
+      },
+      {
+        type: 'text',
+        content: 'L\'interface de connexion web offre une expérience d\'authentification moderne et intuitive avec un design responsive et une gestion sécurisée des identifiants.'
+      },
+      {
+        type: 'title',
+        content: 'Application Desktop'
+      },
+      {
+        type: 'image',
+        image: '/images/chronosync/logindesktop.png',
+        caption: 'Écran de connexion de l\'application desktop avec style natif'
+      },
+      {
+        type: 'text',
+        content: 'L\'application desktop dispose d\'un écran de connexion natif qui s\'intègre parfaitement au système d\'exploitation tout en maintenant les mêmes standards de sécurité que la version web.'
+      },
+      {
+        type: 'title',
+        content: 'Gestion des Tokens & URI'
+      },
+      {
+        type: 'video',
+        video: '/videos/chronosync/URIshowcase.mp4',
+        caption: 'Démonstration des requêtes URI montrant la génération et gestion des tokens d\'authentification',
+        muted: true
+      },
+      {
+        type: 'text',
+        content: 'Le système d\'authentification démontre comment les requêtes URI gèrent la génération et la gestion des tokens pour un accès sécurisé à l\'application desktop.'
+      },
+      {
+        type: 'title',
+        content: 'Fonctionnalités Principales'
+      },
+      {
+        type: 'image',
+        image: '/images/chronosync/database.png',
+        caption: 'Architecture de base de données et système de gestion des données'
+      },
+      {
+        type: 'image',
+        image: '/images/chronosync/email.png',
+        caption: 'Système de notifications email pour les mises à jour de projets et rappels'
+      },
+      {
+        type: 'text',
+        content: 'L\'application propose un tableau de bord complet pour le suivi du temps, la gestion de projets et l\'analyse de productivité. Les utilisateurs peuvent basculer facilement entre les interfaces web et desktop tout en maintenant des données synchronisées.'
+      },
+      {
+        type: 'title',
+        content: 'Algorithmes Avancés'
+      },
+      {
+        type: 'image',
+        image: '/images/chronosync/blurryAlgorithm.png',
+        caption: 'Algorithme de détection de flou pour le suivi de concentration et mesure de productivité'
+      },
+      {
+        type: 'image',
+        image: '/images/chronosync/closeAlgorithm.png',
+        caption: 'Algorithme de fermeture de session pour le suivi automatique du temps et préservation des données'
+      },
+      {
+        type: 'text',
+        content: 'ChronoSync implémente des algorithmes sophistiqués pour l\'optimisation du temps et l\'analyse de productivité, incluant la détection de flou pour le suivi de concentration et la gestion intelligente des sessions.'
+      },
+      {
+        type: 'title',
+        content: 'Intégrations'
+      },
+      {
+        type: 'image',
+        image: '/images/chronosync/clickup.png',
+        caption: 'Intégration ClickUp pour un workflow de gestion de projet fluide'
+      },
+      {
+        type: 'text',
+        content: 'La plateforme s\'intègre parfaitement avec les outils de gestion de projet populaires et fournit un accès API complet pour les workflows personnalisés et applications tierces.'
+      },
+      {
+        type: 'title',
+        content: 'Stack Technique'
+      },
+      {
+        type: 'text',
+        content: 'Frontend développé avec Nuxt.js et Vue.js, exploitant le rendu côté serveur pour des performances optimales. Backend Express.js avec PostgreSQL pour une gestion robuste des données. Application desktop en C++ pour des performances natives.'
       }
     ]
   },
