@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 import { useIsMobile } from '@/hooks/use-mobile'
 
 export default function StickyCursor() {
@@ -21,6 +22,13 @@ export default function StickyCursor() {
     scale: 1, // Current scale of the small cursor
     largeScale: 1, // Current scale of the large cursor
   })
+
+  const pathname = usePathname()
+
+  // Reset hover state when pathname changes
+  useEffect(() => {
+    hoverState.current.isHovering = false
+  }, [pathname])
 
   useEffect(() => {
     if (isMobile) return
