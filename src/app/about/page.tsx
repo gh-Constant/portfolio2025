@@ -1,11 +1,13 @@
-'use client';
+'use client'
 
 import React from 'react';
 import Image from 'next/image';
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 import GridLines from '../components/GridLines';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function About() {
+  const { t } = useLanguage();
   return (
     <ParallaxProvider>
       <div className="relative bg-black min-h-screen w-full">
@@ -39,9 +41,12 @@ export default function About() {
                     {/* Name */}
                     <Parallax translateY={[-10, 10]}>
                       <h1 className="nohemi-display text-6xl lg:text-7xl font-bold text-black leading-tight">
-                        CONSTANT
-                        <br />
-                        SUCHET
+                        {t('about.title').split('\n').map((line, index) => (
+                          <span key={index}>
+                            {line}
+                            {index === 0 && <br />}
+                          </span>
+                        ))}
                       </h1>
                     </Parallax>
 
@@ -50,53 +55,49 @@ export default function About() {
                       <div className="space-y-6">
                         <div className="space-y-4">
                           <h2 className="nohemi-heading-lg text-2xl font-semibold text-black">
-                            Creative Developer & Designer
+                            {t('about.subtitle')}
                           </h2>
                           <p className="nohemi-body-regular text-lg text-gray-700 leading-relaxed">
-                            I&aspas;m a passionate full-stack developer with a keen eye for design and user experience. 
-                            I specialize in creating innovative digital solutions that bridge the gap between 
-                            functionality and aesthetics.
+                            {t('about.description')}
                           </p>
                         </div>
 
                         <div className="space-y-4">
                           <h3 className="nohemi-heading-md text-xl font-semibold text-black">
-                            My Philosophy
+                            {t('about.philosophy.title')}
                           </h3>
                           <p className="nohemi-body-regular text-gray-700 leading-relaxed">
-                            I believe in crafting experiences that not only solve problems but also delight users. 
-                            Every project is an opportunity to push boundaries and explore new possibilities in 
-                            the intersection of technology and creativity.
+                            {t('about.philosophy.description')}
                           </p>
                         </div>
 
                         <div className="space-y-4">
                           <h3 className="nohemi-heading-md text-xl font-semibold text-black">
-                            Skills & Expertise
+                            {t('about.skills.title')}
                           </h3>
                           <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
-                              <h4 className="nohemi-heading-sm font-medium text-black">Frontend</h4>
+                              <h4 className="nohemi-heading-sm font-medium text-black">{t('about.skills.frontend')}</h4>
                               <p className="nohemi-body-light text-sm text-gray-600">
-                                React, Next.js, TypeScript, Three.js
+                                {t('about.skills.frontend.tech')}
                               </p>
                             </div>
                             <div className="space-y-2">
-                              <h4 className="nohemi-heading-sm font-medium text-black">Backend</h4>
+                              <h4 className="nohemi-heading-sm font-medium text-black">{t('about.skills.backend')}</h4>
                               <p className="nohemi-body-light text-sm text-gray-600">
-                                Node.js, Python, PostgreSQL, MongoDB
+                                {t('about.skills.backend.tech')}
                               </p>
                             </div>
                             <div className="space-y-2">
-                              <h4 className="nohemi-heading-sm font-medium text-black">Design</h4>
+                              <h4 className="nohemi-heading-sm font-medium text-black">{t('about.skills.design')}</h4>
                               <p className="nohemi-body-light text-sm text-gray-600">
-                                UI/UX, Figma, Adobe Creative Suite
+                                {t('about.skills.design.tech')}
                               </p>
                             </div>
                             <div className="space-y-2">
-                              <h4 className="nohemi-heading-sm font-medium text-black">Tools</h4>
+                              <h4 className="nohemi-heading-sm font-medium text-black">{t('about.skills.tools')}</h4>
                               <p className="nohemi-body-light text-sm text-gray-600">
-                                Git, Docker, AWS, Vercel
+                                {t('about.skills.tools.tech')}
                               </p>
                             </div>
                           </div>
@@ -109,7 +110,7 @@ export default function About() {
                               href="#contact"
                               className="inline-flex items-center px-8 py-4 bg-black text-white nohemi-heading-sm font-medium rounded-full hover:bg-gray-800 transition-colors duration-300 interactive cursor-hover-target"
                             >
-                              Let&aspas;s Work Together
+                              {t('about.contact.button')}
                               <svg 
                                 className="ml-2 w-5 h-5" 
                                 fill="none" 

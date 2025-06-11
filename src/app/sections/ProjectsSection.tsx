@@ -4,15 +4,25 @@ import Link from 'next/link';
 import { Parallax } from 'react-scroll-parallax';
 import { projects } from '../data/projects';
 import Image from 'next/image';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const ProjectsSection: React.FC = () => {
+  const { t } = useLanguage();
   return (
     <section className="relative z-10 min-h-screen w-full py-40">
       <div className="container mx-auto px-6">
         <Parallax speed={-10}>
           <h2 className="text-[clamp(4rem,12vw,10rem)] nohemi-heading-xl mb-16 text-black text-center leading-none">
-            SELECTED <br />
-            <span className="italic">PROJECTS</span>
+            {t('projects.title').split(' ').map((word, index) => (
+              <span key={index}>
+                {index === 1 ? (
+                  <><br /><span className="italic">{word}</span></>
+                ) : (
+                  word
+                )}
+                {index === 0 && ' '}
+              </span>
+            ))}
           </h2>
         </Parallax>
         

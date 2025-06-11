@@ -4,12 +4,23 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { siteConfig } from '@/config/site';
+import { useLanguage } from '../contexts/LanguageContext';
+import LanguageSwitch from './LanguageSwitch';
 
 //TODO #2 : Add a animation when hovering the items of the navbar
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useLanguage();
   const NAVBAR_HEIGHT = 64; // px, adjust if your navbar height changes
+
+  // Navigation items with translations
+  const navigationItems = [
+    { name: t('nav.projects'), href: '#projects', badge: '9' },
+    { name: t('nav.about'), href: '/about' },
+    { name: t('nav.resume'), href: '/resume.pdf', external: true },
+    { name: t('nav.contact'), href: '#contact' },
+  ];
 
   return (
     <nav className="bg-white text-black border-b border-gray-300 sticky top-0 z-50">
@@ -17,7 +28,7 @@ const Navbar: React.FC = () => {
         <Link href="/" className="text-xl nohemi-heading-lg font-semibold uppercase tracking-wider interactive cursor-hover-target">{siteConfig.name}</Link>
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8">
-          {siteConfig.navigation.main.map((item) => (
+          {navigationItems.map((item) => (
             <a 
               key={item.name}
               href={item.href} 
@@ -38,12 +49,13 @@ const Navbar: React.FC = () => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                   />
                 </svg>
               )}
             </a>
           ))}
+          <LanguageSwitch />
         </div>
         {/* Hamburger Icon for Mobile */}
         <button
@@ -107,7 +119,7 @@ const Navbar: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.3 }}
             >
-              {siteConfig.navigation.main.map((item, index) => (
+              {navigationItems.map((item, index) => (
                 <motion.a 
                   key={item.name}
                   href={item.href} 
@@ -127,6 +139,14 @@ const Navbar: React.FC = () => {
                   )}
                 </motion.a>
               ))}
+              <motion.div
+                className="mt-4"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 + navigationItems.length * 0.1, duration: 0.3 }}
+              >
+                <LanguageSwitch />
+              </motion.div>
               <motion.a 
                 href={siteConfig.contact.linkedin} 
                 target="_blank"

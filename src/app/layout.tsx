@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import BottomBar from "./components/BottomBar";
 import StickyCursor from "./components/StickyCursor";
 import LoadingScreen from "./components/LoadingScreen"; // Added import for LoadingScreen
+import { LanguageProvider } from "./contexts/LanguageContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -96,20 +97,22 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${offBitFont.variable} ${nohemiFont.variable} antialiased`}
       >
-        <LoadingScreen /> {/* Added LoadingScreen component */}
-        <StickyCursor />
-        <Navbar />
-        <main className="relative min-h-screen bg-[#F8F5F0]">
-          <div className="absolute inset-0 grid grid-cols-3 pointer-events-none z-0">
-            <div className="border-r border-gray-300"></div>
-            <div className="border-r border-gray-300"></div>
-            <div></div>
-          </div>
-          <div className="relative z-10">
-            {children}
-          </div>
-        </main>
-        <BottomBar />
+        <LanguageProvider>
+          <LoadingScreen /> {/* Added LoadingScreen component */}
+          <StickyCursor />
+          <Navbar />
+          <main className="relative min-h-screen bg-[#F8F5F0]">
+            <div className="absolute inset-0 grid grid-cols-3 pointer-events-none z-0">
+              <div className="border-r border-gray-300"></div>
+              <div className="border-r border-gray-300"></div>
+              <div></div>
+            </div>
+            <div className="relative z-10">
+              {children}
+            </div>
+          </main>
+          <BottomBar />
+        </LanguageProvider>
       </body>
     </html>
   );

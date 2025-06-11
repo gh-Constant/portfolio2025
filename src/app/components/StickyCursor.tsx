@@ -46,6 +46,29 @@ export default function StickyCursor() {
       hoverState.current.isHovering = false
     }
 
+    // Store current hover targets to remove listeners later
+    let currentHoverTargets: NodeListOf<Element> | null = null
+
+    // Function to attach hover listeners to all current hover targets
+    const attachHoverListeners = () => {
+      // Remove existing listeners first
+      if (currentHoverTargets) {
+        currentHoverTargets.forEach((target) => {
+          target.removeEventListener('mouseenter', handleMouseEnter)
+          target.removeEventListener('mouseleave', handleMouseLeave)
+        })
+      }
+
+      // Query for all current hover targets
+      currentHoverTargets = document.querySelectorAll('.cursor-hover-target, nav button')
+      
+      // Add listeners to all current targets
+      currentHoverTargets.forEach((target) => {
+        target.addEventListener('mouseenter', handleMouseEnter)
+        target.addEventListener('mouseleave', handleMouseLeave)
+      })
+    }
+
     // Smooth animation loop using requestAnimationFrame
     const animate = () => {
       // Small cursor with inertia effect
@@ -98,11 +121,39 @@ export default function StickyCursor() {
     // Add event listeners
     document.addEventListener('mousemove', handleMouseMove, { passive: true })
 
-    // NEW: Add listeners to all elements that should trigger the hover effect
-    const hoverTargets = document.querySelectorAll('.cursor-hover-target, nav button')
-    hoverTargets.forEach((target) => {
-      target.addEventListener('mouseenter', handleMouseEnter)
-      target.addEventListener('mouseleave', handleMouseLeave)
+    // Initial attachment of hover listeners
+    attachHoverListeners()
+
+    // Set up MutationObserver to detect DOM changes and re-attach listeners
+    const observer = new MutationObserver((mutations) => {
+      let shouldReattach = false
+      
+      mutations.forEach((mutation) => {
+        // Check if any added nodes contain hover targets
+        if (mutation.type === 'childList') {
+          mutation.addedNodes.forEach((node) => {
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              const element = node as Element
+              // Check if the added element or its children have cursor-hover-target class
+              if (element.classList?.contains('cursor-hover-target') || 
+                  element.querySelector?.('.cursor-hover-target')) {
+                shouldReattach = true
+              }
+            }
+          })
+        }
+      })
+      
+      if (shouldReattach) {
+        // Small delay to ensure DOM is fully updated
+        setTimeout(attachHoverListeners, 10)
+      }
+    })
+
+    // Start observing DOM changes
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
     })
 
     return () => {
@@ -110,12 +161,15 @@ export default function StickyCursor() {
         cancelAnimationFrame(animationId.current)
       }
       document.removeEventListener('mousemove', handleMouseMove)
+      observer.disconnect()
 
-      // NEW: Clean up hover listeners
-      hoverTargets.forEach((target) => {
-        target.removeEventListener('mouseenter', handleMouseEnter)
-        target.removeEventListener('mouseleave', handleMouseLeave)
-      })
+      // Clean up hover listeners
+      if (currentHoverTargets) {
+        currentHoverTargets.forEach((target) => {
+          target.removeEventListener('mouseenter', handleMouseEnter)
+          target.removeEventListener('mouseleave', handleMouseLeave)
+        })
+      }
     }
   }, [isMobile])
 
