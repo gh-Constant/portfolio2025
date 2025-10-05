@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
 
   // Navigation items with translations
   const navigationItems = [
-    { name: t('nav.projects'), href: '#projects', badge: '9' },
+    { name: t('nav.projects'), href: '/#projects', badge: '9' },
     { name: t('nav.about'), href: '/about' },
     { name: t('nav.resume'), href: '/resume.pdf', external: true },
     { name: t('nav.contact'), href: '#contact' },

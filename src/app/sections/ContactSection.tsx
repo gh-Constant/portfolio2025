@@ -12,7 +12,7 @@ const ContactSection = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="relative z-10 min-h-[60vh] w-full bg-[#111] flex flex-col items-center justify-center">
+    <section id="contact" className="relative z-10 min-h-[60vh] w-full bg-[#111] flex flex-col items-center justify-center">
       <Parallax speed={-20}>
         <div className="relative">
           <h2 className="text-[clamp(2rem,8vw,7rem)] nohemi-heading-xl mb-4 text-white text-center leading-none">
@@ -31,7 +31,7 @@ const ContactSection = () => {
             />
             <a
               href="mailto:constantsuchet@gmail.com"
-              className="relative px-12 py-4 border border-white rounded-full text-white cursor- nohemi-heading-md text-lg block hover:text-black transition-colors duration-300 z-10 min-w-[280px] text-center"
+              className="relative px-12 py-4 border border-white rounded-full text-white nohemi-heading-md text-lg block hover:text-black transition-colors duration-300 z-10 min-w-[280px] text-center cursor-hover-target"
             >
               {t('contact.button')}
             </a>
