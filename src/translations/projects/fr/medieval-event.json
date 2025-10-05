@@ -1,0 +1,64 @@
+{
+  "title": "Medieval Event",
+  "description": "Une plateforme complète de gestion d'événements pour un festival médiéval, avec cartes interactives, support multilingue et mises à jour en temps réel construite avec Vue.js et Express.",
+  "longDescription": "Medieval Event est une application web moderne conçue pour gérer et présenter un festival à thème médiéval. Construite avec Vue.js et Express, la plateforme propose des cartes interactives, un support multilingue i18n, une authentification sécurisée et des informations d'événements en temps réel gérées via Prisma ORM, offrant une expérience immersive aux participants du festival.",
+  "year": "2024-2025",
+  "technologies": ["Express", "Prisma ORM", "i18n", "Vue.js", "Tailwind CSS", "NX CLI", "Auto Deploy", "Agile", "Swagger API"],
+  "sections": [
+    {
+      "type": "title",
+      "content": "Vue d'ensemble du projet"
+    },
+    {
+      "type": "text",
+      "content": "Medieval Event est une plateforme complète de gestion d'événements conçue spécifiquement pour les festivals à thème médiéval. Développée selon la méthodologie Agile et utilisant les outils monorepo NX CLI, l'application fournit aux participants des informations essentielles, des fonctionnalités interactives et une expérience utilisateur fluide en plusieurs langues."
+    },
+    {
+      "type": "title",
+      "content": "Système d'authentification"
+    },
+    {
+      "type": "image",
+      "image": "/images/medievalevent/login.png",
+      "caption": "Système d'authentification sécurisé avec design moderne et interface conviviale"
+    },
+    {
+      "type": "text",
+      "content": "La plateforme dispose d'un système d'authentification sécurisé permettant aux utilisateurs de créer des comptes, de se connecter et d'accéder à des fonctionnalités personnalisées. L'interface de connexion est conçue avec une esthétique médiévale tout en maintenant des standards d'utilisabilité modernes."
+    },
+    {
+      "type": "title",
+      "content": "Carte interactive de l'événement"
+    },
+    {
+      "type": "image",
+      "image": "/images/medievalevent/interactivemap.png",
+      "caption": "Carte interactive montrant les emplacements des événements, activités et points d'intérêt"
+    },
+    {
+      "type": "text",
+      "content": "Une carte interactive aide les participants à naviguer sur le site du festival, à localiser les activités, les stands de nourriture et les installations importantes. La carte fournit des informations en temps réel et peut être facilement explorée sur n'importe quel appareil."
+    },
+    {
+      "type": "title",
+      "content": "Support multilingue"
+    },
+    {
+      "type": "image",
+      "image": "/images/medievalevent/language.png",
+      "caption": "Support complet de l'internationalisation avec plusieurs options de langue pour une accessibilité mondiale"
+    },
+    {
+      "type": "text",
+      "content": "L'application inclut un support i18n complet, permettant aux utilisateurs de changer de langue de manière fluide. Cela garantit que les informations du festival sont accessibles aux visiteurs internationaux et améliore l'expérience utilisateur globale."
+    },
+    {
+      "type": "title",
+      "content": "Implémentation technique"
+    },
+    {
+      "type": "text",
+      "content": "Construite avec Vue.js et un backend Express, la plateforme exploite les technologies web modernes pour des performances et une maintenabilité optimales. Prisma ORM gère efficacement toutes les opérations de base de données, tandis que Tailwind CSS fournit un système de design responsive. L'implémentation i18n assure un support multilingue fluide à travers toutes les fonctionnalités. L'API est entièrement documentée avec Swagger, et le projet utilise NX CLI pour la gestion du monorepo avec des pipelines de déploiement automatique. Le développement a suivi la méthodologie Agile pour des améliorations itératives et la collaboration avec les parties prenantes."
+    }
+  ]
+}

@@ -15,8 +15,11 @@ export interface Project {
   tags: string[];
   link?: string;
   github?: string;
+  demo?: string;
+  download?: string;
   featured?: boolean;
   size?: 'small' | 'medium' | 'large';
+  status?: 'available' | 'closed' | 'not-online';
   // Extended fields for detailed project pages
   longDescription?: string;
   year?: string;
@@ -56,13 +59,12 @@ export const getTranslatedProject = async (projectId: string, language: 'en' | '
 
 // Function to get all translated projects
 export const getTranslatedProjects = async (language: 'en' | 'fr'): Promise<Project[]> => {
-  const translatedProjects = await Promise.all(
+  return await Promise.all(
     projects.map(async (project) => {
       const translatedProject = await getTranslatedProject(project.id, language);
       return translatedProject || project; // Fallback to original if translation fails
     })
   );
-  return translatedProjects;
 };
 
 export const projects: Project[] = [
@@ -73,6 +75,8 @@ export const projects: Project[] = [
     image: '/images/Chronosync.png',
     tags: ['Nuxt.Js', 'Vue.Js', 'Tailwind CSS', 'C++ Application', 'Express.Js', 'PostgreSQL'],
     link: 'https://example.com',
+    github: 'https://github.com/gh-Constant/mono-chronosync',
+    status: 'closed',
     featured: true,
     size: 'large',
     longDescription: 'ChronoSync is a comprehensive time management solution designed specifically for developers and creative professionals. The application combines modern web technologies with a native desktop application to provide seamless time tracking across all platforms.',
@@ -209,37 +213,74 @@ export const projects: Project[] = [
     ]
   },
   {
-    id: 'roblox-inventory',
-    title: 'Roblox Inventory',
-    description: 'Inventory System for games featuring Drag&Drop, item size system, hotbar etc (inspired of Tarkov inventory).',
-    image: '/images/InventoryRoblox.png',
-    tags: ['Roblox', 'Lua', 'UI/UX'],
+    id: 'medieval-event',
+    title: 'Medieval Event',
+    description: 'A comprehensive event management platform for a medieval-themed festival, featuring interactive maps, multilingual support, and real-time updates.',
+    image: '/images/medievalevent/logo.png',
+    tags: ['Vue.js', 'Express', 'Prisma ORM', 'i18n', 'Tailwind CSS', 'NX CLI', 'Agile', 'Swagger API'],
+    link: 'http://livrable.constantsuchet.fr/',
+    github: 'https://github.com/gh-Constant/SAE_Project_BUT2',
+    status: 'available',
     featured: true,
     size: 'medium',
-    longDescription: 'A comprehensive wayfinding and signage system designed for modern educational institutions, focusing on accessibility, clarity, and visual appeal.',
-    year: '2023',
-    technologies: ['Figma', 'Adobe Creative Suite', 'Sketch'],
+    longDescription: 'Medieval Event is a modern web application designed to manage and showcase a medieval-themed festival. The platform features interactive maps, multilingual support, user authentication, and real-time event information, providing an immersive experience for festival attendees.',
+    year: '2024-2025',
+    technologies: ['Vue.js', 'Express', 'Prisma ORM', 'i18n', 'Tailwind CSS', 'NX CLI', 'Auto Deploy', 'Agile', 'Swagger API'],
     sections: [
       {
         type: 'title',
-        content: 'Design Challenge'
+        content: 'Project Overview'
       },
       {
         type: 'text',
-        content: 'Creating an intuitive wayfinding system for a modern educational campus that serves diverse user groups including students, faculty, visitors, and people with disabilities.'
-      },
-      {
-        type: 'image',
-        image: '/images/project2.jpg',
-        caption: 'Final signage system implementation showing clear visual hierarchy and accessibility features'
+        content: 'Medieval Event is a comprehensive event management platform designed specifically for medieval-themed festivals. The application provides attendees with essential information, interactive features, and a seamless user experience across multiple languages.'
       },
       {
         type: 'title',
-        content: 'Design Solution'
+        content: 'Authentication System'
+      },
+      {
+        type: 'image',
+        image: '/images/medievalevent/login.png',
+        caption: 'Secure authentication system with modern design and user-friendly interface'
       },
       {
         type: 'text',
-        content: 'Developed a modular design system with high contrast colors, multiple language support, and tactile elements. The system balances functionality with the institution\'s brand identity.'
+        content: 'The platform features a secure authentication system that allows users to create accounts, log in, and access personalized features. The login interface is designed with a medieval aesthetic while maintaining modern usability standards.'
+      },
+      {
+        type: 'title',
+        content: 'Interactive Event Map'
+      },
+      {
+        type: 'image',
+        image: '/images/medievalevent/interactivemap.png',
+        caption: 'Interactive map showing event locations, activities, and points of interest'
+      },
+      {
+        type: 'text',
+        content: 'An interactive map helps attendees navigate the festival grounds, locate activities, food vendors, and important facilities. The map provides real-time information and can be easily explored on any device.'
+      },
+      {
+        type: 'title',
+        content: 'Multilingual Support'
+      },
+      {
+        type: 'image',
+        image: '/images/medievalevent/language.png',
+        caption: 'Complete internationalization support with multiple language options for global accessibility'
+      },
+      {
+        type: 'text',
+        content: 'The application includes comprehensive i18n support, allowing users to switch between languages seamlessly. This ensures that the festival information is accessible to international visitors and enhances the overall user experience.'
+      },
+      {
+        type: 'title',
+        content: 'Technical Implementation'
+      },
+      {
+        type: 'text',
+        content: 'Built with Next.js and TypeScript, the platform leverages modern web technologies for optimal performance and maintainability. Tailwind CSS provides a responsive design system, while the i18n implementation ensures seamless multilingual support across all features.'
       }
     ]
   },
@@ -249,6 +290,8 @@ export const projects: Project[] = [
     description: 'Simplified implementation of a vocoder allowing audio signal manipulation, specifically focused on pitch shifting while preserving the speech tempo.',
     image: '/images/Pauvocoder.PNG',
     tags: ['Java'],
+    github: 'https://github.com/gh-Constant/Pauvocoder',
+    status: 'available',
     size: 'medium',
     longDescription: 'Pauvocoder is a sophisticated audio processing application that implements vocoder technology for real-time audio manipulation. The project focuses on pitch shifting algorithms while maintaining speech intelligibility and temporal characteristics.',
     year: '2024',
@@ -283,6 +326,10 @@ export const projects: Project[] = [
     description: 'A modified version of Connect 4 with X win condition created in Java with the framework Boardifier.',
     image: '/images/PuissanceX.PNG',
     tags: ['Java', 'JavaFX', 'JUnit', 'Maven'],
+    github: 'https://github.com/gh-Constant/SAE_PuissanceX',
+    demo: 'https://youtu.be/BuV9MnWdidI',
+    download: 'https://github.com/gh-Constant/SAE_PuissanceX/releases',
+    status: 'available',
     size: 'large',
     longDescription: 'PuissanceX is an innovative take on the classic Connect 4 game, introducing dynamic win conditions and enhanced gameplay mechanics. Built with modern Java technologies and following best practices for game development.',
     year: '2024',

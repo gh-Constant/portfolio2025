@@ -37,7 +37,23 @@ const Navbar: React.FC = () => {
               className="relative group uppercase tracking-wider pb-1 flex items-center interactive nohemi-heading-sm cursor-hover-target"
             >
               {item.name}{item.badge && <sup>{item.badge}</sup>}
-              {item.external && (
+              {item.external && item.name === t('nav.resume') && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4 ml-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M7 17L17 7M17 7H7M17 7V17"
+                  />
+                </svg>
+              )}
+              {item.external && item.name !== t('nav.resume') && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-4 w-4 ml-1"
@@ -132,7 +148,23 @@ const Navbar: React.FC = () => {
                   transition={{ delay: 0.2 + index * 0.1, duration: 0.3 }}
                 >
                   {item.name.charAt(0) + item.name.slice(1).toLowerCase()}{item.badge && <sup className="text-base">{item.badge}</sup>}
-                  {item.external && (
+                  {item.external && item.name === t('nav.resume') && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 ml-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M7 17L17 7M17 7H7M17 7V17"
+                      />
+                    </svg>
+                  )}
+                  {item.external && item.name !== t('nav.resume') && (
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 ml-1">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                     </svg>

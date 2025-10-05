@@ -4,13 +4,78 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 
+// SVG Flag Components
+const USFlag = () => (
+  <svg viewBox="0 0 24 16" className="w-6 h-4">
+    <rect width="24" height="16" fill="#B22234"/>
+    <path d="M0,1.85h24M0,3.69h24M0,5.54h24M0,7.38h24M0,9.23h24M0,11.08h24M0,12.92h24M0,14.77h24" stroke="white" strokeWidth="1.23"/>
+    <rect width="9.6" height="7.38" fill="#3C3B6E"/>
+    <g fill="white">
+      <circle cx="1.2" cy="1.23" r="0.4"/>
+      <circle cx="2.4" cy="1.23" r="0.4"/>
+      <circle cx="3.6" cy="1.23" r="0.4"/>
+      <circle cx="4.8" cy="1.23" r="0.4"/>
+      <circle cx="6" cy="1.23" r="0.4"/>
+      <circle cx="7.2" cy="1.23" r="0.4"/>
+      <circle cx="8.4" cy="1.23" r="0.4"/>
+      <circle cx="1.8" cy="2.15" r="0.4"/>
+      <circle cx="3" cy="2.15" r="0.4"/>
+      <circle cx="4.2" cy="2.15" r="0.4"/>
+      <circle cx="5.4" cy="2.15" r="0.4"/>
+      <circle cx="6.6" cy="2.15" r="0.4"/>
+      <circle cx="7.8" cy="2.15" r="0.4"/>
+      <circle cx="1.2" cy="3.08" r="0.4"/>
+      <circle cx="2.4" cy="3.08" r="0.4"/>
+      <circle cx="3.6" cy="3.08" r="0.4"/>
+      <circle cx="4.8" cy="3.08" r="0.4"/>
+      <circle cx="6" cy="3.08" r="0.4"/>
+      <circle cx="7.2" cy="3.08" r="0.4"/>
+      <circle cx="8.4" cy="3.08" r="0.4"/>
+      <circle cx="1.8" cy="4" r="0.4"/>
+      <circle cx="3" cy="4" r="0.4"/>
+      <circle cx="4.2" cy="4" r="0.4"/>
+      <circle cx="5.4" cy="4" r="0.4"/>
+      <circle cx="6.6" cy="4" r="0.4"/>
+      <circle cx="7.8" cy="4" r="0.4"/>
+      <circle cx="1.2" cy="4.92" r="0.4"/>
+      <circle cx="2.4" cy="4.92" r="0.4"/>
+      <circle cx="3.6" cy="4.92" r="0.4"/>
+      <circle cx="4.8" cy="4.92" r="0.4"/>
+      <circle cx="6" cy="4.92" r="0.4"/>
+      <circle cx="7.2" cy="4.92" r="0.4"/>
+      <circle cx="8.4" cy="4.92" r="0.4"/>
+      <circle cx="1.8" cy="5.85" r="0.4"/>
+      <circle cx="3" cy="5.85" r="0.4"/>
+      <circle cx="4.2" cy="5.85" r="0.4"/>
+      <circle cx="5.4" cy="5.85" r="0.4"/>
+      <circle cx="6.6" cy="5.85" r="0.4"/>
+      <circle cx="7.8" cy="5.85" r="0.4"/>
+      <circle cx="1.2" cy="6.77" r="0.4"/>
+      <circle cx="2.4" cy="6.77" r="0.4"/>
+      <circle cx="3.6" cy="6.77" r="0.4"/>
+      <circle cx="4.8" cy="6.77" r="0.4"/>
+      <circle cx="6" cy="6.77" r="0.4"/>
+      <circle cx="7.2" cy="6.77" r="0.4"/>
+      <circle cx="8.4" cy="6.77" r="0.4"/>
+    </g>
+  </svg>
+);
+
+const FrenchFlag = () => (
+  <svg viewBox="0 0 24 16" className="w-6 h-4">
+    <rect width="8" height="16" fill="#002395"/>
+    <rect x="8" width="8" height="16" fill="white"/>
+    <rect x="16" width="8" height="16" fill="#ED2939"/>
+  </svg>
+);
+
 const LanguageSwitch: React.FC = () => {
   const { language, setLanguage, t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
 
   const languages = [
-    { code: 'en', name: t('language.english'), flag: '🇺🇸' },
-    { code: 'fr', name: t('language.french'), flag: '🇫🇷' }, 
+    { code: 'en', name: t('language.english'), flag: <USFlag /> },
+    { code: 'fr', name: t('language.french'), flag: <FrenchFlag /> },
   ];
 
   const currentLanguage = languages.find(lang => lang.code === language);
@@ -22,7 +87,7 @@ const LanguageSwitch: React.FC = () => {
         className="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors duration-200 cursor-hover-target"
         aria-label={t('language.switch')}
       >
-        <span className="text-lg">{currentLanguage?.flag}</span>
+        <span className="flex items-center">{currentLanguage?.flag}</span>
         <span className="offbit-font uppercase tracking-wider text-sm">
           {currentLanguage?.code.toUpperCase()}
         </span>
@@ -63,7 +128,7 @@ const LanguageSwitch: React.FC = () => {
                   language === lang.code ? 'bg-gray-50 font-medium' : ''
                 }`}
               >
-                <span className="text-lg">{lang.flag}</span>
+                <span className="flex items-center">{lang.flag}</span>
                 <span className="offbit-font text-sm">{lang.name}</span>
               </button>
             ))}
