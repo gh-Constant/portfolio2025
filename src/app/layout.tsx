@@ -96,7 +96,7 @@ export const metadata: Metadata = {
     siteName: "Constant Suchet Portfolio",
     images: [
       {
-        url: "/images/profile.png",
+        url: "/images/og-image.png",
         width: 1200,
         height: 630,
         alt: "Constant Suchet Portfolio",
@@ -107,7 +107,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Constant Suchet - Game Developer & Cybersecurity Specialist",
     description: "Portfolio of Constant Suchet. Explore MMORPG projects, multiplayer architecture, and cybersecurity insights.",
-    images: ["/images/profile.png"],
+    images: ["/images/og-image.png"],
     creator: "@constantsuchet", // Update if different
   },
   robots: {
@@ -142,7 +142,7 @@ const jsonLd = {
       "contactType": "Personal",
       "email": "contact@constantsuchet.fr"
     },
-    "image": "https://constantsuchet.fr/images/profile.png"
+    "image": "https://constantsuchet.fr/images/og-image.png"
   }
 };
 
