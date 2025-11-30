@@ -78,8 +78,66 @@ const nohemiFont = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Constant Suchet Portfolio",
-  description: "Portfolio of Constant Suchet",
+  metadataBase: new URL('https://constantsuchet.com'), // TODO: Confirm domain
+  title: {
+    default: "Constant Suchet - Game Developer & Cybersecurity Specialist",
+    template: "%s | Constant Suchet"
+  },
+  description: "Portfolio of Constant Suchet. Explore MMORPG projects, multiplayer architecture, and cybersecurity insights.",
+  keywords: ["Constant Suchet", "Game Developer", "Unity", "Cybersecurity", "MMORPG", "FishNet", "Networking"],
+  authors: [{ name: "Constant Suchet" }],
+  creator: "Constant Suchet",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://constantsuchet.com",
+    title: "Constant Suchet - Game Developer & Cybersecurity Specialist",
+    description: "Portfolio of Constant Suchet. Explore MMORPG projects, multiplayer architecture, and cybersecurity insights.",
+    siteName: "Constant Suchet Portfolio",
+    images: [
+      {
+        url: "/images/og-image.jpg", // Ensure this image exists or update path
+        width: 1200,
+        height: 630,
+        alt: "Constant Suchet Portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Constant Suchet - Game Developer & Cybersecurity Specialist",
+    description: "Portfolio of Constant Suchet. Explore MMORPG projects, multiplayer architecture, and cybersecurity insights.",
+    images: ["/images/og-image.jpg"],
+    creator: "@constantsuchet", // Update if different
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Constant Suchet",
+  "jobTitle": "Computer Science Student / Game Developer",
+  "url": "https://constantsuchet.com",
+  "sameAs": [
+    "https://github.com/ConstantSuchet", // Update with actual links
+    "https://linkedin.com/in/constant-suchet" // Update with actual links
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "Personal",
+    "email": "contact@constantsuchet.com" // Update with actual email
+  }
 };
 
 export default function RootLayout({
@@ -97,6 +155,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${offBitFont.variable} ${nohemiFont.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <LanguageProvider>
           <LoadingScreen /> {/* Added LoadingScreen component */}
           <StickyCursor />
