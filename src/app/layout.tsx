@@ -80,19 +80,38 @@ const nohemiFont = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL('https://constantsuchet.fr'),
   title: {
-    default: "Constant Suchet - Game Developer & Cybersecurity Specialist",
+    default: "Constant Suchet - CS Student, Full Stack Developer & Security Enthusiast",
     template: "%s | Constant Suchet"
   },
-  description: "Portfolio of Constant Suchet. Explore MMORPG projects, multiplayer architecture, and cybersecurity insights.",
-  keywords: ["Constant Suchet", "Game Developer", "Unity", "Cybersecurity", "MMORPG", "FishNet", "Networking"],
+  description: "Portfolio of Constant Suchet. CS Student @ IUT NFC, Full Stack Developer (Vue/Express) & Security Enthusiast.",
+  keywords: [
+    "Constant Suchet",
+    "CS Student",
+    "IUT NFC",
+    "Full Stack Developer",
+    "Vue.js",
+    "Express.js",
+    "Security Enthusiast",
+    "Cybersecurity",
+    "Reverse Engineering",
+    "Game Developer",
+    "Java",
+    "JavaFX",
+    "JUnit",
+    "Maven",
+    "Boardifier",
+    "Roblox",
+    "LUA",
+    "Freelance"
+  ],
   authors: [{ name: "Constant Suchet" }],
   creator: "Constant Suchet",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://constantsuchet.fr",
-    title: "Constant Suchet - Game Developer & Cybersecurity Specialist",
-    description: "Portfolio of Constant Suchet. Explore MMORPG projects, multiplayer architecture, and cybersecurity insights.",
+    title: "Constant Suchet - CS Student, Full Stack Developer & Security Enthusiast",
+    description: "Portfolio of Constant Suchet. CS Student @ IUT NFC, Full Stack Developer (Vue/Express) & Security Enthusiast.",
     siteName: "Constant Suchet",
     images: [
       {
@@ -105,10 +124,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Constant Suchet - Game Developer & Cybersecurity Specialist",
-    description: "Portfolio of Constant Suchet. Explore MMORPG projects, multiplayer architecture, and cybersecurity insights.",
+    title: "Constant Suchet - CS Student, Full Stack Developer & Security Enthusiast",
+    description: "Portfolio of Constant Suchet. CS Student @ IUT NFC, Full Stack Developer (Vue/Express) & Security Enthusiast.",
     images: ["/images/og-image.png"],
-    creator: "@constantsuchet", // Update if different
+    creator: "@constantsuchet",
   },
   robots: {
     index: true,
@@ -131,7 +150,8 @@ const jsonLd = {
   "mainEntity": {
     "@type": "Person",
     "name": "Constant Suchet",
-    "jobTitle": "Computer Science Student / Game Developer",
+    "jobTitle": "CS Student | Full Stack Developer & Security Enthusiast",
+    "description": "CS Student @ IUT NFC, Full Stack Developer (Vue/Express) & Security Enthusiast. Freelance with experience in Roblox/LUA and Cybersecurity.",
     "url": "https://constantsuchet.fr",
     "sameAs": [
       "https://github.com/gh-Constant",

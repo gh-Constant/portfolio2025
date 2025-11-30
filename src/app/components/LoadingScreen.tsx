@@ -36,13 +36,14 @@ const LoadingScreen = () => {
     let animationFrameId: number;
     let lastPauseTime = 0;
     let nextPauseDuration = 0;
-    const initialDelay = 500; // Wait 500ms before starting
+    const initialDelay = 100; // Wait 100ms before starting (was 500)
 
     const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
     const shouldPause = () => {
       // Pause more frequently at lower percentages, less at higher
-      const pauseChance = currentProgress < 30 ? 0.02 : (currentProgress < 70 ? 0.01 : 0.005);
+      // Reduced chances significantly for faster loading
+      const pauseChance = currentProgress < 30 ? 0.005 : (currentProgress < 70 ? 0.002 : 0.001);
       return Math.random() < pauseChance;
     };
 
@@ -52,18 +53,19 @@ const LoadingScreen = () => {
       let currentSpeedFactor = 1;
       if (timestamp < lastPauseTime + nextPauseDuration) {
         // During a "pause", significantly slow down the animation
-        currentSpeedFactor = 0.1; // Drastically reduce speed instead of a hard stop
+        currentSpeedFactor = 0.2; // Less drastic slowdown (was 0.1)
       } else {
         // Check if a new pause should start
         if (shouldPause()) {
           lastPauseTime = timestamp;
-          nextPauseDuration = 300 + Math.random() * 700; // Pause for 300-1000ms
-          currentSpeedFactor = 0.1; // Start the slowdown for the new pause
+          nextPauseDuration = 100 + Math.random() * 200; // Pause for 100-300ms (was 300-1000)
+          currentSpeedFactor = 0.2; // Start the slowdown for the new pause
         }
       }
 
       // Increment progress
-      const baseProgressStep = 0.2 + Math.random() * 0.4; // Base step, slightly reduced randomness
+      // Much faster base step (was 0.2 + random*0.4)
+      const baseProgressStep = 1.5 + Math.random() * 2.0; 
       const progressStep = baseProgressStep * currentSpeedFactor;
       currentProgress += progressStep;
       const easedProgress = targetProgress * easeOutCubic(Math.min(currentProgress / targetProgress, 1));
@@ -75,11 +77,11 @@ const LoadingScreen = () => {
         setLoadingPercentage(targetProgress);
         // Ensure the slide-up animation doesn't start prematurely if we are in a slowdown phase
         if (currentSpeedFactor === 1) { 
-            setTimeout(() => setIsVisible(false), 500); // Delay before starting slide-up
+            setTimeout(() => setIsVisible(false), 200); // Delay before starting slide-up (was 500)
         } else {
             // If ending during a slowdown, wait for the slowdown period to effectively end
             const remainingPause = (lastPauseTime + nextPauseDuration) - timestamp;
-            setTimeout(() => setIsVisible(false), Math.max(500, remainingPause + 100));
+            setTimeout(() => setIsVisible(false), Math.max(200, remainingPause + 50));
         }
       }
     };

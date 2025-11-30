@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Constant Suchet',
     short_name: 'Constant Suchet',
-    description: 'Portfolio of Constant Suchet - Game Developer & Cybersecurity Specialist',
+    description: 'Portfolio of Constant Suchet. CS Student @ IUT NFC, Full Stack Developer (Vue/Express) & Security Enthusiast.',
     start_url: '/',
     display: 'standalone',
     background_color: '#F8F5F0',
