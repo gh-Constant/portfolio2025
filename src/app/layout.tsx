@@ -93,13 +93,13 @@ export const metadata: Metadata = {
     url: "https://constantsuchet.fr",
     title: "Constant Suchet - Game Developer & Cybersecurity Specialist",
     description: "Portfolio of Constant Suchet. Explore MMORPG projects, multiplayer architecture, and cybersecurity insights.",
-    siteName: "Constant Suchet Portfolio",
+    siteName: "Constant Suchet",
     images: [
       {
         url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Constant Suchet Portfolio",
+        alt: "Constant Suchet",
       },
     ],
   },

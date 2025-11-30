@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Constant Suchet Portfolio',
+    name: 'Constant Suchet',
     short_name: 'Constant Suchet',
     description: 'Portfolio of Constant Suchet - Game Developer & Cybersecurity Specialist',
     start_url: '/',
