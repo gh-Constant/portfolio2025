@@ -17,6 +17,11 @@
   "about.p2": "Before finishing high school, I turned this passion into concrete projects: I created a Fiverr account and met the needs of over 50 clients by developing Roblox games. Today, I also work on websites as part of my studies, while continuing to create software and technical projects.",
   "about.p3": "I gradually became interested in reverse engineering and cybersecurity. Among my projects, I developed MessageX, an end-to-end encrypted messaging app, and explored reverse engineering to understand and modify certain games. I also undertook a mini MMORPG to challenge myself on network and server aspects.",
   "about.p4": "Finally, with a colleague from IUT, I launched Chronosync, a project aimed at tracking screen time and deriving insights from it; it is currently on pause as I focus on my student projects and learning.",
+  "about.cta.part1": "Explore my ",
+  "about.cta.link1": "projects",
+  "about.cta.part2": " to see my work in action, or ",
+  "about.cta.link2": "contact me",
+  "about.cta.part3": " to discuss potential collaborations.",
   "about.contact.button": "Contact me",
 
   "skills.title": "Skills",

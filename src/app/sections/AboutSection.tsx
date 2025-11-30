@@ -19,7 +19,7 @@ const AboutSection: React.FC = () => {
           <p>{t('about.p3')}</p>
           <p>{t('about.p4')}</p>
           <p>
-            Explore my <Link href="/#projects" className="underline hover:text-blue-600 transition-colors">projects</Link> to see my work in action, or <Link href="#contact" className="underline hover:text-blue-600 transition-colors">contact me</Link> to discuss potential collaborations.
+            {t('about.cta.part1')}<Link href="/#projects" className="underline hover:text-blue-600 transition-colors">{t('about.cta.link1')}</Link>{t('about.cta.part2')}<Link href="#contact" className="underline hover:text-blue-600 transition-colors">{t('about.cta.link2')}</Link>{t('about.cta.part3')}
           </p>
         </div>
       </div>
