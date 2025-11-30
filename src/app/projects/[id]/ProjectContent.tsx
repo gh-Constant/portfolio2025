@@ -119,14 +119,14 @@ export default function ProjectContent({ params }: ProjectPageProps) {
     "@type": "CreativeWork",
     "name": project.title,
     "description": project.description,
-    "image": project.image ? `https://constantsuchet.com${project.image}` : undefined,
+    "image": project.image ? `https://constantsuchet.fr${project.image}` : undefined,
     "dateCreated": project.year,
     "creator": {
       "@type": "Person",
       "name": "Constant Suchet"
     },
     "keywords": project.tags?.join(", "),
-    "url": `https://constantsuchet.com/projects/${project.id}`
+    "url": `https://constantsuchet.fr/projects/${project.id}`
   };
 
   return (

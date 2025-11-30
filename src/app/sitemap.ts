@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { projects } from './data/projects';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://constantsuchet.com'; // TODO: Confirm domain
+  const baseUrl = 'https://constantsuchet.fr';
 
   // Static routes
   const routes = [

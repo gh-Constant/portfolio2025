@@ -78,7 +78,7 @@ const nohemiFont = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://constantsuchet.com'), // TODO: Confirm domain
+  metadataBase: new URL('https://constantsuchet.fr'),
   title: {
     default: "Constant Suchet - Game Developer & Cybersecurity Specialist",
     template: "%s | Constant Suchet"
@@ -90,13 +90,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://constantsuchet.com",
+    url: "https://constantsuchet.fr",
     title: "Constant Suchet - Game Developer & Cybersecurity Specialist",
     description: "Portfolio of Constant Suchet. Explore MMORPG projects, multiplayer architecture, and cybersecurity insights.",
     siteName: "Constant Suchet Portfolio",
     images: [
       {
-        url: "/images/og-image.jpg", // Ensure this image exists or update path
+        url: "/images/profile.png",
         width: 1200,
         height: 630,
         alt: "Constant Suchet Portfolio",
@@ -107,7 +107,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Constant Suchet - Game Developer & Cybersecurity Specialist",
     description: "Portfolio of Constant Suchet. Explore MMORPG projects, multiplayer architecture, and cybersecurity insights.",
-    images: ["/images/og-image.jpg"],
+    images: ["/images/profile.png"],
     creator: "@constantsuchet", // Update if different
   },
   robots: {
@@ -125,18 +125,24 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Constant Suchet",
-  "jobTitle": "Computer Science Student / Game Developer",
-  "url": "https://constantsuchet.com",
-  "sameAs": [
-    "https://github.com/ConstantSuchet", // Update with actual links
-    "https://linkedin.com/in/constant-suchet" // Update with actual links
-  ],
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "contactType": "Personal",
-    "email": "contact@constantsuchet.com" // Update with actual email
+  "@type": "ProfilePage",
+  "dateCreated": new Date().toISOString(),
+  "dateModified": new Date().toISOString(),
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Constant Suchet",
+    "jobTitle": "Computer Science Student / Game Developer",
+    "url": "https://constantsuchet.fr",
+    "sameAs": [
+      "https://github.com/gh-Constant",
+      "https://linkedin.com/in/constantsuchet"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Personal",
+      "email": "contact@constantsuchet.fr"
+    },
+    "image": "https://constantsuchet.fr/images/profile.png"
   }
 };
 

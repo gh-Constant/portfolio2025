@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://constantsuchet.com'; // TODO: Confirm domain
+  const baseUrl = 'https://constantsuchet.fr';
 
   return {
     rules: {
