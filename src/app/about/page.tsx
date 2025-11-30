@@ -65,21 +65,28 @@ export default function About() {
                           <div className="flex gap-4 items-start">
                             <div className="w-2 h-2 rounded-full bg-black mt-3 flex-shrink-0"></div>
                             <p className="nohemi-body-regular text-xl text-gray-700 leading-relaxed">
-                              {t('about.intro')}
+                              {t('about.p1')}
                             </p>
                           </div>
 
                           <div className="flex gap-4 items-start">
                             <div className="w-2 h-2 rounded-full bg-black mt-3 flex-shrink-0"></div>
                             <p className="nohemi-body-regular text-xl text-gray-700 leading-relaxed">
-                              {t('about.journey')}
+                              {t('about.p2')}
                             </p>
                           </div>
 
                           <div className="flex gap-4 items-start">
                             <div className="w-2 h-2 rounded-full bg-black mt-3 flex-shrink-0"></div>
                             <p className="nohemi-body-regular text-xl text-gray-700 leading-relaxed">
-                              {t('about.interests')}
+                              {t('about.p3')}
+                            </p>
+                          </div>
+
+                          <div className="flex gap-4 items-start">
+                            <div className="w-2 h-2 rounded-full bg-black mt-3 flex-shrink-0"></div>
+                            <p className="nohemi-body-regular text-xl text-gray-700 leading-relaxed">
+                              {t('about.p4')}
                             </p>
                           </div>
                         </div>
