@@ -13,9 +13,10 @@
   "about.name": "Constant Suchet",
   "about.role": "Intern Developer",
   "about.heading": "About",
-  "about.intro": "I'm 18 years old and looking for an 8 to 10 week internship in software development.",
-  "about.journey": "I've been developing for over 8 years, starting with Minecraft mods, then Roblox where I led freelance projects through Fiverr.",
-  "about.interests": "Today, I'm interested in reverse engineering, C++ and software security, while strengthening my web development skills.",
+  "about.p1": "Since childhood, I have always loved creating things with computers. Surrounded by computers and video games like Roblox and Minecraft, I discovered my first development experiences in a playful way.",
+  "about.p2": "Before finishing high school, I turned this passion into concrete projects: I created a Fiverr account and met the needs of over 50 clients by developing Roblox games. Today, I also work on websites as part of my studies, while continuing to create software and technical projects.",
+  "about.p3": "I gradually became interested in reverse engineering and cybersecurity. Among my projects, I developed MessageX, an end-to-end encrypted messaging app, and explored reverse engineering to understand and modify certain games. I also undertook a mini MMORPG to challenge myself on network and server aspects.",
+  "about.p4": "Finally, with a colleague from IUT, I launched Chronosync, a project aimed at tracking screen time and deriving insights from it; it is currently on pause as I focus on my student projects and learning.",
   "about.contact.button": "Contact me",
 
   "skills.title": "Skills",

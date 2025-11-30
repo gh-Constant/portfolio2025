@@ -1,6 +1,7 @@
 'use client'
 
 import HeroSection from './sections/HeroSection';
+import AboutSection from './sections/AboutSection';
 import ProjectsSection from './sections/ProjectsSection';
 import ContactSection from './sections/ContactSection';
 import { ParallaxProvider } from 'react-scroll-parallax';
@@ -16,6 +17,7 @@ export default function Home() {
           <GridLines />
           <main className="flex-1">
             <HeroSection />
+            <AboutSection />
           </main>
           <div className="relative">
             <ProjectsSection />

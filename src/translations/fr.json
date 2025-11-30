@@ -13,9 +13,10 @@
   "about.name": "Constant Suchet",
   "about.role": "Développeur Stagiaire",
   "about.heading": "À propos",
-  "about.intro": "J'ai 18 ans et je cherche un stage de 8 à 10 semaines en développement informatique.",
-  "about.journey": "Je développe depuis plus de 8 ans, d'abord avec des mods sur Minecraft, puis sur Roblox où j'ai mené des projets freelance par l'intermédiaire de Fiverr.",
-  "about.interests": "Aujourd'hui, je m'intéresse au reverse engineering, au C++ et à la sécurité logicielle, tout en renforçant mes compétences en développement web.",
+  "about.p1": "Depuis mon enfance, j’ai toujours aimé créer des choses en informatique. Entouré d’ordinateurs et de jeux vidéo comme Roblox et Minecraft, j’ai découvert mes premières expériences en développement de manière ludique.",
+  "about.p2": "Avant la fin du lycée, j’ai transformé cette passion en projets concrets : j’ai créé un compte sur Fiverr et j’ai répondu aux besoins de plus de 50 clients en développant des jeux Roblox. Aujourd’hui, je travaille également sur des sites internet dans le cadre de mes études, tout en continuant à créer des logiciels et des projets techniques.",
+  "about.p3": "Je me suis progressivement intéressé au reverse engineering et à la cybersécurité. Parmi mes projets, j’ai développé MessageX, une messagerie sécurisée de bout en bout, et exploré le reverse engineering pour comprendre et modifier certains jeux. J’ai aussi entrepris un mini MMORPG pour me challenger sur les aspects réseaux et serveurs.",
+  "about.p4": "Enfin, avec un collègue de l’IUT, j’ai lancé Chronosync, un projet visant à suivre le temps passé sur les écrans et à en tirer des insights ; il est actuellement en pause car je me concentre sur mes projets étudiants et l’apprentissage.",
   "about.contact.button": "Me contacter",
 
   "skills.title": "Compétences",

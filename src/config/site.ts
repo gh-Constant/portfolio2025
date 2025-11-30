@@ -3,6 +3,7 @@ export const siteConfig = {
   contact: {
     email: "constantsuchet@gmail.com",
     linkedin: "https://linkedin.com/in/constantsuchet",
+    github: "https://github.com/gh-Constant",
   },
   location: "FRANCE",
   resume: {
@@ -10,7 +11,7 @@ export const siteConfig = {
   },
   navigation: {
     main: [
-      { name: "PROJECTS", href: "#projects", badge: "9" },
+      { name: "PROJECTS", href: "#projects", badge: "4" },
       { name: "ABOUT", href: "/about" },
       { name: "RESUME", href: "/resume.pdf", external: true },
       { name: "CONTACT", href: "#contact" },

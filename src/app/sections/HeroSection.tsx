@@ -26,6 +26,7 @@ const HeroSection: React.FC = () => {
       {/* This text will be visible regardless of the 3D model's loading state */}
       <div className="absolute inset-x-0 top-1/4 transform -translate-y-1/4 z-10">
         <h1 className="text-center w-full px-4">
+          <span className="sr-only">Constant Suchet</span>
           <span className="nohemi-caption block text-[clamp(3.5rem,22.5vw,20rem)] leading-none text-black">
           </span>
         </h1>

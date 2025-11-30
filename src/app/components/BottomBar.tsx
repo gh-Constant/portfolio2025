@@ -46,6 +46,15 @@ const BottomBar: React.FC = () => {
           >
             LinkedIn
           </a>
+          <a
+            href={siteConfig.contact.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="interactive nohemi-body underline text-white hover:text-blue-300 transition-colors hidden sm:inline-block cursor-hover-target"
+            style={{ letterSpacing: 1 }}
+          >
+            GitHub
+          </a>
           <div className="font-mono tracking-widest">
             {time ?? ''}
           </div>
